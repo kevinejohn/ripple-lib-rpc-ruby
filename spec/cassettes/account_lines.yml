@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://s1.ripple.com:51234/
+    body:
+      encoding: UTF-8
+      string: '{"method":"account_lines","params":[{"account":"rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh","ledger":"current"}]}'
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Ripple Ruby Gem 0.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 08 Nov 2013 10:39:37 +0000
+      Connection:
+      - Keep-Alive
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '843'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Server:
+      - ripple-json-rpc/Ripple-0.17.0-rc1
+    body:
+      encoding: UTF-8
+      string: "{\"result\":{\"account\":\"rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh\",\"lines\":[{\"account\":\"rB5TihdPbKgMrkFqrqUC3yLdE8hhv4BdeY\",\"balance\":\"-858.9999999948836\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"859\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rD1jovjQeEpvaDwn9wKaYokkXXrqo4D23x\",\"balance\":\"-1\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"1\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rDv5FHeAdRSsUpSa1mLyrZKhSoRXzotCvY\",\"balance\":\"-1\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"1\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rUjbzuRoQagHet3XnygZkfaTFTFkMoD3YG\",\"balance\":\"-50900100\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"100000000\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rUjbzuRoQagHet3XnygZkfaTFTFkMoD3YG\",\"balance\":\"-9000000\",\"currency\":\"CNY\",\"limit\":\"0\",\"limit_peer\":\"10000000\",\"quality_in\":0,\"quality_out\":0}],\"status\":\"success\"}}\n\n\r\n"
+    http_version: 
+  recorded_at: Fri, 08 Nov 2013 10:41:40 GMT
+recorded_with: VCR 2.7.0

@@ -15,11 +15,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'hashie'
 
   s.add_development_dependency 'awesome_print'
-  s.add_development_dependency 'fakeweb'
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'pry-nav'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'vcr'
+  s.add_development_dependency 'webmock'
 end
