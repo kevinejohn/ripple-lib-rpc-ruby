@@ -1,19 +1,16 @@
 module Ripple
-  # Custom error class for rescuing from all Ripple errors
-  class Error < StandardError; end
-
   # Raised when Ripple returns the HTTP status code 400
-  class BadRequest < Error; end
+  class BadRequest < StandardError; end
 
   # Raised when Ripple returns the HTTP status code 404
-  class NotFound < Error; end
+  class NotFound < StandardError; end
 
   # Raised when Ripple returns the HTTP status code 500
-  class InternalServerError < Error; end
+  class InternalServerError < StandardError; end
 
   # Raised when Ripple returns the HTTP status code 503
-  class ServiceUnavailable < Error; end
+  class ServiceUnavailable < StandardError; end
 
   # Raised when a subscription payload hash is invalid
-  class InvalidSignature < Error; end
+  class InvalidSignature < StandardError; end
 end

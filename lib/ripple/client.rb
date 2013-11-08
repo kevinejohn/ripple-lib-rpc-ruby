@@ -1,9 +1,13 @@
+require 'ripple/client/account_info'
+require 'ripple/client/account_lines'
+require 'ripple/client/account_tx'
+
 module Ripple
   class Client < API
-    Dir[File.expand_path('../client/*.rb', __FILE__)].each{|f| require f}
+    include Client::AccountInfo
+    include Client::AccountLines
+    include Client::AccountTx
 
-    include Ripple::Client::AccountInfo
-    include Ripple::Client::AccountLines
-    include Ripple::Client::AccountTx
+    Dir[File.expand_path('../client/*.rb', __FILE__)].each{|f| require f}
   end
 end

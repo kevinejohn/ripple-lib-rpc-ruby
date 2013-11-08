@@ -17,12 +17,11 @@ module Ripple
 
   # Delegate to Ripple::Client
   def self.method_missing(method, *args, &block)
-    return super unless client.respond_to?(method)
-    client.send(method, *args, &block)
+    (client.respond_to?(method) && client.send(method, *args, &block)) || super
   end
 
   # Delegate to Ripple::Client
   def self.respond_to?(method)
-    return client.respond_to?(method) || super
+    client.respond_to?(method) || super
   end
 end

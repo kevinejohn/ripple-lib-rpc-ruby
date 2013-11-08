@@ -1,5 +1,5 @@
 module Ripple
-  class Client
+  class Client < API
     module AccountTx
       def account_tx
         params = {
@@ -13,8 +13,7 @@ module Ripple
           limit: 10,
           forward: false
         }
-        response = post(:account_tx, params)
-        return response
+        post(:account_tx, params).result
       end
     end
   end

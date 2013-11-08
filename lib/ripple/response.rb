@@ -1,15 +1,17 @@
 module Ripple
-  module Response
-    def self.create( response_hash )
-      result = response_hash.result
+  class Response
+    attr_accessor :result
+
+    def initialize(response_hash)
+      self.result = response_hash.result
 
       # Check for status
       if result.status == 'success'
-        return result
+        result
       else
         # Error
         # TODO: Make more specific
-        raise Exception
+        raise StandardError
       end
     end
   end

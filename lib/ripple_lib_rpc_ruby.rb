@@ -1,12 +1,6 @@
-require 'faraday'
-require 'ap'
-require 'multi_json'
-
-
 class RippleLibRpcRuby
-
   def initialize(params)
-    @conn = Faraday.new(:url => "#{params[:server]}") do |faraday|
+    @conn = Faraday.new(url: "#{params[:server]}") do |faraday|
       faraday.request  :url_encoded             # form-encode POST params
       #faraday.response :logger                  # log requests to STDOUT
       faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
@@ -22,17 +16,17 @@ class RippleLibRpcRuby
     resp = @conn.post do |req|
       req.url '/'
       req.headers['Content-Type'] = 'application/json'
-      req.body = "{ \"method\" : \"account_info\", \"params\" : [ { \"account\" : \"#{@account}\"} ] }"
+      req.body = {method: "account_info", params: [{account: @account}]}
 
       #req.options.timeout = 5           # open/read timeout in seconds
       #req.options.open_timeout = 2      # connection open timeout in seconds
     end
 
-    jsonResponse = MultiJson.load(resp.body)
+    json_response = JSON.parse(resp.body)
 
-    ap jsonResponse
+    ap json_response
 
-    jsonResponse['result']['account_data']['Balance'].to_i
+    json_response['result']['account_data']['Balance'].to_i
 
     # Check for success
     # if jsonResponse['result']['status'] == "success"

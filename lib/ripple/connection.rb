@@ -1,3 +1,4 @@
+require 'json'
 require 'faraday_middleware'
 Dir[File.expand_path('../../faraday/*.rb', __FILE__)].each{|f| require f}
 
@@ -8,14 +9,14 @@ module Ripple
 
     def connection
       options = {
-        :headers => {'Accept' => "application/json; charset=utf-8", 'User-Agent' => user_agent},
-        :url => endpoint
+        headers: {'Accept' => "application/json; charset=utf-8", 'User-Agent' => user_agent},
+        url: endpoint
       }
 
       Faraday::Connection.new(options) do |connection|
-        connection.use Faraday::Request::UrlEncoded
         connection.use FaradayMiddleware::Mashify
-        connection.use Faraday::Response::ParseJson
+        connection.request :json
+        connection.response :json
         connection.use FaradayMiddleware::RaiseHttpException
         connection.adapter(adapter)
       end

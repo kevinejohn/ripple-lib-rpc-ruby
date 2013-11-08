@@ -1,13 +1,12 @@
 module Ripple
-  class Client
+  class Client < API
     module AccountLines
       def account_lines
         params = {
           account: client_account,
           ledger: :current
         }
-        response = post(:account_lines, params)
-        return response
+        post(:account_lines, params).result
       end
     end
   end
