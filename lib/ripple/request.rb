@@ -7,7 +7,7 @@ module Ripple
         req.headers['Content-Type'] = 'application/json'
         req.body = { "method" => method, "params" => [options] }.to_json
       end
-      return response
+      return Response.create( response.body )
     end
   end
 end

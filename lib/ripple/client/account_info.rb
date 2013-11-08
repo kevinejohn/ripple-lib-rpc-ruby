@@ -6,7 +6,8 @@ module Ripple
           account: client_account
         }
         response = post(:account_info, params )
-        return response.body.result.account_data.Balance.to_i
+        puts response
+        return response.account_data.Balance.to_i
       end
     end
   end

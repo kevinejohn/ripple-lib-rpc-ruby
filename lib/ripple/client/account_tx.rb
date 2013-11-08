@@ -14,7 +14,7 @@ module Ripple
           forward: false
         }
         response = post(:account_tx, params)
-        return response.body
+        return response
       end
     end
   end

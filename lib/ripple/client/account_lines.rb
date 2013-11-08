@@ -7,7 +7,7 @@ module Ripple
           ledger: :current
         }
         response = post(:account_lines, params)
-        return response.body
+        return response
       end
     end
   end

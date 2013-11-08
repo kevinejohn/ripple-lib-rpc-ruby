@@ -7,7 +7,7 @@ describe Ripple::Client do
         config.client_account = "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh"
       end
 
-      puts Ripple.account_lines
+      Ripple.account_lines
     end
   end
 end
