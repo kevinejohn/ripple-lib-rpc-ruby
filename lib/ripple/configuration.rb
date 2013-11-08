@@ -7,6 +7,7 @@ module Ripple
     # An array of valid keys in the options hash when configuring a {Ripple::API}
     VALID_OPTIONS_KEYS = [
       :client_account,
+      :client_secret,
       :user_agent,
       :endpoint,
       :adapter
@@ -14,6 +15,9 @@ module Ripple
 
     # By default, don't set an account
     DEFAULT_CLIENT_ACCOUNT = nil
+
+    # By default, don't set a secret
+    DEFAULT_CLIENT_SECRET = nil
 
     # The user agent that will be sent to the API endpoint if none is set
     DEFAULT_USER_AGENT = "Ripple Ruby Gem #{Ripple::VERSION}".freeze
@@ -48,6 +52,7 @@ module Ripple
     # Reset all configuration options to defaults
     def reset
       self.client_account        = DEFAULT_CLIENT_ACCOUNT
+      self.client_secret         = DEFAULT_CLIENT_SECRET
       self.user_agent            = DEFAULT_USER_AGENT
       self.endpoint              = DEFAULT_ENDPOINT
       self.adapter               = DEFAULT_ADAPTER

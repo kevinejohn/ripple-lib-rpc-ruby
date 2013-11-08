@@ -2,6 +2,7 @@ require File.expand_path('../ripple/error', __FILE__)
 require File.expand_path('../ripple/configuration', __FILE__)
 require File.expand_path('../ripple/api', __FILE__)
 require File.expand_path('../ripple/client', __FILE__)
+require File.expand_path('../ripple/request', __FILE__)
 
 module Ripple
   extend Configuration

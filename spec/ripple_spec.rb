@@ -37,6 +37,19 @@ describe Ripple do
     end
   end
 
+  describe ".client_secret" do
+    it "should return the default client_secret" do
+      Ripple.client_secret.should == Ripple::Configuration::DEFAULT_CLIENT_SECRET
+    end
+  end
+
+  describe ".client_secret=" do
+    it "should set the client_secret" do
+      Ripple.client_secret = "spz7x7vjAgU1JuBcgabx8MmgNzLg7"
+      Ripple.client_secret.should == "spz7x7vjAgU1JuBcgabx8MmgNzLg7"
+    end
+  end
+
   describe ".endpoint" do
     it "should return the default endpoint" do
       Ripple.endpoint.should == Ripple::Configuration::DEFAULT_ENDPOINT
