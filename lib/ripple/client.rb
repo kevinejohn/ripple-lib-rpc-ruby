@@ -90,16 +90,34 @@ module Ripple
       post(:server_state)
     end
 
+    def sign(opts = {})
+      params = {
+        secret: opts[:secret],
+        tx_json: {
+          # 'Flags' => opts[:flags] || 0,
+          'TransactionType' => opts[:transaction_type] || 'AccountSet',
+          'Account' => opts[:account],
+          # 'Fee' => 15,
+          'Destination' => opts[:destination],
+          'Amount' => opts[:amount]
+        }
+      }
+      post(:sign, params)
+    end
+
     def submit(opts = {})
       params = {
         secret: opts[:secret],
         tx_json: {
-          :'Flags' => opts[:flags] || 0,
-          :'TransactionType' => opts[:transaction_type] || 'AccountSet',
-          :'Account' => opts[:account],
-          :'Fee' => 15
+          # 'Flags' => opts[:flags] || 0,
+          'TransactionType' => opts[:transaction_type] || 'AccountSet',
+          'Account' => opts[:account],
+          # 'Fee' => 15,
+          'Destination' => opts[:destination],
+          'Amount' => opts[:amount]
         }
       }
+      puts params.inspect
       post(:submit, params)
     end
 
