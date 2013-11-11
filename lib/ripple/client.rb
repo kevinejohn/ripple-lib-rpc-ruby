@@ -117,7 +117,6 @@ module Ripple
           'Amount' => opts[:amount]
         }
       }
-      puts params.inspect
       post(:submit, params)
     end
 
