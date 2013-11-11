@@ -111,42 +111,42 @@ describe Ripple::Client do
     end
   end
 
-  # context "#sign" do
-  #   it "should be successful" do
-  #     resp = VCR.use_cassette('sign') do
-  #       client.sign({
-  #         secret: 'snoPBrXtMeMyMHUVTgbuqAfg1SUTb',
-  #         transaction_type: 'Payment',
-  #         destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
-  #         account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
-  #         amount: '200000000'
-  #       })
-  #     end
-  #     puts resp.inspect
-  #     resp.should be_success
-  #   end
-  # end
+  context "#sign" do
+    it "should be successful" do
+      resp = VCR.use_cassette('sign') do
+        client.sign({
+          secret: 'snoPBrXtMeMyMHUVTgbuqAfg1SUTb',
+          transaction_type: 'Payment',
+          destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
+          account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
+          amount: '200000000'
+        })
+      end
+      puts resp.inspect
+      resp.should be_success
+    end
+  end
 
-  # context '#submit' do
-  #   context 'basic' do
-  #     it 'should be successful' do
-  #       resp = VCR.use_cassette('basic_submit') do
-  #         client.submit({
-  #           secret: 'snoPBrXtMeMyMHUVTgbuqAfg1SUTb',
-  #           transaction_type: 'Payment',
-  #           destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
-  #           account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
-  #           amount: '200000000'
-  #         })
-  #       end
-  #       puts resp.inspect
-  #       resp.should be_success
-  #     end
-  #   end
+  context '#submit' do
+    context 'basic' do
+      it 'should be successful' do
+        resp = VCR.use_cassette('basic_submit') do
+          client.submit({
+            secret: 'snoPBrXtMeMyMHUVTgbuqAfg1SUTb',
+            transaction_type: 'Payment',
+            destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
+            account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
+            amount: '200000000'
+          })
+        end
+        puts resp.inspect
+        resp.should be_success
+      end
+    end
 
-  #   context 'complex' do
-  #   end
-  # end
+    context 'complex' do
+    end
+  end
 
   context '#transaction_entry' do
   end

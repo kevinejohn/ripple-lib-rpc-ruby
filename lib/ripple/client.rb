@@ -40,7 +40,7 @@ module Ripple
     end
 
     def book_offers
-      
+
     end
 
     def ledger(opts = {})
@@ -71,7 +71,7 @@ module Ripple
     end
 
     def path_find
-      
+
     end
 
     def ping
@@ -79,7 +79,7 @@ module Ripple
     end
 
     def ripple_path_find
-      
+
     end
 
     def server_info
@@ -92,11 +92,11 @@ module Ripple
 
     def sign(opts = {})
       params = {
-        secret: opts[:secret],
+        secret: client_secret,
         tx_json: {
           # 'Flags' => opts[:flags] || 0,
-          'TransactionType' => opts[:transaction_type] || 'AccountSet',
-          'Account' => opts[:account],
+          'TransactionType' => opts[:transaction_type] || 'Payment',
+          'Account' => client_account,
           # 'Fee' => 15,
           'Destination' => opts[:destination],
           'Amount' => opts[:amount]
@@ -107,11 +107,11 @@ module Ripple
 
     def submit(opts = {})
       params = {
-        secret: opts[:secret],
+        secret: client_secret,
         tx_json: {
           # 'Flags' => opts[:flags] || 0,
-          'TransactionType' => opts[:transaction_type] || 'AccountSet',
-          'Account' => opts[:account],
+          'TransactionType' => opts[:transaction_type] || 'Payment',
+          'Account' => client_account,
           # 'Fee' => 15,
           'Destination' => opts[:destination],
           'Amount' => opts[:amount]
