@@ -7,6 +7,7 @@ describe Ripple::Client do
   before :all do
     Ripple.configure do |config|
       config.client_account = "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh"
+      config.client_secret = "snoPBrXtMeMyMHUVTgbuqAfg1SUTb"
     end
   end
 
@@ -114,10 +115,7 @@ describe Ripple::Client do
   context "#sign" do
     it "should be successful" do
       params = {
-        secret: 'snoPBrXtMeMyMHUVTgbuqAfg1SUTb',
-        transaction_type: 'Payment',
         destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
-        account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
         amount: '200000000'
       }
       resp = make_request(:sign, params)
@@ -129,14 +127,22 @@ describe Ripple::Client do
     context 'basic' do
       it 'should be successful' do
         params = {
-          secret: 'snoPBrXtMeMyMHUVTgbuqAfg1SUTb',
-          transaction_type: 'Payment',
           destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
-          account: 'rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh',
           amount: '200000000'
         }
         resp = make_request(:submit, params)
         resp.should be_success
+      end
+
+      it 'can use a tx_blob' do
+        params = {
+          destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
+          amount: '200000000'
+        }
+        resp = make_request(:sign, params)
+        blob = resp.tx_blob
+        submit_resp = make_request(:submit, {tx_blob: blob})
+        submit_resp.should be_success
       end
     end
 

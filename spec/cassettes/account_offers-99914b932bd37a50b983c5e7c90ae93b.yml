@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 11 Nov 2013 02:22:13 +0000
+      - Mon, 11 Nov 2013 02:46:48 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
@@ -31,10 +31,10 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.17.0-rc5
+      - ripple-json-rpc/Ripple-0.17.0-rc2
     body:
       encoding: UTF-8
       string: "{\"result\":{\"account\":\"rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh\",\"offers\":[],\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 02:22:13 GMT
+  recorded_at: Mon, 11 Nov 2013 02:46:47 GMT
 recorded_with: VCR 2.7.0
