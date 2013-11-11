@@ -7,7 +7,7 @@ module Ripple
       response = connection.post do |req|
         req.url '/'
         req.body = {method: method}
-        if !options.empty? && !options.nil?
+        unless options.empty? || options.nil?
           req.body.merge!(params: [options])
         end
       end
