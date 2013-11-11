@@ -10,7 +10,6 @@ module Ripple
         if !options.empty? && !options.nil?
           req.body.merge!(params: [options])
         end
-        puts req.inspect
       end
       Response.new(response.body)
     end

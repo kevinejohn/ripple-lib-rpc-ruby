@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 08 Nov 2013 10:39:37 +0000
+      - Mon, 11 Nov 2013 02:22:13 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
@@ -31,10 +31,10 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.17.0-rc1
+      - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: UTF-8
-      string: "{\"result\":{\"account_data\":{\"Account\":\"rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh\",\"Balance\":\"999910\",\"EmailHash\":\"DF1352F23CD32812F4850B878AE4944C\",\"Flags\":0,\"LedgerEntryType\":\"AccountRoot\",\"OwnerCount\":0,\"PreviousTxnID\":\"2549D3C64E3B9FD278D609794E5C10F4CD4E5CCDA0593C3248F2AAEF8EDDBBC2\",\"PreviousTxnLgrSeq\":3173223,\"Sequence\":26518,\"TransferRate\":4294967295,\"index\":\"2B6AC232AA4C4BE41BF49D2459FA4A0347E1B543A4C92FCEE0821C0201E2E9A8\",\"urlgravatar\":\"http://www.gravatar.com/avatar/df1352f23cd32812f4850b878ae4944c\"},\"ledger_current_index\":3226632,\"status\":\"success\"}}\n\n\r\n"
+      string: "{\"result\":{\"account_data\":{\"Account\":\"rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh\",\"Balance\":\"999898\",\"EmailHash\":\"DF1352F23CD32812F4850B878AE4944C\",\"Flags\":0,\"LedgerEntryType\":\"AccountRoot\",\"OwnerCount\":0,\"PreviousTxnID\":\"F05106B06630528583E5E2CF5DB6CE9145755820993D5C16691802F7475B83EF\",\"PreviousTxnLgrSeq\":3236320,\"Sequence\":26519,\"TransferRate\":4294967295,\"index\":\"2B6AC232AA4C4BE41BF49D2459FA4A0347E1B543A4C92FCEE0821C0201E2E9A8\",\"urlgravatar\":\"http://www.gravatar.com/avatar/df1352f23cd32812f4850b878ae4944c\"},\"ledger_current_index\":3271168,\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Fri, 08 Nov 2013 10:41:40 GMT
+  recorded_at: Mon, 11 Nov 2013 02:22:13 GMT
 recorded_with: VCR 2.7.0

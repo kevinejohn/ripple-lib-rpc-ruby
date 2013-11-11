@@ -5,7 +5,7 @@ http_interactions:
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: '{"method":"ledger_closed"}'
+      string: '{"method":"account_offers","params":[{"account":"rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh","ledger":"current"}]}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -21,20 +21,20 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 11 Nov 2013 00:43:56 +0000
+      - Mon, 11 Nov 2013 02:22:13 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
       - '*'
       Content-Length:
-      - '139'
+      - '94'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
       - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: UTF-8
-      string: "{\"result\":{\"ledger_hash\":\"4806B4E55E0B1A077A3637ED0CACC5ADB11DA7C00CFFDDBAD448B1D556DF354B\",\"ledger_index\":3269929,\"status\":\"success\"}}\n\n\r\n"
+      string: "{\"result\":{\"account\":\"rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh\",\"offers\":[],\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 00:43:55 GMT
+  recorded_at: Mon, 11 Nov 2013 02:22:13 GMT
 recorded_with: VCR 2.7.0

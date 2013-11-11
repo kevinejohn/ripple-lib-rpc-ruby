@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 08 Nov 2013 10:39:37 +0000
+      - Mon, 11 Nov 2013 02:22:13 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
@@ -31,10 +31,10 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.17.0-rc1
+      - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: UTF-8
       string: "{\"result\":{\"account\":\"rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh\",\"lines\":[{\"account\":\"rB5TihdPbKgMrkFqrqUC3yLdE8hhv4BdeY\",\"balance\":\"-858.9999999948836\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"859\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rD1jovjQeEpvaDwn9wKaYokkXXrqo4D23x\",\"balance\":\"-1\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"1\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rDv5FHeAdRSsUpSa1mLyrZKhSoRXzotCvY\",\"balance\":\"-1\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"1\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rUjbzuRoQagHet3XnygZkfaTFTFkMoD3YG\",\"balance\":\"-50900100\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"100000000\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rUjbzuRoQagHet3XnygZkfaTFTFkMoD3YG\",\"balance\":\"-9000000\",\"currency\":\"CNY\",\"limit\":\"0\",\"limit_peer\":\"10000000\",\"quality_in\":0,\"quality_out\":0}],\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Fri, 08 Nov 2013 10:41:40 GMT
+  recorded_at: Mon, 11 Nov 2013 02:22:13 GMT
 recorded_with: VCR 2.7.0

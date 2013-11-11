@@ -1,9 +1,23 @@
 require File.expand_path('../../spec_helper', __FILE__)
+require 'json'
+require 'digest/md5'
+require 'pry-nav'
 
 describe Ripple::Client do
   before :all do
     Ripple.configure do |config|
       config.client_account = "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh"
+    end
+  end
+
+  def make_request(command, params = {})
+    params_digest = Digest::MD5.hexdigest(JSON.dump(params))
+    VCR.use_cassette("#{command}-#{params_digest}") do
+      if params.empty? || params.nil?
+        client.send(command)
+      else
+        client.send(command, params)
+      end
     end
   end
 
@@ -17,36 +31,28 @@ describe Ripple::Client do
 
   context '#account_info' do
     it "should be successful" do
-      resp = VCR.use_cassette('account_info') do
-        client.account_info
-      end
+      resp = make_request(:account_info)
       resp.should be_success
     end
   end
 
   context '#account_lines' do
     it "should be successful" do
-      resp = VCR.use_cassette('account_lines') do
-        client.account_lines
-      end
+      resp = make_request(:account_lines)
       resp.should be_success
     end
   end
 
   context '#account_offers' do
     it "should be successful" do
-      resp = VCR.use_cassette('account_lines') do
-        client.account_offers
-      end
+      resp = make_request(:account_offers)
       resp.should be_success
     end
   end
 
   context '#account_tx' do
     it "should be successful" do
-      resp = VCR.use_cassette('account_tx') do
-        client.account_tx
-      end
+      resp = make_request(:account_tx)
       resp.should be_success
     end
   end
@@ -56,27 +62,21 @@ describe Ripple::Client do
 
   context '#ledger' do
     it "should be successful" do
-      resp = VCR.use_cassette('ledger') do
-        client.ledger
-      end
+      resp = make_request(:ledger)
       resp.should be_success
     end
   end
 
   context '#ledger_closed' do
     it "should be successful" do
-      resp = VCR.use_cassette('ledger_closed') do
-        client.ledger_closed
-      end
+      resp = make_request(:ledger_closed)
       resp.should be_success
     end
   end
 
   context '#ledger_current' do
     it "should be successful" do
-      resp = VCR.use_cassette('ledger_closed') do
-        client.ledger_current
-      end
+      resp = make_request(:ledger_current)
       resp.should be_success
     end
   end
@@ -89,9 +89,7 @@ describe Ripple::Client do
 
   context '#ping' do
     it "should be successful" do
-      resp = VCR.use_cassette('ping') do
-        client.ping
-      end
+      resp = make_request(:ping)
       resp.should be_success
     end
   end
@@ -101,18 +99,14 @@ describe Ripple::Client do
 
   context '#server_info' do
     it "should be successful" do
-      resp = VCR.use_cassette('server_info') do
-        client.server_info
-      end
+      resp = make_request(:server_info)
       resp.should be_success
     end
   end
 
   context '#server_state' do
     it "should be successful" do
-      resp = VCR.use_cassette('server_state') do
-        client.server_state
-      end
+      resp = make_request(:server_state)
       resp.should be_success
     end
   end
@@ -162,9 +156,7 @@ describe Ripple::Client do
 
   context '#tx_history' do
     it "should be successful" do
-      resp = VCR.use_cassette('tx_history') do
-        client.tx_history
-      end
+      resp = make_request(:tx_history)
       resp.should be_success
     end
   end

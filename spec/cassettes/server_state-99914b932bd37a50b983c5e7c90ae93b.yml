@@ -5,7 +5,7 @@ http_interactions:
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: '{"method":"server_info"}'
+      string: '{"method":"server_state"}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -21,20 +21,20 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 11 Nov 2013 00:38:48 +0000
+      - Mon, 11 Nov 2013 02:22:15 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
       - '*'
       Content-Length:
-      - '500'
+      - '510'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
       - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: UTF-8
-      string: "{\"result\":{\"info\":{\"build_version\":\"0.17.0-rc5\",\"complete_ledgers\":\"32570-3269859\",\"hostid\":\"TRIM\",\"last_close\":{\"converge_time_s\":2.036,\"proposers\":5},\"load_factor\":1,\"peers\":34,\"pubkey_node\":\"n9LRSvNgP3gVqyXd6RBnRet1KyRZhVGBWfGJZwYAmKAhxpBmmcnf\",\"server_state\":\"full\",\"validated_ledger\":{\"age\":8,\"base_fee_xrp\":1e-05,\"hash\":\"53D4BAC0EF217C64220478886A7F592A668D0B8B6A41550B5D3C9C16D8543F70\",\"reserve_base_xrp\":50,\"reserve_inc_xrp\":12.5,\"seq\":3269859},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
+      string: "{\"result\":{\"state\":{\"build_version\":\"0.17.0-rc5\",\"complete_ledgers\":\"32570-3271167\",\"last_close\":{\"converge_time\":3035,\"proposers\":4},\"load_base\":256,\"load_factor\":256,\"peers\":37,\"pubkey_node\":\"n9LdD8suq4oHyT9hyCDAgXuCMYoWTHm73d4r7CwT7BSV9stmnkgt\",\"server_state\":\"full\",\"validated_ledger\":{\"base_fee\":10,\"close_time\":437451730,\"hash\":\"82E8BA473031615768C93C35AB0E6649673A597B87377FD99E0D702030F2B36D\",\"reserve_base\":50000000,\"reserve_inc\":12500000,\"seq\":3271167},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Mon, 11 Nov 2013 00:38:47 GMT
+  recorded_at: Mon, 11 Nov 2013 02:22:15 GMT
 recorded_with: VCR 2.7.0
