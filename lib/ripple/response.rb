@@ -17,5 +17,13 @@ module Ripple
     def success?
       resp.status == 'success'
     end
+
+    def method_missing(method_name, *args)
+      if resp.respond_to?(method_name)
+        resp.send(method_name)
+      else
+        super
+      end
+    end
   end
 end

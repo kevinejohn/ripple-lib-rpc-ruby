@@ -1,9 +1,5 @@
 module Ripple
   class Client < API
-    # include Client::AccountInfo
-    # include Client::AccountLines
-    # include Client::AccountTx
-
     def account_info
       post(:account_info, {account: client_account})
     end
@@ -94,10 +90,8 @@ module Ripple
       params = {
         secret: client_secret,
         tx_json: {
-          # 'Flags' => opts[:flags] || 0,
           'TransactionType' => opts[:transaction_type] || 'Payment',
           'Account' => client_account,
-          # 'Fee' => 15,
           'Destination' => opts[:destination],
           'Amount' => opts[:amount]
         }
@@ -108,15 +102,17 @@ module Ripple
     def submit(opts = {})
       params = {
         secret: client_secret,
-        tx_json: {
-          # 'Flags' => opts[:flags] || 0,
+      }
+      if opts.key?(:tx_blob)
+        params.merge!(opts)
+      else
+        params.merge!({tx_json: {
           'TransactionType' => opts[:transaction_type] || 'Payment',
           'Account' => client_account,
-          # 'Fee' => 15,
           'Destination' => opts[:destination],
           'Amount' => opts[:amount]
-        }
-      }
+        }})
+      end
       post(:submit, params)
     end
 
