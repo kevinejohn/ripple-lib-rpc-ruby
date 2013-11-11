@@ -14,14 +14,4 @@ module Ripple
   def self.client(options={})
     Ripple::Client.new(options)
   end
-
-  # Delegate to Ripple::Client
-  def self.method_missing(method, *args, &block)
-    (client.respond_to?(method) && client.send(method, *args, &block)) || super
-  end
-
-  # Delegate to Ripple::Client
-  def self.respond_to?(method)
-    client.respond_to?(method) || super
-  end
 end

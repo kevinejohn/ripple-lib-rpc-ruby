@@ -6,7 +6,10 @@ module Ripple
       # RPC
       response = connection.post do |req|
         req.url '/'
-        req.body = {method: method, params: [options]}
+        req.body = {method: method}
+        if !options.empty? && !options.nil?
+          req.body.merge!(params: [options])
+        end
       end
       Response.new(response.body)
     end

@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://s1.ripple.com:51234/
+    body:
+      encoding: UTF-8
+      string: '{"method":"ledger_closed"}'
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Ripple Ruby Gem 0.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 11 Nov 2013 00:43:56 +0000
+      Connection:
+      - Keep-Alive
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '139'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Server:
+      - ripple-json-rpc/Ripple-0.17.0-rc5
+    body:
+      encoding: UTF-8
+      string: "{\"result\":{\"ledger_hash\":\"4806B4E55E0B1A077A3637ED0CACC5ADB11DA7C00CFFDDBAD448B1D556DF354B\",\"ledger_index\":3269929,\"status\":\"success\"}}\n\n\r\n"
+    http_version: 
+  recorded_at: Mon, 11 Nov 2013 00:43:55 GMT
+recorded_with: VCR 2.7.0
