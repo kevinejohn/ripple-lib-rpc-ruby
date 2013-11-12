@@ -15,4 +15,17 @@ module Ripple
   class InvalidSignature < StandardError; end
 
   class MalformedTransaction < StandardError; end
+
+  class InvalidParameters < StandardError; end
+
+
+  # Submit errors
+  class SubmitFailed < StandardError; end
+
+  # Happens when submitting transaction
+  class ServerUnavailable < StandardError; end
+
+
+  # Unknown error
+  class UnknownError < StandardError; end
 end

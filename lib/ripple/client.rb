@@ -123,16 +123,17 @@ module Ripple
       params = {
         source_account: client_account,
         destination_account: opts[:destination],
-        destination_amount: opts[:amount],
-        source_currencies: [
-           {
-             currency: opts[:source_currency]
-             # issuer: issuer     // optional
-           }
-        ]
-        # "ledger_hash" : ledger,         // optional
+        destination_amount: opts[:amount]
+        # source_currencies: [
+        #    {
+        #      currency: opts[:source_currency]
+        #      #issuer: client_account     # optional
+        #    }
+        # ],
+        # ledger_hash: ledger         # optional
         # "ledger_index" : ledger_index   // optional, defaults 'current'
       }
+      puts JSON params
       post(:ripple_path_find, params)
     end
 
@@ -171,7 +172,17 @@ module Ripple
           'Amount' => opts[:amount]
         }})
       end
-      post(:submit, params)
+      response = post(:submit, params)
+
+      if response.resp.engine_result == 'tesSUCCESS'
+        # Success
+      else
+        # Failed
+        puts response.resp.inspect
+        raise SubmitFailed
+      end
+
+      response
     end
 
     def transaction_entry(tx_hash, ledger_index)

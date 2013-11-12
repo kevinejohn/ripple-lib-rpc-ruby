@@ -103,7 +103,7 @@ describe Ripple::Client do
     #     amount: '0.0001',
     #     source_currency: 'USD'
     #   }
-    #   resp = make_request(:submit, params)
+    #   resp = client.ripple_path_find(params)
     #   puts resp.body
     #   resp.should be_success
     # end
@@ -135,27 +135,27 @@ describe Ripple::Client do
   end
 
   context '#submit' do
-    context 'basic' do
-      it 'should be successful' do
-        params = {
-          destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
-          amount: '200000000'
-        }
-        resp = make_request(:submit, params)
-        resp.should be_success
-      end
+    # context 'basic' do
+    #   it 'should be successful' do
+    #     params = {
+    #       destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
+    #       amount: '200000000'
+    #     }
+    #     resp = make_request(:submit, params)
+    #     resp.should be_success
+    #   end
 
-      it 'can use a tx_blob' do
-        params = {
-          destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
-          amount: '200000000'
-        }
-        resp = make_request(:sign, params)
-        blob = resp.tx_blob
-        submit_resp = make_request(:submit, {tx_blob: blob})
-        submit_resp.should be_success
-      end
-    end
+    #   it 'can use a tx_blob' do
+    #     params = {
+    #       destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
+    #       amount: '200000000'
+    #     }
+    #     resp = make_request(:sign, params)
+    #     blob = resp.tx_blob
+    #     submit_resp = make_request(:submit, {tx_blob: blob})
+    #     submit_resp.should be_success
+    #   end
+    # end
 
 
     context 'live' do
