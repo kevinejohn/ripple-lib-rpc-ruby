@@ -6,8 +6,8 @@ require 'pry-nav'
 describe Ripple::Client do
   before :all do
     Ripple.configure do |config|
-      config.client_account = "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh"
-      config.client_secret = "snoPBrXtMeMyMHUVTgbuqAfg1SUTb"
+      config.client_account = "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj"
+      config.client_secret = "ssm5HPoeEZYJWvkJvQW9ro6e6hW9m"
     end
   end
 
@@ -143,6 +143,18 @@ describe Ripple::Client do
         blob = resp.tx_blob
         submit_resp = make_request(:submit, {tx_blob: blob})
         submit_resp.should be_success
+      end
+    end
+
+
+    context 'live' do
+      it 'should be successful sending XRP' do
+        params = {
+          destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
+          amount: '1'
+        }
+        resp = client.send(:submit, params)
+        resp.should be_success
       end
     end
 
