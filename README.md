@@ -19,14 +19,14 @@ Or install it yourself as:
 
 ## Usage
 
-    Ripple.configure do |config|
-      config.endpoint = "http://s1.ripple.com:51234/",
-      config.client_account = "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
-      config.client_secret = "ssm5HPoeEZYJWvkJvQW9ro6e6hW9m"
-    end
+    ripple = Ripple.client({
+      endpoint: "http://s1.ripple.com:51234/",
+      client_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
+      client_secret: "ssm5HPoeEZYJWvkJvQW9ro6e6hW9m"
+    })
 
     # Send XRP
-    Ripple.send_xrp("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "1")
+    ripple.send_xrp("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "1")
 
     # Send IOU
     ripple.send_iou("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
