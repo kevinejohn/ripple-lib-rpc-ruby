@@ -1,5 +1,46 @@
 module Ripple
   class Client < API
+    ######################
+    # High level methods
+    ######################
+    def send_xrp(destination, amount)
+      params = {
+        destination: destination,
+        amount: amount
+      }
+      submit(params)
+    end
+
+    def send_iou(destination, currency, amount)
+      params = {
+        destination: destination,
+        amount: {
+           currency: currency,
+           value: amount,
+           issuer: destination
+        }
+      }
+      submit(params)
+    end
+
+    # def send_other_currency(destination, source_currency, destination_currency, destination_amount)
+    #   # Find paths
+
+    #   # Submit path
+    #   params = {
+    #     destination: destination,
+    #     amount: {
+    #        currency: currency,
+    #        value: amount,
+    #        issuer: destination
+    #     }
+    #   }
+    #   submit(params)
+    # end
+
+    ####################
+    # Low level methods
+    ####################
     def account_info
       post(:account_info, {account: client_account})
     end

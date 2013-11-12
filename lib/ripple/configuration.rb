@@ -22,7 +22,7 @@ module Ripple
     # The user agent that will be sent to the API endpoint if none is set
     DEFAULT_USER_AGENT = "Ripple Ruby Gem #{Ripple::VERSION}".freeze
 
-    DEFAULT_ENDPOINT = 'http://s1.ripple.com:51234/'.freeze
+    DEFAULT_ENDPOINT = nil
 
     # The adapter that will be used to connect if none is set
     #

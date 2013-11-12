@@ -6,6 +6,7 @@ require 'pry-nav'
 describe Ripple::Client do
   before :all do
     Ripple.configure do |config|
+      config.endpoint = 'http://s1.ripple.com:51234/'
       config.client_account = "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj"
       config.client_secret = "ssm5HPoeEZYJWvkJvQW9ro6e6hW9m"
     end
@@ -148,14 +149,34 @@ describe Ripple::Client do
 
 
     context 'live' do
+      # it 'should be successful sending XRP' do
+      #   params = {
+      #     destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
+      #     amount: '1'
+      #   }
+      #   resp = client.send(:submit, params)
+      #   resp.should be_success
+      # end
+
+
       it 'should be successful sending XRP' do
-        params = {
-          destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
-          amount: '1'
-        }
-        resp = client.send(:submit, params)
+        resp = client.send_xrp("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "1")
         resp.should be_success
       end
+
+      it 'should be successful sending USD' do
+        resp = client.send_iou("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
+        resp.should be_success
+      end
+
+      # it 'should be successful sending USD' do
+      #   params = {
+      #     destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
+      #     amount: '1'
+      #   }
+      #   resp = client.send(:submit, params)
+      #   resp.should be_success
+      # end
     end
 
     context 'complex' do
