@@ -13,4 +13,6 @@ module Ripple
 
   # Raised when a subscription payload hash is invalid
   class InvalidSignature < StandardError; end
+
+  class MalformedTransaction < StandardError; end
 end

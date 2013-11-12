@@ -7,6 +7,10 @@ module Ripple
       # Check for status
       if resp.status == 'success'
         resp.result
+      elsif resp.status == 'error'
+        # TODO: Is this the correct way?
+        # puts response_hash.inspect
+        raise MalformedTransaction "Malformed Transaction"
       else
         # Error
         # TODO: Make more specific

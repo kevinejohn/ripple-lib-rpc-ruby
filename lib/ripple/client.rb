@@ -23,20 +23,24 @@ module Ripple
       submit(params)
     end
 
-    # def send_other_currency(destination, source_currency, destination_currency, destination_amount)
-    #   # Find paths
+    def send_other_currency(destination, source_currency, destination_currency, destination_amount)
+      # Find paths
+      # TODO:
 
-    #   # Submit path
-    #   params = {
-    #     destination: destination,
-    #     amount: {
-    #        currency: currency,
-    #        value: amount,
-    #        issuer: destination
-    #     }
-    #   }
-    #   submit(params)
-    # end
+      # Submit path
+      # TODO:
+      # params = {
+      #   destination: destination,
+      #   amount: {
+      #      currency: currency,
+      #      value: amount,
+      #      issuer: destination
+      #   }
+      # }
+      # submit(params)
+    end
+
+
 
     ####################
     # Low level methods
@@ -115,8 +119,21 @@ module Ripple
       post(:ping)
     end
 
-    def ripple_path_find
-
+    def ripple_path_find(opts = {})
+      params = {
+        source_account: client_account,
+        destination_account: opts[:destination],
+        destination_amount: opts[:amount],
+        source_currencies: [
+           {
+             currency: opts[:source_currency]
+             # issuer: issuer     // optional
+           }
+        ]
+        # "ledger_hash" : ledger,         // optional
+        # "ledger_index" : ledger_index   // optional, defaults 'current'
+      }
+      post(:ripple_path_find, params)
     end
 
     def server_info

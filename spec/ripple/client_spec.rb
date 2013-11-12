@@ -97,6 +97,16 @@ describe Ripple::Client do
   end
 
   context '#ripple_path_find' do
+    # it "should be successful" do
+    #   params = {
+    #     destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
+    #     amount: '0.0001',
+    #     source_currency: 'USD'
+    #   }
+    #   resp = make_request(:submit, params)
+    #   puts resp.body
+    #   resp.should be_success
+    # end
   end
 
   context '#server_info' do
