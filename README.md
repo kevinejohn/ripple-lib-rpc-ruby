@@ -23,7 +23,7 @@ Or install it yourself as:
     # The client does not do local signing of transactions at this point. You must use a trusted endpoint!
     # WARNING!
 
-    require 'ripple_lib_rpc_ruby'
+    require 'ripple'
 
     ripple = Ripple.client({
       endpoint: "http://s1.ripple.com:51234/",
