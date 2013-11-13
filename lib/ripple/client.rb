@@ -3,24 +3,33 @@ module Ripple
     ######################
     # High level methods
     ######################
-    def send_xrp(destination, amount)
-      params = {
-        destination: destination,
-        amount: amount
-      }
-      submit(params)
-    end
-
-    def send_iou(destination, currency, amount)
-      params = {
-        destination: destination,
-        amount: {
-           currency: currency,
-           value: amount,
-           issuer: destination
+    def send_currency(destination, currency, amount)
+      if currency == 'XRP'
+        params = {
+          destination: destination,
+          amount: amount
         }
-      }
-      submit(params)
+      else
+        # IOU
+        params = {
+          destination: destination,
+          amount: {
+             currency: currency,
+             value: amount,
+             issuer: destination
+          }
+        }
+      end
+
+      response = submit(params)
+
+      if response.resp.engine_result != 'tesSUCCESS'
+        # Failed
+        puts response.resp.inspect
+        raise SubmitFailed
+      end
+      # Return transaction hash
+      response.resp.tx_json['hash']
     end
 
     def send_other_currency(destination, source_currency, destination_currency, destination_amount)
@@ -38,6 +47,11 @@ module Ripple
       #   }
       # }
       # submit(params)
+    end
+
+    def transaction_suceeded?(tx_hash)
+      response = tx(tx_hash)
+      response.success? and response.resp.validated == true and response.resp.meta.TransactionResult == 'tesSUCCESS'
     end
 
 
@@ -112,14 +126,6 @@ module Ripple
     end
 
     def path_find
-
-    end
-
-    def ping
-      post(:ping)
-    end
-
-    def ripple_path_find(opts = {})
       params = {
         source_account: client_account,
         destination_account: opts[:destination],
@@ -133,7 +139,27 @@ module Ripple
         # ledger_hash: ledger         # optional
         # "ledger_index" : ledger_index   // optional, defaults 'current'
       }
-      puts JSON params
+      post(:path_find, params)
+    end
+
+    def ping
+      post(:ping)
+    end
+
+    def ripple_path_find(opts = {})
+      params = {
+        source_account: client_account,
+        destination_account: opts[:destination],
+        destination_amount: opts[:amount],
+        source_currencies: [
+           {
+             currency: opts[:source_currency]
+             #issuer: client_account     # optional
+           }
+        ]
+        # ledger_hash: ledger         # optional
+        # "ledger_index" : ledger_index   // optional, defaults 'current'
+      }
       post(:ripple_path_find, params)
     end
 
@@ -172,17 +198,7 @@ module Ripple
           'Amount' => opts[:amount]
         }})
       end
-      response = post(:submit, params)
-
-      if response.resp.engine_result == 'tesSUCCESS'
-        # Success
-      else
-        # Failed
-        puts response.resp.inspect
-        raise SubmitFailed
-      end
-
-      response
+      post(:submit, params)
     end
 
     def transaction_entry(tx_hash, ledger_index)

@@ -12,6 +12,7 @@ module Ripple
             req.body.merge!(params: [options])
           end
         end
+        # puts response.inspect
         Response.new(response.body)
       rescue Faraday::Error::ParsingError
         # Server unavailable

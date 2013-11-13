@@ -4,17 +4,21 @@ module Ripple
 
     def initialize(response_hash)
       self.resp = response_hash.result
-      # Check for status
-      if resp.status == 'success'
-        resp.result
-      elsif resp.status == 'error'
+    end
+
+    def success?
+      resp.status == 'success'
+    end
+
+    def raise_errors
+      if resp.status == 'error'
         # TODO: Is this the correct way?
-        puts response_hash.inspect
+        # puts response_hash.inspect
 
         if resp.error == 'invalidParams'
           raise InvalidParameters
         elsif resp.error = 'malformedTransaction'
-          raise MalformedTransaction
+          raise MalformedTransaction, resp.error_message
         else
           raise UnknownError
         end
@@ -24,10 +28,6 @@ module Ripple
         puts response_hash.inspect
         raise StandardError
       end
-    end
-
-    def success?
-      resp.status == 'success'
     end
 
     def method_missing(method_name, *args)

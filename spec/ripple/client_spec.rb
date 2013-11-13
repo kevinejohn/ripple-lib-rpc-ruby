@@ -97,16 +97,20 @@ describe Ripple::Client do
   end
 
   context '#ripple_path_find' do
-    # it "should be successful" do
-    #   params = {
-    #     destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
-    #     amount: '0.0001',
-    #     source_currency: 'USD'
-    #   }
-    #   resp = client.ripple_path_find(params)
-    #   puts resp.body
-    #   resp.should be_success
-    # end
+    it "should be successful" do
+      params = {
+        destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
+        source_currency: 'USD',
+        amount: {
+           currency: 'USD',
+           value: '0.0001',
+           issuer: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc'
+        }
+      }
+      resp = client.ripple_path_find(params)
+      puts resp.inspect
+      resp.should be_success
+    end
   end
 
   context '#server_info' do
@@ -135,58 +139,26 @@ describe Ripple::Client do
   end
 
   context '#submit' do
-    # context 'basic' do
-    #   it 'should be successful' do
-    #     params = {
-    #       destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
-    #       amount: '200000000'
-    #     }
-    #     resp = make_request(:submit, params)
-    #     resp.should be_success
-    #   end
-
-    #   it 'can use a tx_blob' do
-    #     params = {
-    #       destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
-    #       amount: '200000000'
-    #     }
-    #     resp = make_request(:sign, params)
-    #     blob = resp.tx_blob
-    #     submit_resp = make_request(:submit, {tx_blob: blob})
-    #     submit_resp.should be_success
-    #   end
-    # end
-
-
-    context 'live' do
-      # it 'should be successful sending XRP' do
-      #   params = {
-      #     destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
-      #     amount: '1'
-      #   }
-      #   resp = client.send(:submit, params)
-      #   resp.should be_success
-      # end
-
-
-      it 'should be successful sending XRP' do
-        resp = client.send_xrp("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "1")
+    context 'basic' do
+      it 'should be successful' do
+        params = {
+          destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
+          amount: '200000000'
+        }
+        resp = make_request(:submit, params)
         resp.should be_success
       end
 
-      it 'should be successful sending USD' do
-        resp = client.send_iou("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
-        resp.should be_success
+      it 'can use a tx_blob' do
+        params = {
+          destination: 'r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV',
+          amount: '200000000'
+        }
+        resp = make_request(:sign, params)
+        blob = resp.tx_blob
+        submit_resp = make_request(:submit, {tx_blob: blob})
+        submit_resp.should be_success
       end
-
-      # it 'should be successful sending USD' do
-      #   params = {
-      #     destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
-      #     amount: '1'
-      #   }
-      #   resp = client.send(:submit, params)
-      #   resp.should be_success
-      # end
     end
 
     context 'complex' do
@@ -197,12 +169,68 @@ describe Ripple::Client do
   end
 
   context '#tx' do
+    it "should be successful" do
+      resp = client.tx("EAC1B3A55036882CA6CFE5C8F3D627046BEEDE38A5D5902FD5D7CC548883707C")
+      puts resp.inspect
+      resp.should be_success
+    end
   end
 
   context '#tx_history' do
     it "should be successful" do
       resp = make_request(:tx_history)
       resp.should be_success
+    end
+  end
+
+
+  # High level methods
+  context '#send_currency' do
+    it 'should be successful sending XRP' do
+      begin
+        resp = client.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
+        puts resp
+      rescue Ripple::SubmitFailed
+
+      rescue Ripple::MalformedTransaction
+
+      rescue Ripple::ServerUnavailable
+
+      end
+      #resp.should be_success
+    end
+
+    it 'should be successful sending USD' do
+      begin
+        resp = client.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
+        puts resp
+      rescue Ripple::SubmitFailed
+
+      rescue Ripple::MalformedTransaction
+
+      rescue Ripple::ServerUnavailable
+
+      end
+    end
+  end
+
+  context '#transaction_suceeded' do
+    it 'should be successful' do
+      begin
+        resp = client.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
+        resp.should be_true
+      rescue Ripple::ServerUnavailable
+
+      end
+    end
+
+    it 'should fail from invalid tx_tash' do
+      begin
+        resp = client.transaction_suceeded?("94062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
+        resp.should be_false
+      rescue Ripple::ServerUnavailable
+
+      end
     end
   end
 end

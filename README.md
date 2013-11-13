@@ -32,10 +32,10 @@ Or install it yourself as:
     })
 
     # Send XRP
-    ripple.send_xrp("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "1")
+    ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP" "1")
 
     # Send IOU
-    ripple.send_iou("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
+    ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
 
 
 ## Contributing
