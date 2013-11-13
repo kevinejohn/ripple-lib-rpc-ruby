@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = 'ripple'
+  s.name        = 'ripple-lib'
   s.version     = '0.0.0'
   s.date        = '2013-11-05'
   s.summary     = "ripple-lib"
