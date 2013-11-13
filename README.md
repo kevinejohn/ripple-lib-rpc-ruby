@@ -7,7 +7,7 @@ Ripple Client Ruby Gem
 
 Add this line to your application's Gemfile:
 
-    gem 'ripple-lib'
+    gem 'ripple_lib_rpc_ruby'
 
 And then execute:
 
@@ -15,7 +15,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install ripple-lib
+    $ gem install ripple_lib_rpc_ruby
 
 ## Usage
 
@@ -23,7 +23,7 @@ Or install it yourself as:
     # The client does not do local signing of transactions at this point. You must use a trusted endpoint!
     # WARNING!
 
-    require 'ripple-lib'
+    require 'ripple_lib_rpc_ruby'
 
     ripple = Ripple.client({
       endpoint: "http://s1.ripple.com:51234/",
