@@ -19,6 +19,10 @@ Or install it yourself as:
 
 ## Usage
 
+    # WARNING!
+    # The client does not do local signing of transactions at this point. You must use a trusted endpoint!
+    # WARNING!
+
     require 'ripple-lib'
 
     ripple = Ripple.client({
