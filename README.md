@@ -38,6 +38,28 @@ Or install it yourself as:
     ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
 
 
+
+    # Send and verify with error checking
+    begin
+        success = true
+        begin
+            puts "Sending transaction"
+            tx_hash = ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
+        rescue Ripple::SubmitFailed
+            # Handle failed submit
+            puts "Transaction failed"
+        rescue Ripple::ServerUnavailable
+            puts "Server Unavailable"
+            success = false
+        end
+    end while success == false
+    # Verify transaction
+    begin
+        puts "Checking transaction status"
+    end while not ripple.transaction_suceeded?(tx_hash)
+    puts "Transaction complete"
+
+
 ## Contributing
 
 1. Fork it

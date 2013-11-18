@@ -100,7 +100,7 @@ describe Ripple::Client do
     it "should be successful" do
       params = {
         destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
-        source_currency: 'USD',
+        source_currency: 'XRP',
         amount: {
            currency: 'USD',
            value: '0.0001',
@@ -108,7 +108,7 @@ describe Ripple::Client do
         }
       }
       resp = client.ripple_path_find(params)
-      puts resp.inspect
+      puts JSON(resp.resp)
       resp.should be_success
     end
   end

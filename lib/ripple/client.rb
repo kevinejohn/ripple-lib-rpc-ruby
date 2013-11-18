@@ -160,6 +160,7 @@ module Ripple
         # ledger_hash: ledger         # optional
         # "ledger_index" : ledger_index   // optional, defaults 'current'
       }
+      puts JSON(params)
       post(:ripple_path_find, params)
     end
 
