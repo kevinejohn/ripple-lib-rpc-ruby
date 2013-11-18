@@ -59,21 +59,24 @@ module Ripple
     ####################
     # Low level methods
     ####################
-    def account_info
-      post(:account_info, {account: client_account})
+    def account_info(opts = {})
+      params = {
+        account: opts[:account] || client_account,
+      }
+      post(:account_info, params)
     end
 
-    def account_lines
+    def account_lines(opts = {})
       params = {
-        account: client_account,
+        account: opts[:account] || client_account,
         ledger: :current
       }
       post(:account_lines, params)
     end
 
-    def account_offers
+    def account_offers(opts = {})
       params = {
-        account: client_account,
+        account: opts[:account] || client_account,
         ledger: :current
       }
       post(:account_offers, params)
@@ -81,7 +84,7 @@ module Ripple
 
     def account_tx(opts = {})
       params = {
-        account: client_account,
+        account: opts[:account] || client_account,
         ledger_index_min: -1,
         ledger_index_max: -1,
         binary: false,
@@ -125,22 +128,23 @@ module Ripple
       post(:ledger_entry, params)
     end
 
-    def path_find
-      params = {
-        source_account: client_account,
-        destination_account: opts[:destination],
-        destination_amount: opts[:amount]
-        # source_currencies: [
-        #    {
-        #      currency: opts[:source_currency]
-        #      #issuer: client_account     # optional
-        #    }
-        # ],
-        # ledger_hash: ledger         # optional
-        # "ledger_index" : ledger_index   // optional, defaults 'current'
-      }
-      post(:path_find, params)
-    end
+    # NOTE: path_find is not supported on RPC
+    # def path_find
+    #   params = {
+    #     source_account: client_account,
+    #     destination_account: opts[:destination],
+    #     destination_amount: opts[:amount],
+    #     source_currencies: [
+    #        {
+    #          currency: opts[:source_currency]
+    #          #issuer: client_account     # optional
+    #        }
+    #     ]
+    #     # ledger_hash: ledger         # optional
+    #     # "ledger_index" : ledger_index   // optional, defaults 'current'
+    #   }
+    #   post(:path_find, params)
+    # end
 
     def ping
       post(:ping)
@@ -148,15 +152,10 @@ module Ripple
 
     def ripple_path_find(opts = {})
       params = {
-        source_account: client_account,
-        destination_account: opts[:destination],
-        destination_amount: opts[:amount],
-        source_currencies: [
-           {
-             currency: opts[:source_currency]
-             #issuer: client_account     # optional
-           }
-        ]
+        source_account: opts[:source_account] || client_account,
+        destination_account: opts[:destination_account],
+        destination_amount: opts[:destination_amount],
+        source_currencies: opts[:source_currencies]
         # ledger_hash: ledger         # optional
         # "ledger_index" : ledger_index   // optional, defaults 'current'
       }

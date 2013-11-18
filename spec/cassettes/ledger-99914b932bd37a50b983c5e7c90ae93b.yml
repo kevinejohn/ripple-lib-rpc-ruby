@@ -2,44 +2,6 @@
 http_interactions:
 - request:
     method: post
-    uri: http://s1.ripple.com:51234/
-    body:
-      encoding: UTF-8
-      string: ! '{"method":"ledger","params":[{"full":false,"expand":false,"transactions":true,"accounts":true}]}'
-    headers:
-      Accept:
-      - application/json; charset=utf-8
-      User-Agent:
-      - Ripple Ruby Gem 0.0.0
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 11 Nov 2013 02:46:49 +0000
-      Connection:
-      - Keep-Alive
-      Access-Control-Allow-Origin:
-      - ! '*'
-      Content-Length:
-      - '854'
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - ripple-json-rpc/Ripple-0.17.0-rc2
-    body:
-      encoding: UTF-8
-      string: ! "{\"result\":{\"closed\":{\"ledger\":{\"accepted\":true,\"account_hash\":\"43A07C6529D7B60A5D7E7B8512EC7C4258A1036B57C6A6756FE7C1F9CFF96EAF\",\"close_time\":437453200,\"close_time_human\":\"2013-Nov-11
-        02:46:40\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"DDEC3CC2A916DB6E20EECC9520A5C6EC2A77F476C2F842C0D5B392881FE9B972\",\"ledger_hash\":\"DDEC3CC2A916DB6E20EECC9520A5C6EC2A77F476C2F842C0D5B392881FE9B972\",\"ledger_index\":\"3271491\",\"parent_hash\":\"AD3D47D56D450308A51AE4DEB03B83DE36B4744BC2534C2470C05449E7E0CA67\",\"seqNum\":\"3271491\",\"totalCoins\":\"99999998515920087\",\"total_coins\":\"99999998515920087\",\"transaction_hash\":\"2C9D225B02B18FE41F58FB6CB4F3421CF9747487F257EC51BFA7FB99286BD6F7\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3271492\",\"parent_hash\":\"DDEC3CC2A916DB6E20EECC9520A5C6EC2A77F476C2F842C0D5B392881FE9B972\",\"seqNum\":\"3271492\"}},\"status\":\"success\"}}\n\n\r\n"
-    http_version: 
-  recorded_at: Mon, 11 Nov 2013 02:46:48 GMT
-- request:
-    method: post
     uri: https://s1.ripple.com:51234/
     body:
       encoding: UTF-8
@@ -74,4 +36,40 @@ http_interactions:
         20:47:00\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"5977876DBB1971707F499C2DE8CB98AF42E0B89C87ED8CA70BAA60EA31F696D6\",\"ledger_hash\":\"5977876DBB1971707F499C2DE8CB98AF42E0B89C87ED8CA70BAA60EA31F696D6\",\"ledger_index\":\"3351179\",\"parent_hash\":\"651BB7C227748A99F74257230B406C1FE8EBEC0D6C300778E0978E45426766C9\",\"seqNum\":\"3351179\",\"totalCoins\":\"99999998513508438\",\"total_coins\":\"99999998513508438\",\"transaction_hash\":\"3428F916D31BC3483E9A150666CA70E226C5633D99DA4C605D09C1C75E612D93\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3351180\",\"parent_hash\":\"5977876DBB1971707F499C2DE8CB98AF42E0B89C87ED8CA70BAA60EA31F696D6\",\"seqNum\":\"3351180\"}},\"status\":\"success\"}}\n\n\r\n"
     http_version: 
   recorded_at: Fri, 15 Nov 2013 20:47:19 GMT
+- request:
+    method: post
+    uri: http://s1.ripple.com:51234/
+    body:
+      encoding: UTF-8
+      string: ! '{"method":"ledger","params":[{"full":false,"expand":false,"transactions":true,"accounts":true}]}'
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Ripple Ruby Gem 0.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 18 Nov 2013 22:46:35 +0000
+      Connection:
+      - Keep-Alive
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Content-Length:
+      - '854'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Server:
+      - ripple-json-rpc/Ripple-0.17.0-rc5
+    body:
+      encoding: US-ASCII
+      string: ! "{\"result\":{\"closed\":{\"ledger\":{\"accepted\":true,\"account_hash\":\"5BFF7DBAB49E26F40D1B5F5F03809B9729043FB5154126B37BF8246604A94F45\",\"close_time\":438129990,\"close_time_human\":\"2013-Nov-18
+        22:46:30\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"3ABF7FA5714EE087C311EF187D90C81215FEDAF27DCD4FB34B92D32364DB68B0\",\"ledger_hash\":\"3ABF7FA5714EE087C311EF187D90C81215FEDAF27DCD4FB34B92D32364DB68B0\",\"ledger_index\":\"3408808\",\"parent_hash\":\"DDFFA451E774E51E2A4F50C27855998592BB7C1B7822567C4A781732A10426E2\",\"seqNum\":\"3408808\",\"totalCoins\":\"99999998509123619\",\"total_coins\":\"99999998509123619\",\"transaction_hash\":\"5B93FF4A0725BC2A9093DC250B6F6B5B0FF47BB0692C3B2D3A75AB078D0A3FBD\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3408809\",\"parent_hash\":\"3ABF7FA5714EE087C311EF187D90C81215FEDAF27DCD4FB34B92D32364DB68B0\",\"seqNum\":\"3408809\"}},\"status\":\"success\"}}\n\n\r\n"
+    http_version: 
+  recorded_at: Mon, 18 Nov 2013 22:46:35 GMT
 recorded_with: VCR 2.7.0

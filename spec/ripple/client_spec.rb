@@ -87,6 +87,20 @@ describe Ripple::Client do
   end
 
   context '#path_find' do
+    # it "should be successful" do
+    #   params = {
+    #     destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
+    #     source_currency: 'XRP',
+    #     amount: {
+    #        currency: 'USD',
+    #        value: '0.0001',
+    #        issuer: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc'
+    #     }
+    #   }
+    #   resp = client.path_find(params)
+    #   puts JSON(resp.resp)
+    #   resp.should be_success
+    # end
   end
 
   context '#ping' do
@@ -99,12 +113,15 @@ describe Ripple::Client do
   context '#ripple_path_find' do
     it "should be successful" do
       params = {
-        destination: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc',
-        source_currency: 'XRP',
-        amount: {
-           currency: 'USD',
+        source_account: 'r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59',
+        destination_account: 'r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59',
+        source_currencies: [
+          currency: 'USD'
+          ],
+        destination_amount: {
+           currency: 'EUR',
            value: '0.0001',
-           issuer: 'rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc'
+           issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B'
         }
       }
       resp = client.ripple_path_find(params)
@@ -171,7 +188,6 @@ describe Ripple::Client do
   context '#tx' do
     it "should be successful" do
       resp = client.tx("EAC1B3A55036882CA6CFE5C8F3D627046BEEDE38A5D5902FD5D7CC548883707C")
-      puts resp.inspect
       resp.should be_success
     end
   end
@@ -190,9 +206,9 @@ describe Ripple::Client do
       begin
         resp = client.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
         puts resp
-      rescue Ripple::SubmitFailed
+      # rescue Ripple::SubmitFailed
 
-      rescue Ripple::MalformedTransaction
+      # rescue Ripple::MalformedTransaction
 
       rescue Ripple::ServerUnavailable
 
@@ -204,9 +220,9 @@ describe Ripple::Client do
       begin
         resp = client.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
         puts resp
-      rescue Ripple::SubmitFailed
+      # rescue Ripple::SubmitFailed
 
-      rescue Ripple::MalformedTransaction
+      # rescue Ripple::MalformedTransaction
 
       rescue Ripple::ServerUnavailable
 

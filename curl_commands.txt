@@ -1,6 +1,6 @@
 
 # ripple_path_find
-curl -X POST -d '{"method":"ripple_path_find","params":[{"source_account":"rPJ78bFzY54HNyuNvBs6Hch9Z3F2MvMjj6","destination_account":"r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9","destination_amount":{"currency":"EUR","value":"0.0001","issuer":"rPJ78bFzY54HNyuNvBs6Hch9Z3F2MvMjj6"},"source_currencies":[{"currency":"EUR"}]}]}' http://s1.ripple.com:51234/
+curl -X POST -d '{"method":"ripple_path_find","params":[{"source_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59","destination_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59","destination_amount":{"currency":"EUR","value":"0.0001","issuer":"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"},"source_currencies":[{"currency":"EUR"}]}]}' http://s1.ripple.com:51234/
 
 
 

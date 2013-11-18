@@ -2,43 +2,6 @@
 http_interactions:
 - request:
     method: post
-    uri: http://s1.ripple.com:51234/
-    body:
-      encoding: UTF-8
-      string: ! '{"method":"server_info"}'
-    headers:
-      Accept:
-      - application/json; charset=utf-8
-      User-Agent:
-      - Ripple Ruby Gem 0.0.0
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Mon, 11 Nov 2013 02:46:50 +0000
-      Connection:
-      - Keep-Alive
-      Access-Control-Allow-Origin:
-      - ! '*'
-      Content-Length:
-      - '503'
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - ripple-json-rpc/Ripple-0.17.0-rc2
-    body:
-      encoding: UTF-8
-      string: ! "{\"result\":{\"info\":{\"build_version\":\"0.17.0-rc2\",\"complete_ledgers\":\"32570-3271492\",\"hostid\":\"DESK\",\"last_close\":{\"converge_time_s\":2.049,\"proposers\":4},\"load_factor\":1,\"peers\":38,\"pubkey_node\":\"n9MEEymdFKzgi6eXR2H5bNNVFbr9KY7iajPpCRqZwjHiSyEinnt5\",\"server_state\":\"syncing\",\"validated_ledger\":{\"age\":0,\"base_fee_xrp\":1e-05,\"hash\":\"6A01AFC7333C3C98CCB7A951A3BC9C2D05D37F3CFBCEE46A37EB0844B0D25D5E\",\"reserve_base_xrp\":50,\"reserve_inc_xrp\":12.5,\"seq\":3271492},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
-    http_version: 
-  recorded_at: Mon, 11 Nov 2013 02:46:50 GMT
-- request:
-    method: post
     uri: https://s1.ripple.com:51234/
     body:
       encoding: UTF-8
@@ -72,4 +35,39 @@ http_interactions:
       string: ! "Unable to service at this time\r\n"
     http_version: 
   recorded_at: Fri, 15 Nov 2013 20:47:21 GMT
+- request:
+    method: post
+    uri: http://s1.ripple.com:51234/
+    body:
+      encoding: UTF-8
+      string: ! '{"method":"server_info"}'
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Ripple Ruby Gem 0.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 18 Nov 2013 22:46:38 +0000
+      Connection:
+      - Keep-Alive
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Content-Length:
+      - '503'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Server:
+      - ripple-json-rpc/Ripple-0.17.0-rc5
+    body:
+      encoding: US-ASCII
+      string: ! "{\"result\":{\"info\":{\"build_version\":\"0.17.0-rc5\",\"complete_ledgers\":\"32570-3408810\",\"hostid\":\"GAUR\",\"last_close\":{\"converge_time_s\":6.078,\"proposers\":0},\"load_factor\":1,\"peers\":42,\"pubkey_node\":\"n9LLc5eEh8RqRauHcPt8A8BE8AcNie9H7cGEQUEp7pUe9HbRWN8W\",\"server_state\":\"syncing\",\"validated_ledger\":{\"age\":8,\"base_fee_xrp\":1e-05,\"hash\":\"CC2B9F9A1C3921EBADBC20BBE6B0036EF7BEACFE95B24E54A6E32324B66D09C9\",\"reserve_base_xrp\":50,\"reserve_inc_xrp\":12.5,\"seq\":3408810},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
+    http_version: 
+  recorded_at: Mon, 18 Nov 2013 22:46:38 GMT
 recorded_with: VCR 2.7.0
