@@ -120,12 +120,13 @@ describe Ripple::Client do
           ],
         destination_amount: {
            currency: 'EUR',
-           value: '0.0001',
+           value: '0.00001',
            issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B'
         }
       }
       resp = client.ripple_path_find(params)
-      puts JSON(resp.resp)
+      # resp = make_request(:ripple_path_find, params)
+      #puts JSON(resp.resp)
       resp.should be_success
     end
   end
@@ -205,7 +206,8 @@ describe Ripple::Client do
     it 'should be successful sending XRP' do
       begin
         resp = client.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
-        puts resp
+        client.transaction_suceeded?(resp)
+        # puts resp
       # rescue Ripple::SubmitFailed
 
       # rescue Ripple::MalformedTransaction
@@ -219,7 +221,7 @@ describe Ripple::Client do
     it 'should be successful sending USD' do
       begin
         resp = client.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
-        puts resp
+        # puts resp
       # rescue Ripple::SubmitFailed
 
       # rescue Ripple::MalformedTransaction
@@ -228,25 +230,44 @@ describe Ripple::Client do
 
       end
     end
+
+
+    it 'should return first path' do
+      begin
+        params = {
+          destination_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+          destination_issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
+          destination_amount: "0.0001",
+          destination_currency: "EUR",
+          source_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+          source_currency: "USD"
+        }
+        path = client.find_first_available_path(params)
+        # puts JSON(path)
+      end
+    end
+
+
+    it 'should throw NoPathAvailable' do
+      params = {
+        destination_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
+        destination_issuer: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
+        destination_amount: "0.0001",
+        destination_currency: "EUR",
+        source_currency: "USD"
+      }
+      expect { client.find_first_available_path(params) }.to raise_error(Ripple::NoPathAvailable)
+    end
   end
 
   context '#transaction_suceeded' do
     it 'should be successful' do
-      begin
-        resp = client.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
-        resp.should be_true
-      rescue Ripple::ServerUnavailable
-
-      end
+      resp = client.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
+      resp.should be_true
     end
 
     it 'should fail from invalid tx_tash' do
-      begin
-        resp = client.transaction_suceeded?("94062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
-        resp.should be_false
-      rescue Ripple::ServerUnavailable
-
-      end
+      expect { client.transaction_suceeded?("94062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735") }.to raise_error(Ripple::InvalidTxHash)
     end
   end
 end

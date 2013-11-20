@@ -25,6 +25,16 @@ module Ripple
   # Happens when submitting transaction
   class ServerUnavailable < StandardError; end
 
+  class Timedout < StandardError; end
+
+  # ripple_find_path
+  class NoPathAvailable < StandardError; end
+
+
+  # transaction_suceeded? response on invalid transaction
+  class InvalidTxHash < StandardError; end
+
+
 
   # Unknown error
   class UnknownError < StandardError; end

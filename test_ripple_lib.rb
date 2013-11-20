@@ -1,4 +1,6 @@
-require 'ripple'
+#require 'ripple'
+require './lib/ripple'
+
 
 ripple = Ripple.client({
   endpoint: "http://s1.ripple.com:51234/",
@@ -29,6 +31,8 @@ if success
       begin
         puts "Checking transaction status"
         complete = ripple.transaction_suceeded?(tx_hash)
+      rescue Ripple::InvalidTxHash
+        puts "Invalid Tx Hash"
       rescue Ripple::ServerUnavailable
         puts "Server Unavailable"
       end

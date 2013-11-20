@@ -32,7 +32,27 @@ module Ripple
       response.resp.tx_json['hash']
     end
 
-    def send_other_currency(destination, source_currency, destination_currency, destination_amount)
+    # Returns first available path
+    def find_first_available_path(opts = {})
+      params = {
+        source_account: opts[:source_account] || client_account,
+        destination_account: opts[:destination_account],
+        source_currencies: [
+          currency: opts[:source_currency]
+          ],
+        destination_amount: {
+           currency: opts[:destination_currency],
+           value: opts[:destination_amount],
+           issuer: opts[:destination_issuer]
+        }
+      }
+      resp = ripple_path_find(params)
+      if resp.resp.alternatives.count == 0
+        raise NoPathAvailable
+      else
+        resp.resp.alternatives[0]
+      end
+
       # Find paths
       # TODO:
 
@@ -49,9 +69,19 @@ module Ripple
       # submit(params)
     end
 
+    # Returns either:
+    # :unknown_tx
+    # :submitted_tx
+    # :success_tx
     def transaction_suceeded?(tx_hash)
       response = tx(tx_hash)
-      response.success? and response.resp.validated == true and response.resp.meta.TransactionResult == 'tesSUCCESS'
+      if response.success? and response.resp.validated == true and response.resp.meta.TransactionResult == 'tesSUCCESS'
+        true
+      elsif response.success? and response.resp['hash'] == tx_hash
+        false
+      else
+        raise InvalidTxHash
+      end
     end
 
 
@@ -159,7 +189,7 @@ module Ripple
         # ledger_hash: ledger         # optional
         # "ledger_index" : ledger_index   // optional, defaults 'current'
       }
-      puts JSON(params)
+      # puts JSON(params)
       post(:ripple_path_find, params)
     end
 

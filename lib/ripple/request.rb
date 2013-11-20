@@ -17,6 +17,8 @@ module Ripple
       rescue Faraday::Error::ParsingError
         # Server unavailable
         raise ServerUnavailable
+      rescue Faraday::Error::TimeoutError
+        raise Timedout
       end
     end
   end
