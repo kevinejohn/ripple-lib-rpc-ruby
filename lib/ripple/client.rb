@@ -52,27 +52,11 @@ module Ripple
       else
         resp.resp.alternatives[0]
       end
-
-      # Find paths
-      # TODO:
-
-      # Submit path
-      # TODO:
-      # params = {
-      #   destination: destination,
-      #   amount: {
-      #      currency: currency,
-      #      value: amount,
-      #      issuer: destination
-      #   }
-      # }
-      # submit(params)
     end
 
-    # Returns either:
-    # :unknown_tx
-    # :submitted_tx
-    # :success_tx
+    # Returns true if tx_hash is completed.
+    # Returns false if tx_hash is submitted but not complete
+    # Raises Ripple::InvalidTxHash if tx_hash isnt found
     def transaction_suceeded?(tx_hash)
       response = tx(tx_hash)
       if response.success? and response.resp.validated == true and response.resp.meta.TransactionResult == 'tesSUCCESS'

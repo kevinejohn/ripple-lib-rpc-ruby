@@ -207,25 +207,14 @@ describe Ripple::Client do
       begin
         resp = client.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
         client.transaction_suceeded?(resp)
-        # puts resp
-      # rescue Ripple::SubmitFailed
-
-      # rescue Ripple::MalformedTransaction
-
       rescue Ripple::ServerUnavailable
 
       end
-      #resp.should be_success
     end
 
     it 'should be successful sending USD' do
       begin
         resp = client.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
-        # puts resp
-      # rescue Ripple::SubmitFailed
-
-      # rescue Ripple::MalformedTransaction
-
       rescue Ripple::ServerUnavailable
 
       end
@@ -243,7 +232,6 @@ describe Ripple::Client do
           source_currency: "USD"
         }
         path = client.find_first_available_path(params)
-        # puts JSON(path)
       end
     end
 
@@ -254,6 +242,7 @@ describe Ripple::Client do
         destination_issuer: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
         destination_amount: "0.0001",
         destination_currency: "EUR",
+        source_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
         source_currency: "USD"
       }
       expect { client.find_first_available_path(params) }.to raise_error(Ripple::NoPathAvailable)
