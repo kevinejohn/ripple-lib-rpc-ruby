@@ -32,11 +32,17 @@ Or install it yourself as:
     })
 
     # Send XRP
-    ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP" "1")
+    tx_hash = ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP" "1")
 
     # Send IOU
-    ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
+    tx_hash = ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
 
+    # Verify tx_hash
+    if ripple.transaction_suceeded?(tx_hash)
+        # Transaction complete
+    else
+        # Transaction Pending
+    end
 
 
     # Send and verify with error checking
@@ -67,7 +73,7 @@ Or install it yourself as:
           end
           if not complete
             # Sleep for small amount of time before checking again
-            sleep 0.5
+            sleep 1
           end
         end while not complete
         puts "Transaction complete"

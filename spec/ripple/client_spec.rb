@@ -247,6 +247,26 @@ describe Ripple::Client do
       }
       expect { client.find_first_available_path(params) }.to raise_error(Ripple::NoPathAvailable)
     end
+
+
+    # it 'should be successful sending USD from EUR' do
+    #   begin
+    #     params = {
+    #       destination_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+    #       destination_issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
+    #       destination_amount: "0.0001",
+    #       destination_currency: "EUR",
+    #       source_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+    #       source_currency: "USD"
+    #     }
+    #     path = client.find_first_available_path(params)
+
+    #     resp = client.send_other_currency(destination, source_currency, destination_currency, send_max, path, amount)
+    #   rescue Ripple::ServerUnavailable
+
+    #   end
+    # end
+
   end
 
   context '#transaction_suceeded' do

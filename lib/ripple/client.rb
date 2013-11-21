@@ -32,6 +32,40 @@ module Ripple
       response.resp.tx_json['hash']
     end
 
+    # Complex IOU send
+    def send_other_currency(destination, source_currency, destination_currency, path, amount)
+      if source_currency == 'XRP'
+        params = {
+          destination: destination,
+          amount: amount
+        }
+      else
+        # IOU
+        params = {
+          destination: destination,
+          amount: {
+             currency: source_currency,
+             value: amount,
+             issuer: destination
+          }
+        }
+      end
+      params.merge!({
+        SendMax: path.source_amount,
+        Paths: path.paths_computed
+        })
+
+      response = submit(params)
+
+      if response.resp.engine_result != 'tesSUCCESS'
+        # Failed
+        puts response.resp.inspect
+        raise SubmitFailed
+      end
+      # Return transaction hash
+      response.resp.tx_json['hash']
+    end
+
     # Returns first available path
     def find_first_available_path(opts = {})
       params = {
@@ -50,7 +84,9 @@ module Ripple
       if resp.resp.alternatives.count == 0
         raise NoPathAvailable
       else
-        resp.resp.alternatives[0]
+        # Create Path object
+        Ripple::Model::Path.new(resp.resp.alternatives[0])
+        #resp.resp.alternatives[0]
       end
     end
 
@@ -198,6 +234,13 @@ module Ripple
       post(:sign, params)
     end
 
+    # Parameters for opts
+    # :tx_blob           // Optional. Replaces all other parameters. Raw transaction
+    # :transaction_type  // Optional. Default: 'Payment'
+    # :destination       // Destination account
+    # :amount            // Ammount to send
+    # :SendMax           // Optional. Complex IOU send
+    # :Paths             // Optional. Complex IOU send
     def submit(opts = {})
       params = {
         secret: client_secret,
@@ -211,6 +254,14 @@ module Ripple
           'Destination' => opts[:destination],
           'Amount' => opts[:amount]
         }})
+
+        # Complex IOU send
+        if opts.key?(:SendMax) and opts.key?(:Paths)
+          params.merge!({tx_json: {
+            'SendMax' => opts[:SendMax],
+            'Paths' => opts[:Paths]
+          }})
+        end
       end
       post(:submit, params)
     end
