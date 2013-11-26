@@ -45,100 +45,89 @@ Or install it yourself as:
     end
 
 
-    # Send and confirm basic transaction with error checking
+    # Send and verify with error checking
     success = false
+    failed = false
     begin
-        failed = false
-        begin
-            puts "Sending transaction"
-            tx_hash = ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
-            success = true
-        rescue Ripple::SubmitFailed
-            # Handle failed submit
-            puts "Transaction failed"
-            failed = true
-        rescue Ripple::ServerUnavailable
-            puts "Server Unavailable"
-        end
+        puts "Sending transaction"
+        tx_hash = ripple.send_currency("r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9", "USD", "0.00001")
+        success = true
+    rescue Ripple::SubmitFailed
+        puts "Transaction failed"
+        failed = true
+    rescue Ripple::ServerUnavailable
+        puts "Server Unavailable"
     end while not success and not failed
     if success
         # Verify transaction
         complete = false
         begin
-          begin
-            puts "Checking transaction status"
-            complete = ripple.transaction_suceeded?(tx_hash)
-          rescue Ripple::ServerUnavailable
-            puts "Server Unavailable"
-          end
+          puts "Checking transaction status"
+          complete = ripple.transaction_suceeded?(tx_hash)
           if not complete
             # Sleep for small amount of time before checking again
             sleep 1
           end
+        rescue Ripple::InvalidTxHash
+          puts "Invalid Tx Hash"
+        rescue Ripple::ServerUnavailable
+          puts "Server Unavailable"
         end while not complete
         puts "Transaction complete"
     end
 
 
 
-    # Send and confirm complex IOU transaction with error checking
+    # Send complex IOU
     # 1. Find path
     success = false
     begin
-        begin
-            puts "Finding Path"
-            destination_amount = Ripple::Model::Amount.new(value: '0.00001', currency: 'EUR', issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9')
-
-            params = {
-              destination_account: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
-              destination_amount: destination_amount.to_json,
-              source_currency: 'USD'
-            }
-            path = ripple.find_first_available_path(params)
-            #puts path.inspect
-            success = true
-        rescue Ripple::ServerUnavailable
-            puts "Server Unavailable"
-        end
+      puts "Finding Path"
+      destination_amount = Ripple::Model::Amount.new(value: '0.00001', currency: 'EUR', issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9')
+      params = {
+        destination_account: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
+        destination_amount: destination_amount.to_json,
+        source_currency: 'USD'
+      }
+      path = ripple.find_first_available_path(params)
+      success = true
+    rescue Ripple::ServerUnavailable
+        puts "Server Unavailable"
     end while not success
     # 2. Submit transaction
     success = false
     failed = false
     begin
-      begin
-          puts "Submitting transaction"
-          params = {
-            destination: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
-            destination_amount: destination_amount.to_json,
-            path: path
-          }
-          tx_hash = ripple.send_other_currency(params)
-          success = true
-      rescue Ripple::SubmitFailed
-        puts "Transaction Failed"
-        failed = true
-      rescue Ripple::ServerUnavailable
-          puts "Server Unavailable"
-      end
+      puts "Submitting transaction"
+      params = {
+        destination: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
+        destination_amount: destination_amount.to_json,
+        path: path
+      }
+      tx_hash = ripple.send_other_currency(params)
+      success = true
+    rescue Ripple::SubmitFailed
+      puts "Transaction Failed"
+      failed = true
+    rescue Ripple::ServerUnavailable
+        puts "Server Unavailable"
     end while not success and not failed
     # 3. Verify transaction
     if success
-        complete = false
-        begin
-          begin
-            puts "Checking transaction status"
-            complete = ripple.transaction_suceeded?(tx_hash)
-          rescue Ripple::InvalidTxHash
-            puts "Invalid Tx Hash"
-          rescue Ripple::ServerUnavailable
-            puts "Server Unavailable"
-          end
-          if not complete
-            # Sleep for small amount of time before checking again
-            sleep 1
-          end
-        end while not complete
-        puts "Transaction complete"
+      complete = false
+      begin
+        puts "Checking transaction status"
+        complete = ripple.transaction_suceeded?(tx_hash)
+        if not complete
+          # Sleep for small amount of time before checking again
+          sleep 1
+        end
+      rescue Ripple::InvalidTxHash
+        puts "Invalid Tx Hash"
+      rescue Ripple::ServerUnavailable
+        puts "Server Unavailable"
+      end while not complete
+      puts "Transaction complete"
     end
 
 
