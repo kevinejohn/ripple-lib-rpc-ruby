@@ -5,7 +5,7 @@ require './lib/ripple'
 ripple = Ripple.client({
   endpoint: "http://s1.ripple.com:51234/",
   client_account: "rPJ78bFzY54HNyuNvBs6Hch9Z3F2MvMjj6",
-  client_secret: "<Your Secret Here>"
+  client_secret: "secret"
 })
 
 # Send and verify with error checking
