@@ -5,6 +5,7 @@ module Ripple
       attr_accessor :paths_computed
 
       def initialize(path_response)
+        # puts path_response.inspect
         self.source_amount = Ripple::Model::Amount.new(path_response.source_amount)
         self.paths_computed = path_response.paths_computed
       end

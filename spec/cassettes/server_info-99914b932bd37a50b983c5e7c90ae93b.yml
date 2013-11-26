@@ -5,7 +5,7 @@ http_interactions:
     uri: https://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: ! '{"method":"server_info"}'
+      string: '{"method":"server_info"}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - ! '*'
+      - '*'
       Content-Length:
       - '32'
       Content-Type:
@@ -32,7 +32,7 @@ http_interactions:
       - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: US-ASCII
-      string: ! "Unable to service at this time\r\n"
+      string: "Unable to service at this time\r\n"
     http_version: 
   recorded_at: Fri, 15 Nov 2013 20:47:21 GMT
 - request:
@@ -40,7 +40,7 @@ http_interactions:
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: ! '{"method":"server_info"}'
+      string: '{"method":"server_info"}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -48,26 +48,28 @@ http_interactions:
       - Ripple Ruby Gem 0.0.0
       Content-Type:
       - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
     status:
-      code: 200
-      message: OK
+      code: 503
+      message: ''
     headers:
       Date:
-      - Mon, 18 Nov 2013 22:46:38 +0000
+      - Tue, 26 Nov 2013 21:54:04 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - ! '*'
+      - '*'
       Content-Length:
-      - '503'
+      - '32'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
       - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
-      encoding: US-ASCII
-      string: ! "{\"result\":{\"info\":{\"build_version\":\"0.17.0-rc5\",\"complete_ledgers\":\"32570-3408810\",\"hostid\":\"GAUR\",\"last_close\":{\"converge_time_s\":6.078,\"proposers\":0},\"load_factor\":1,\"peers\":42,\"pubkey_node\":\"n9LLc5eEh8RqRauHcPt8A8BE8AcNie9H7cGEQUEp7pUe9HbRWN8W\",\"server_state\":\"syncing\",\"validated_ledger\":{\"age\":8,\"base_fee_xrp\":1e-05,\"hash\":\"CC2B9F9A1C3921EBADBC20BBE6B0036EF7BEACFE95B24E54A6E32324B66D09C9\",\"reserve_base_xrp\":50,\"reserve_inc_xrp\":12.5,\"seq\":3408810},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
+      encoding: UTF-8
+      string: "Unable to service at this time\r\n"
     http_version: 
-  recorded_at: Mon, 18 Nov 2013 22:46:38 GMT
+  recorded_at: Tue, 26 Nov 2013 21:54:04 GMT
 recorded_with: VCR 2.7.0

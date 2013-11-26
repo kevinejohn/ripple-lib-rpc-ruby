@@ -6,11 +6,12 @@ module Ripple
       attr_accessor :value
 
       def initialize(amount_json)
-        if amount_json.key?('currency')
+        # puts amount_json.inspect
+        if amount_json.key?('currency') or not amount_json[:currency].nil?
           # IOU
-          self.currency = amount_json.currency
-          self.issuer = amount_json.issuer
-          self.value = amount_json.value
+          self.currency = amount_json[:currency] || amount_json.currency
+          self.issuer = amount_json[:issuer] || amount_json.issuer
+          self.value = amount_json[:value] || amount_json.value
         else
           # XRP
           self.currency = 'XRP'
@@ -23,13 +24,13 @@ module Ripple
         self.currency == 'XRP'
       end
 
-      # def to_json
-      #   if is_xrp?
-      #     self.value
-      #   else
-      #     {currency: self.currency, issuer: self.issuer, value: self.value}
-      #   end
-      # end
+      def to_json(options = {})
+        if is_xrp?
+          self.value
+        else
+          {currency: self.currency, issuer: self.issuer, value: self.value}
+        end
+      end
     end
   end
 end

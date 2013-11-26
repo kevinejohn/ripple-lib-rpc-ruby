@@ -5,7 +5,7 @@ http_interactions:
     uri: https://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: ! '{"method":"submit","params":[{"secret":"ssm5HPoeEZYJWvkJvQW9ro6e6hW9m","tx_json":{"TransactionType":"Payment","Account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","Destination":"r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV","Amount":"200000000"}}]}'
+      string: '{"method":"submit","params":[{"secret":"ssm5HPoeEZYJWvkJvQW9ro6e6hW9m","tx_json":{"TransactionType":"Payment","Account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","Destination":"r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV","Amount":"200000000"}}]}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - ! '*'
+      - '*'
       Content-Length:
       - '32'
       Content-Type:
@@ -32,7 +32,7 @@ http_interactions:
       - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: US-ASCII
-      string: ! "Unable to service at this time\r\n"
+      string: "Unable to service at this time\r\n"
     http_version: 
   recorded_at: Fri, 15 Nov 2013 20:47:23 GMT
 - request:
@@ -40,7 +40,7 @@ http_interactions:
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: ! '{"method":"submit","params":[{"secret":"ssm5HPoeEZYJWvkJvQW9ro6e6hW9m","tx_json":{"TransactionType":"Payment","Account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","Destination":"r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV","Amount":"200000000"}}]}'
+      string: '{"method":"submit","params":[{"secret":"ssm5HPoeEZYJWvkJvQW9ro6e6hW9m","tx_json":{"TransactionType":"Payment","Account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","Destination":"r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV","Amount":"200000000"}}]}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -48,27 +48,28 @@ http_interactions:
       - Ripple Ruby Gem 0.0.0
       Content-Type:
       - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
     status:
-      code: 200
-      message: OK
+      code: 503
+      message: ''
     headers:
       Date:
-      - Mon, 18 Nov 2013 22:46:39 +0000
+      - Tue, 26 Nov 2013 21:54:05 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - ! '*'
+      - '*'
       Content-Length:
-      - '1055'
+      - '32'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
       - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
-      encoding: US-ASCII
-      string: ! "{\"result\":{\"engine_result\":\"tecUNFUNDED_PAYMENT\",\"engine_result_code\":104,\"engine_result_message\":\"Insufficient
-        XRP balance to send.\",\"status\":\"success\",\"tx_blob\":\"1200002200000000240000016061400000000BEBC20068400000000000000A732103AF2FB2EC38B072B50EC56360820D35C022D387BFE22D080D689D5DB5AF2C509574483046022100E642D0D4CFF9B072CEE7F16E303C53B63B5DBFDB7679661929C18163166D7717022100B8EB5F3F8209A7F73D646F9761459338DC4BC3C6FA4FA181FA4F08E09B3F63E38114EA1FCE78BEA993878FEAE450ADFC64A14331AB528314550FC62003E785DC231A1058A05E56E3F09CF4E6\",\"tx_json\":{\"Account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"Amount\":\"200000000\",\"Destination\":\"r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV\",\"Fee\":\"10\",\"Flags\":0,\"Sequence\":352,\"SigningPubKey\":\"03AF2FB2EC38B072B50EC56360820D35C022D387BFE22D080D689D5DB5AF2C5095\",\"TransactionType\":\"Payment\",\"TxnSignature\":\"3046022100E642D0D4CFF9B072CEE7F16E303C53B63B5DBFDB7679661929C18163166D7717022100B8EB5F3F8209A7F73D646F9761459338DC4BC3C6FA4FA181FA4F08E09B3F63E3\",\"hash\":\"FE9E2F3B5E3FD635B97B9B611653836AD16D919DF464912301D5DDAB65279260\"}}}\n\n\r\n"
+      encoding: UTF-8
+      string: "Unable to service at this time\r\n"
     http_version: 
-  recorded_at: Mon, 18 Nov 2013 22:46:39 GMT
+  recorded_at: Tue, 26 Nov 2013 21:54:05 GMT
 recorded_with: VCR 2.7.0

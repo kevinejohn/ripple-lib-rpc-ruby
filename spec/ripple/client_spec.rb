@@ -223,13 +223,12 @@ describe Ripple::Client do
 
     it 'should return first path' do
       begin
+        destination_amount = Ripple::Model::Amount.new(currency: 'EUR', value: '0.0001', issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B')
         params = {
           destination_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-          destination_issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
-          destination_amount: "0.0001",
-          destination_currency: "EUR",
+          destination_amount: destination_amount.to_json,
           source_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-          source_currency: "USD"
+          source_currency: 'USD'
         }
         path = client.find_first_available_path(params)
       end
@@ -237,35 +236,34 @@ describe Ripple::Client do
 
 
     it 'should throw NoPathAvailable' do
+      destination_amount = Ripple::Model::Amount.new(currency: 'EUR', value: '0.0001', issuer: 'r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj')
       params = {
         destination_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
-        destination_issuer: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
-        destination_amount: "0.0001",
-        destination_currency: "EUR",
-        source_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
-        source_currency: "USD"
+        destination_amount: destination_amount.to_json,
+        source_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+        source_currency: 'USD'
       }
       expect { client.find_first_available_path(params) }.to raise_error(Ripple::NoPathAvailable)
     end
 
 
-    # it 'should be successful sending USD from EUR' do
-    #   begin
-    #     params = {
-    #       destination_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-    #       destination_issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
-    #       destination_amount: "0.0001",
-    #       destination_currency: "EUR",
-    #       source_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-    #       source_currency: "USD"
-    #     }
-    #     path = client.find_first_available_path(params)
+    it 'should be successful sending USD from EUR' do
+      destination_amount = Ripple::Model::Amount.new(value: '0.00001', currency: 'EUR', issuer: 'r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59')
 
-    #     resp = client.send_other_currency(destination, source_currency, destination_currency, send_max, path, amount)
-    #   rescue Ripple::ServerUnavailable
+      params = {
+        destination_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+        destination_amount: destination_amount.to_json,
+        source_currency: 'USD'
+      }
+      path = client.find_first_available_path(params)
 
-    #   end
-    # end
+      params = {
+        destination: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+        destination_amount: destination_amount.to_json,
+        path: path
+      }
+      tx_hash = client.send_other_currency(params)
+    end
 
   end
 

@@ -4,8 +4,8 @@ require './lib/ripple'
 
 ripple = Ripple.client({
   endpoint: "http://s1.ripple.com:51234/",
-  client_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
-  client_secret: "ssm5HPoeEZYJWvkJvQW9ro6e6hW9m"
+  client_account: "rPJ78bFzY54HNyuNvBs6Hch9Z3F2MvMjj6",
+  client_secret: "<Your Secret Here>"
 })
 
 # Send and verify with error checking
@@ -62,17 +62,15 @@ success = false
 begin
     begin
         puts "Finding Path"
+        destination_amount = Ripple::Model::Amount.new(value: '0.00001', currency: 'EUR', issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9')
+
         params = {
-          destination_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-          destination_issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
-          destination_amount: "0.0001",
-          destination_currency: "EUR",
-          source_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-          source_currency: "USD"
+          destination_account: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
+          destination_amount: destination_amount.to_json,
+          source_currency: 'USD'
         }
         path = ripple.find_first_available_path(params)
         #puts path.inspect
-        puts path.source_amount.inspect
         success = true
     rescue Ripple::ServerUnavailable
         puts "Server Unavailable"
@@ -84,15 +82,12 @@ failed = false
 begin
   begin
       puts "Submitting transaction"
-      # params = {
-      #   destination_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-      #   destination_issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
-      #   destination_amount: "0.0001",
-      #   destination_currency: "EUR",
-      #   source_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-      #   source_currency: "USD"
-      # }
-      tx_hash = ripple.send_other_currency(destination="r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59" , source_currency="USD", destination_currency="EUR", path=path, amount="0.0001")
+      params = {
+        destination: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
+        destination_amount: destination_amount.to_json,
+        path: path
+      }
+      tx_hash = ripple.send_other_currency(params)
       success = true
   rescue Ripple::SubmitFailed
     puts "Transaction Failed"
@@ -101,26 +96,25 @@ begin
       puts "Server Unavailable"
   end
 end while not success and not failed
-# # 3. Verify transaction
-# if success
-
-#     complete = false
-#     begin
-#       begin
-#         puts "Checking transaction status"
-#         complete = ripple.transaction_suceeded?(tx_hash)
-#       rescue Ripple::InvalidTxHash
-#         puts "Invalid Tx Hash"
-#       rescue Ripple::ServerUnavailable
-#         puts "Server Unavailable"
-#       end
-#       if not complete
-#         # Sleep for small amount of time before checking again
-#         sleep 1
-#       end
-#     end while not complete
-#     puts "Transaction complete"
-# end
+# 3. Verify transaction
+if success
+    complete = false
+    begin
+      begin
+        puts "Checking transaction status"
+        complete = ripple.transaction_suceeded?(tx_hash)
+      rescue Ripple::InvalidTxHash
+        puts "Invalid Tx Hash"
+      rescue Ripple::ServerUnavailable
+        puts "Server Unavailable"
+      end
+      if not complete
+        # Sleep for small amount of time before checking again
+        sleep 1
+      end
+    end while not complete
+    puts "Transaction complete"
+end
 
 
 

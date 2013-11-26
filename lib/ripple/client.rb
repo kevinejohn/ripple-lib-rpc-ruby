@@ -33,28 +33,16 @@ module Ripple
     end
 
     # Complex IOU send
-    def send_other_currency(destination, source_currency, destination_currency, path, amount)
-      if source_currency == 'XRP'
-        params = {
-          destination: destination,
-          amount: amount
-        }
-      else
-        # IOU
-        params = {
-          destination: destination,
-          amount: {
-             currency: source_currency,
-             value: amount,
-             issuer: destination
-          }
-        }
-      end
-      params.merge!({
-        SendMax: path.source_amount,
+    def send_other_currency(opts = {})
+      path = opts[:path]
+      params = {
+        destination: opts[:destination],
+        amount: opts[:destination_amount],
+        SendMax: path.source_amount.to_json,
         Paths: path.paths_computed
-        })
+      }
 
+      # puts "Sending other currency " + params.inspect
       response = submit(params)
 
       if response.resp.engine_result != 'tesSUCCESS'
@@ -74,13 +62,11 @@ module Ripple
         source_currencies: [
           currency: opts[:source_currency]
           ],
-        destination_amount: {
-           currency: opts[:destination_currency],
-           value: opts[:destination_amount],
-           issuer: opts[:destination_issuer]
-        }
+        destination_amount: opts[:destination_amount]
       }
+      #puts params.inspect
       resp = ripple_path_find(params)
+      #puts resp.resp.inspect
       if resp.resp.alternatives.count == 0
         raise NoPathAvailable
       else
@@ -248,21 +234,27 @@ module Ripple
       if opts.key?(:tx_blob)
         params.merge!(opts)
       else
-        params.merge!({tx_json: {
-          'TransactionType' => opts[:transaction_type] || 'Payment',
-          'Account' => client_account,
-          'Destination' => opts[:destination],
-          'Amount' => opts[:amount]
-        }})
-
-        # Complex IOU send
         if opts.key?(:SendMax) and opts.key?(:Paths)
+          # Complex IOU send
           params.merge!({tx_json: {
+            'TransactionType' => opts[:transaction_type] || 'Payment',
+            'Account' => client_account,
+            'Destination' => opts[:destination],
+            'Amount' => opts[:amount],
             'SendMax' => opts[:SendMax],
             'Paths' => opts[:Paths]
           }})
+        else
+          # Easy IOU Send
+          params.merge!({tx_json: {
+            'TransactionType' => opts[:transaction_type] || 'Payment',
+            'Account' => client_account,
+            'Destination' => opts[:destination],
+            'Amount' => opts[:amount]
+          }})
         end
       end
+      # puts "Submit: " + params.inspect
       post(:submit, params)
     end
 
