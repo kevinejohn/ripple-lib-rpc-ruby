@@ -56,20 +56,20 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 27 Nov 2013 01:38:56 +0000
+      - Wed, 27 Nov 2013 02:03:30 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
       - '*'
       Content-Length:
-      - '503'
+      - '499'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.17.0-rc5
+      - ripple-json-rpc/Ripple-0.18.0
     body:
       encoding: UTF-8
-      string: "{\"result\":{\"info\":{\"build_version\":\"0.17.0-rc5\",\"complete_ledgers\":\"32570-3561258\",\"hostid\":\"SEEM\",\"last_close\":{\"converge_time_s\":2.054,\"proposers\":2},\"load_factor\":1,\"peers\":46,\"pubkey_node\":\"n9KZTt9msBy53McxuGufwgHeD7hZv5gBPbVwkWS5uwvWQyoMiEQD\",\"server_state\":\"syncing\",\"validated_ledger\":{\"age\":6,\"base_fee_xrp\":1e-05,\"hash\":\"D300FED60E32459A43076F1C23D385FA3AE1708CD92D88C0834A6F934052AD61\",\"reserve_base_xrp\":50,\"reserve_inc_xrp\":12.5,\"seq\":3561258},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
+      string: "{\"result\":{\"info\":{\"build_version\":\"0.18.0\",\"complete_ledgers\":\"32570-3561595\",\"hostid\":\"BUSH\",\"last_close\":{\"converge_time_s\":2.015,\"proposers\":4},\"load_factor\":1,\"peers\":45,\"pubkey_node\":\"n9KNUUntNaDqvMVMKZLPHhGaWZDnx7soeUiHjeQE8ejR45DmHyfx\",\"server_state\":\"syncing\",\"validated_ledger\":{\"age\":0,\"base_fee_xrp\":1e-05,\"hash\":\"27C129CB2A7049912A2CCF0590A9C292EBD70BC8FAB2D3A4F8909A7D271C1462\",\"reserve_base_xrp\":50,\"reserve_inc_xrp\":12.5,\"seq\":3561595},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Wed, 27 Nov 2013 01:38:56 GMT
+  recorded_at: Wed, 27 Nov 2013 02:03:31 GMT
 recorded_with: VCR 2.7.0

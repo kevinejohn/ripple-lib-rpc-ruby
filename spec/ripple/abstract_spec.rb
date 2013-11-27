@@ -28,15 +28,11 @@ describe Ripple::Abstract do
   # High level methods
   context '#submit_transaction' do
     it 'should be successful sending XRP' do
-      transaction = Ripple::Model::Transaction.new
-      transaction.init_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
-      abstract.submit_transaction(transaction)
+      abstract.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
     end
 
     it 'should be successful sending USD' do
-      transaction = Ripple::Model::Transaction.new
-      transaction.init_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
-      abstract.submit_transaction(transaction)
+      abstract.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
     end
 
 

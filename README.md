@@ -32,16 +32,20 @@ Or install it yourself as:
     )
 
     # Send XRP
-    tx_hash = ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP" "1")
+    tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
 
     # Send IOU
-    tx_hash = ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
+    tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "1")
 
     # Verify tx_hash
-    if ripple.transaction_suceeded?(tx_hash)
-        # Transaction complete
-    else
-        # Transaction Pending
+    begin
+        if ripple.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
+            puts "Transaction complete"
+        else
+            puts "Transaction Pending"
+        end
+    rescue Ripple::InvalidTxHash
+        puts "Invalid transaction"
     end
 
 
@@ -50,10 +54,10 @@ Or install it yourself as:
     failed = false
     begin
         puts "Sending transaction"
-        tx_hash = ripple.send_currency("r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9", "USD", "0.00001")
+        tx_hash = ripple.send_basic_transaction("r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9", "USD", "0.00001")
         success = true
-    rescue Ripple::SubmitFailed
-        puts "Transaction failed"
+    rescue Ripple::SubmitFailed => e
+        puts "Transaction failed: " + e.message
         failed = true
     rescue Ripple::ServerUnavailable
         puts "Server Unavailable"
@@ -83,13 +87,17 @@ Or install it yourself as:
     success = false
     begin
       puts "Finding Path"
-      destination_amount = Ripple::Model::Amount.new(value: '0.00001', currency: 'EUR', issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9')
-      params = {
+      destination_amount = Ripple::Model::Amount.new(
+        value: '0.00001',
+        currency: 'EUR',
+        issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
+        )
+      path = Ripple::Model::Path.new(
+        source_currency: 'USD',
         destination_account: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
-        destination_amount: destination_amount.to_json,
-        source_currency: 'USD'
-      }
-      path = ripple.find_first_available_path(params)
+        destination_amount: destination_amount
+        )
+      transaction = ripple.find_transaction_path(path)
       success = true
     rescue Ripple::ServerUnavailable
         puts "Server Unavailable"
@@ -99,15 +107,10 @@ Or install it yourself as:
     failed = false
     begin
       puts "Submitting transaction"
-      params = {
-        destination: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
-        destination_amount: destination_amount.to_json,
-        path: path
-      }
-      tx_hash = ripple.send_other_currency(params)
+      tx_hash = ripple.submit_transaction(transaction)
       success = true
-    rescue Ripple::SubmitFailed
-      puts "Transaction Failed"
+    rescue Ripple::SubmitFailed => e
+        puts "Transaction failed: " + e.message
       failed = true
     rescue Ripple::ServerUnavailable
         puts "Server Unavailable"

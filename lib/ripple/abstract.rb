@@ -21,6 +21,11 @@ module Ripple
       path.transaction
     end
 
+    def send_basic_transaction(destination, currency, amount)
+      transaction = Ripple::Model::Transaction.init_basic_transaction(destination, currency, amount)
+      submit_transaction(transaction)
+    end
+
     # Returns true if tx_hash is completed.
     # Returns false if tx_hash is submitted but not complete
     # Raises Ripple::InvalidTxHash if tx_hash isnt found

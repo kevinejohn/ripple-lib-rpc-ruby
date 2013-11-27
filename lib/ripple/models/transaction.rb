@@ -21,14 +21,16 @@ module Ripple
       end
 
       # Initialize a basic transaction
-      def init_basic_transaction(destination, currency, amount)
-        self.destination_account = destination
-        self.destination_currency = currency
-        self.destination_amount = Ripple::Model::Amount.new(
+      def self.init_basic_transaction(destination, currency, amount)
+        obj = Transaction.new
+        obj.destination_account = destination
+        obj.destination_currency = currency
+        obj.destination_amount = Ripple::Model::Amount.new(
           value: amount,
           issuer: destination,
           currency: currency
           )
+        obj
       end
 
       def valid?
@@ -39,8 +41,8 @@ module Ripple
       def tx_hash
         if self.response.resp.engine_result != 'tesSUCCESS'
           # Failed
-          puts "Failed Transaction: " + response.resp.inspect
-          raise SubmitFailed
+          # puts "Failed Transaction: " + response.resp.inspect
+          raise SubmitFailed, response.resp.engine_result_message
         end
         # Return transaction hash
         self.response.resp.tx_json['hash']

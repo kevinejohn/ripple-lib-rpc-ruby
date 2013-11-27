@@ -8,25 +8,40 @@ ripple = Ripple.client(
   client_secret: "secret"
 )
 
+
+# ripple = Ripple.client(
+#   endpoint: "http://s1.ripple.com:51234/",
+#   client_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
+#   client_secret: "secret"
+# )
+
+# Send XRP
+tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
+
+# Send IOU
+tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "1")
+
+# Verify tx_hash
+begin
+    if ripple.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
+        puts "Transaction complete"
+    else
+        puts "Transaction Pending"
+    end
+rescue Ripple::InvalidTxHash
+    puts "Invalid transaction"
+end
+
+
 # Send and verify with error checking
 success = false
 failed = false
 begin
     puts "Sending transaction"
-
-    transaction = Ripple::Model::Transaction.new(
-      destination_account: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9',
-      destination_amount: Ripple::Model::Amount.new(
-        value: '1',
-        currency: 'XRP',
-        #issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
-        )
-      )
-    #puts transaction.to_json
-    tx_hash = ripple.submit_transaction(transaction)
+    tx_hash = ripple.send_basic_transaction("r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9", "USD", "0.00001")
     success = true
-rescue Ripple::SubmitFailed
-    puts "Transaction failed"
+rescue Ripple::SubmitFailed => e
+    puts "Transaction failed: " + e.message
     failed = true
 rescue Ripple::ServerUnavailable
     puts "Server Unavailable"
@@ -49,16 +64,6 @@ if success
     puts "Transaction complete"
 end
 
-# Verify Transaction
-begin
-    if ripple.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
-        puts "Transaction complete"
-    else
-        puts "Transaction Pending"
-    end
-rescue Ripple::InvalidTxHash
-    puts "Invalid transaction"
-end
 
 
 # Send complex IOU
@@ -88,8 +93,8 @@ begin
   puts "Submitting transaction"
   tx_hash = ripple.submit_transaction(transaction)
   success = true
-rescue Ripple::SubmitFailed
-  puts "Transaction Failed"
+rescue Ripple::SubmitFailed => e
+    puts "Transaction failed: " + e.message
   failed = true
 rescue Ripple::ServerUnavailable
     puts "Server Unavailable"
