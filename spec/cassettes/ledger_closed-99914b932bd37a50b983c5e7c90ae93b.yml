@@ -5,7 +5,7 @@ http_interactions:
     uri: https://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: '{"method":"ledger_closed"}'
+      string: ! '{"method":"ledger_closed"}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - '*'
+      - ! '*'
       Content-Length:
       - '139'
       Content-Type:
@@ -32,7 +32,7 @@ http_interactions:
       - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: US-ASCII
-      string: "{\"result\":{\"ledger_hash\":\"9AA4E926D488DD20AF072BF80B3294900DB328C8A6DF2B4EB012A6FB61BD61CF\",\"ledger_index\":3351180,\"status\":\"success\"}}\n\n\r\n"
+      string: ! "{\"result\":{\"ledger_hash\":\"9AA4E926D488DD20AF072BF80B3294900DB328C8A6DF2B4EB012A6FB61BD61CF\",\"ledger_index\":3351180,\"status\":\"success\"}}\n\n\r\n"
     http_version: 
   recorded_at: Fri, 15 Nov 2013 20:47:20 GMT
 - request:
@@ -40,7 +40,7 @@ http_interactions:
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: '{"method":"ledger_closed"}'
+      string: ! '{"method":"ledger_closed"}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -48,28 +48,26 @@ http_interactions:
       - Ripple Ruby Gem 0.0.0
       Content-Type:
       - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Wed, 27 Nov 2013 02:16:21 +0000
+      - Wed, 27 Nov 2013 22:14:34 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - '*'
+      - ! '*'
       Content-Length:
       - '139'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.18.0
+      - ripple-json-rpc/Ripple-0.19.1
     body:
-      encoding: UTF-8
-      string: "{\"result\":{\"ledger_hash\":\"C19CB30DA07733CDEC973EE3EA1CDCDFCFF92E77D169D91C092AF48754FFD5F2\",\"ledger_index\":3561774,\"status\":\"success\"}}\n\n\r\n"
+      encoding: US-ASCII
+      string: ! "{\"result\":{\"ledger_hash\":\"10C7D9C4916B01A0294D330AA33A6FF77023E5F4854EAC647FDC84658A66B189\",\"ledger_index\":3578143,\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Wed, 27 Nov 2013 02:16:22 GMT
+  recorded_at: Wed, 27 Nov 2013 22:14:34 GMT
 recorded_with: VCR 2.7.0

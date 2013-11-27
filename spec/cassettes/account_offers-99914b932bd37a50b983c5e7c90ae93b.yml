@@ -5,7 +5,7 @@ http_interactions:
     uri: https://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: '{"method":"account_offers","params":[{"account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","ledger":"current"}]}'
+      string: ! '{"method":"account_offers","params":[{"account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","ledger":"current"}]}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - '*'
+      - ! '*'
       Content-Length:
       - '94'
       Content-Type:
@@ -32,7 +32,7 @@ http_interactions:
       - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: US-ASCII
-      string: "{\"result\":{\"account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"offers\":[],\"status\":\"success\"}}\n\n\r\n"
+      string: ! "{\"result\":{\"account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"offers\":[],\"status\":\"success\"}}\n\n\r\n"
     http_version: 
   recorded_at: Fri, 15 Nov 2013 20:47:16 GMT
 - request:
@@ -40,7 +40,7 @@ http_interactions:
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: '{"method":"account_offers","params":[{"account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","ledger":"current"}]}'
+      string: ! '{"method":"account_offers","params":[{"account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","ledger":"current"}]}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -48,28 +48,26 @@ http_interactions:
       - Ripple Ruby Gem 0.0.0
       Content-Type:
       - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Wed, 27 Nov 2013 02:16:20 +0000
+      - Wed, 27 Nov 2013 22:14:30 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - '*'
+      - ! '*'
       Content-Length:
       - '94'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.18.0
+      - ripple-json-rpc/Ripple-0.19.1
     body:
-      encoding: UTF-8
-      string: "{\"result\":{\"account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"offers\":[],\"status\":\"success\"}}\n\n\r\n"
+      encoding: US-ASCII
+      string: ! "{\"result\":{\"account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"offers\":[],\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Wed, 27 Nov 2013 02:16:20 GMT
+  recorded_at: Wed, 27 Nov 2013 22:14:30 GMT
 recorded_with: VCR 2.7.0

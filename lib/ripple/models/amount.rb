@@ -27,8 +27,6 @@ module Ripple
       def to_json(options = {})
         if is_xrp?
           self.value
-        # elsif self.issuer.nil?
-        #   {currency: self.currency, value: self.value}
         else
           {currency: self.currency, issuer: self.issuer, value: self.value}
         end

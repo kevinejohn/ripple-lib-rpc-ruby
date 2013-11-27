@@ -2,7 +2,6 @@ module Ripple
   module Model
     class Transaction
       attr_accessor :destination_account
-      attr_accessor :destination_currency
       attr_accessor :destination_amount
       attr_accessor :source_account
       attr_accessor :source_currency
@@ -12,7 +11,6 @@ module Ripple
 
       def initialize(transaction_json={})
         self.destination_account = transaction_json[:destination_account]
-        self.destination_currency = transaction_json[:destination_currency]
         self.destination_amount = transaction_json[:destination_amount]
         self.source_account = transaction_json[:source_account]
         self.source_currency = transaction_json[:source_currency]
@@ -24,13 +22,20 @@ module Ripple
       def self.init_basic_transaction(destination, currency, amount)
         obj = Transaction.new
         obj.destination_account = destination
-        obj.destination_currency = currency
         obj.destination_amount = Ripple::Model::Amount.new(
           value: amount,
           issuer: destination,
           currency: currency
           )
         obj
+      end
+
+      def source_amount
+        self.path.source_amount
+      end
+
+      def print_path_info
+        puts "Sending #{self.destination_amount.value} #{self.destination_amount.currency} to #{self.destination_account} for #{self.source_amount.value} #{self.source_amount.currency}"
       end
 
       def valid?

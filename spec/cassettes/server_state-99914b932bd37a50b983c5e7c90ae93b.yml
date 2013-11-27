@@ -5,7 +5,7 @@ http_interactions:
     uri: https://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: '{"method":"server_state"}'
+      string: ! '{"method":"server_state"}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -23,7 +23,7 @@ http_interactions:
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - '*'
+      - ! '*'
       Content-Length:
       - '32'
       Content-Type:
@@ -32,7 +32,7 @@ http_interactions:
       - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: US-ASCII
-      string: "Unable to service at this time\r\n"
+      string: ! "Unable to service at this time\r\n"
     http_version: 
   recorded_at: Fri, 15 Nov 2013 20:47:21 GMT
 - request:
@@ -40,7 +40,7 @@ http_interactions:
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: '{"method":"server_state"}'
+      string: ! '{"method":"server_state"}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -48,28 +48,26 @@ http_interactions:
       - Ripple Ruby Gem 0.0.0
       Content-Type:
       - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Wed, 27 Nov 2013 02:16:23 +0000
+      - Wed, 27 Nov 2013 22:15:29 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - '*'
+      - ! '*'
       Content-Length:
       - '509'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.18.0
+      - ripple-json-rpc/Ripple-0.19.1
     body:
-      encoding: UTF-8
-      string: "{\"result\":{\"state\":{\"build_version\":\"0.18.0\",\"complete_ledgers\":\"32570-3561774\",\"last_close\":{\"converge_time\":2004,\"proposers\":0},\"load_base\":256,\"load_factor\":256,\"peers\":46,\"pubkey_node\":\"n9M6wtakQ5PEieUSJJHqNKpJWsyTgGUsYDzCdpnN239fqrm9RAbk\",\"server_state\":\"syncing\",\"validated_ledger\":{\"base_fee\":10,\"close_time\":438833780,\"hash\":\"C19CB30DA07733CDEC973EE3EA1CDCDFCFF92E77D169D91C092AF48754FFD5F2\",\"reserve_base\":50000000,\"reserve_inc\":12500000,\"seq\":3561774},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
+      encoding: US-ASCII
+      string: ! "{\"result\":{\"state\":{\"build_version\":\"0.19.1\",\"complete_ledgers\":\"32570-3578156\",\"last_close\":{\"converge_time\":2055,\"proposers\":5},\"load_base\":256,\"load_factor\":256,\"peers\":42,\"pubkey_node\":\"n9KNUUntNaDqvMVMKZLPHhGaWZDnx7soeUiHjeQE8ejR45DmHyfx\",\"server_state\":\"syncing\",\"validated_ledger\":{\"base_fee\":10,\"close_time\":438905720,\"hash\":\"D3A891651F0197BEA6E9F6A37F34C9B343D540A3573964B7B4B830F65F8F8B8C\",\"reserve_base\":50000000,\"reserve_inc\":12500000,\"seq\":3578156},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Wed, 27 Nov 2013 02:16:23 GMT
+  recorded_at: Wed, 27 Nov 2013 22:15:29 GMT
 recorded_with: VCR 2.7.0
