@@ -42,24 +42,24 @@ rescue Ripple::Timedout
   puts "Request timed out"
 end while not success and not failed
 if success
-    # Verify transaction
-    complete = false
-    begin
-      puts "Checking transaction status"
-      complete = ripple.transaction_suceeded?(tx_hash)
-      if not complete
-        # Sleep for small amount of time before checking again
-        sleep 1
-      end
-    rescue Ripple::InvalidTxHash
-      puts "Invalid Tx Hash"
-    rescue Ripple::ServerUnavailable
-      puts "Server Unavailable"
-    rescue Ripple::Timedout
-      puts "Request timed out"
-    end while not complete
-    puts "Transaction complete"
-  end
+  # Verify transaction
+  complete = false
+  begin
+    puts "Checking transaction status"
+    complete = ripple.transaction_suceeded?(tx_hash)
+    if not complete
+      # Sleep for small amount of time before checking again
+      sleep 1
+    end
+  rescue Ripple::InvalidTxHash
+    puts "Invalid Tx Hash"
+  rescue Ripple::ServerUnavailable
+    puts "Server Unavailable"
+  rescue Ripple::Timedout
+    puts "Request timed out"
+  end while not complete
+  puts "Transaction complete"
+end
 
 
 
@@ -68,15 +68,14 @@ if success
 success = false
 begin
   puts "Finding Path"
-  destination_amount = ripple.new_amount(
-    value: '1',
-    currency: 'XRP',
-    #issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
-    )
   path = ripple.new_path(
     source_currency: 'USD',
     destination_account: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
-    destination_amount: destination_amount
+    destination_amount: ripple.new_amount(
+      value: '1',
+      currency: 'XRP',
+      #issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
+      )
     )
   transaction = ripple.find_transaction_path(path)
   success = true

@@ -16,7 +16,6 @@ module Ripple
     def find_transaction_path(path)
       path.valid?
       path.response = ripple_path_find(path.to_json)
-      #puts path.response.resp.inspect
       path.response.raise_errors
       path.transaction
     end
