@@ -56,7 +56,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 27 Nov 2013 02:03:28 +0000
+      - Wed, 27 Nov 2013 02:16:21 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
@@ -69,7 +69,7 @@ http_interactions:
       - ripple-json-rpc/Ripple-0.18.0
     body:
       encoding: UTF-8
-      string: "{\"result\":{\"ledger_hash\":\"27C129CB2A7049912A2CCF0590A9C292EBD70BC8FAB2D3A4F8909A7D271C1462\",\"ledger_index\":3561595,\"status\":\"success\"}}\n\n\r\n"
+      string: "{\"result\":{\"ledger_hash\":\"C19CB30DA07733CDEC973EE3EA1CDCDFCFF92E77D169D91C092AF48754FFD5F2\",\"ledger_index\":3561774,\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Wed, 27 Nov 2013 02:03:28 GMT
+  recorded_at: Wed, 27 Nov 2013 02:16:22 GMT
 recorded_with: VCR 2.7.0

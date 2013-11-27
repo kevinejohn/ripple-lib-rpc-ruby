@@ -29,7 +29,7 @@ Or install it yourself as:
       endpoint: "http://s1.ripple.com:51234/",
       client_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
       client_secret: "ssm5HPoeEZYJWvkJvQW9ro6e6hW9m"
-    )
+      )
 
     # Send XRP
     tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
@@ -39,28 +39,30 @@ Or install it yourself as:
 
     # Verify tx_hash
     begin
-        if ripple.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
-            puts "Transaction complete"
-        else
-            puts "Transaction Pending"
-        end
+      if ripple.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
+        puts "Transaction complete"
+      else
+        puts "Transaction Pending"
+      end
     rescue Ripple::InvalidTxHash
-        puts "Invalid transaction"
+      puts "Invalid transaction"
     end
 
 
-    # Send and verify with error checking
+    # Send and confirm with error checking
     success = false
     failed = false
     begin
-        puts "Sending transaction"
-        tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
-        success = true
+      puts "Sending transaction"
+      tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
+      success = true
     rescue Ripple::SubmitFailed => e
-        puts "Transaction failed: " + e.message
-        failed = true
+      puts "Transaction failed: " + e.message
+      failed = true
     rescue Ripple::ServerUnavailable
-        puts "Server Unavailable"
+      puts "Server Unavailable"
+    rescue Ripple::Timedout
+      puts "Request timed out"
     end while not success and not failed
     if success
         # Verify transaction
@@ -76,13 +78,15 @@ Or install it yourself as:
           puts "Invalid Tx Hash"
         rescue Ripple::ServerUnavailable
           puts "Server Unavailable"
+        rescue Ripple::Timedout
+          puts "Request timed out"
         end while not complete
         puts "Transaction complete"
-    end
+      end
 
 
 
-    # Send complex IOU
+    # Send and confirm complex send with error checking
     # 1. Find path
     success = false
     begin
@@ -100,7 +104,9 @@ Or install it yourself as:
       transaction = ripple.find_transaction_path(path)
       success = true
     rescue Ripple::ServerUnavailable
-        puts "Server Unavailable"
+      puts "Server Unavailable"
+    rescue Ripple::Timedout
+      puts "Request timed out"
     end while not success
     # 2. Submit transaction
     success = false
@@ -110,10 +116,12 @@ Or install it yourself as:
       tx_hash = ripple.submit_transaction(transaction)
       success = true
     rescue Ripple::SubmitFailed => e
-        puts "Transaction failed: " + e.message
+      puts "Transaction failed: " + e.message
       failed = true
     rescue Ripple::ServerUnavailable
-        puts "Server Unavailable"
+      puts "Server Unavailable"
+    rescue Ripple::Timedout
+      puts "Request timed out"
     end while not success and not failed
     # 3. Verify transaction
     if success
@@ -129,6 +137,8 @@ Or install it yourself as:
         puts "Invalid Tx Hash"
       rescue Ripple::ServerUnavailable
         puts "Server Unavailable"
+      rescue Ripple::Timedout
+        puts "Request timed out"
       end while not complete
       puts "Transaction complete"
     end
