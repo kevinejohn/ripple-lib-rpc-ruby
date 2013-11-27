@@ -2,18 +2,28 @@
 require './lib/ripple'
 
 
-ripple = Ripple.client({
+ripple = Ripple.client(
   endpoint: "http://s1.ripple.com:51234/",
   client_account: "rPJ78bFzY54HNyuNvBs6Hch9Z3F2MvMjj6",
   client_secret: "secret"
-})
+)
 
 # Send and verify with error checking
 success = false
 failed = false
 begin
     puts "Sending transaction"
-    tx_hash = ripple.send_currency("r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9", "USD", "0.001")
+
+    transaction = Ripple::Model::Transaction.new(
+      destination_account: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9',
+      destination_amount: Ripple::Model::Amount.new(
+        value: '1',
+        currency: 'XRP',
+        #issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
+        )
+      )
+    #puts transaction.to_json
+    tx_hash = ripple.submit_transaction(transaction)
     success = true
 rescue Ripple::SubmitFailed
     puts "Transaction failed"
@@ -56,13 +66,17 @@ end
 success = false
 begin
   puts "Finding Path"
-  destination_amount = Ripple::Model::Amount.new(value: '0.00001', currency: 'EUR', issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9')
-  params = {
+  destination_amount = Ripple::Model::Amount.new(
+    value: '0.00001',
+    currency: 'EUR',
+    issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
+    )
+  path = Ripple::Model::Path.new(
+    source_currency: 'USD',
     destination_account: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
-    destination_amount: destination_amount.to_json,
-    source_currency: 'USD'
-  }
-  path = ripple.find_first_available_path(params)
+    destination_amount: destination_amount
+    )
+  transaction = ripple.find_transaction_path(path)
   success = true
 rescue Ripple::ServerUnavailable
     puts "Server Unavailable"
@@ -72,12 +86,7 @@ success = false
 failed = false
 begin
   puts "Submitting transaction"
-  params = {
-    destination: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
-    destination_amount: destination_amount.to_json,
-    path: path
-  }
-  tx_hash = ripple.send_other_currency(params)
+  tx_hash = ripple.submit_transaction(transaction)
   success = true
 rescue Ripple::SubmitFailed
   puts "Transaction Failed"

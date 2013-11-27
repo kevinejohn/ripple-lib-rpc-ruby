@@ -9,9 +9,9 @@ module Ripple
         # puts amount_json.inspect
         if amount_json.key?('currency') or not amount_json[:currency].nil?
           # IOU
-          self.currency = amount_json[:currency] || amount_json.currency
-          self.issuer = amount_json[:issuer] || amount_json.issuer
-          self.value = amount_json[:value] || amount_json.value
+          self.currency = amount_json[:currency]
+          self.issuer = amount_json[:issuer]
+          self.value = amount_json[:value]
         else
           # XRP
           self.currency = 'XRP'
@@ -27,6 +27,8 @@ module Ripple
       def to_json(options = {})
         if is_xrp?
           self.value
+        # elsif self.issuer.nil?
+        #   {currency: self.currency, value: self.value}
         else
           {currency: self.currency, issuer: self.issuer, value: self.value}
         end

@@ -57,7 +57,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 26 Nov 2013 22:28:43 +0000
+      - Wed, 27 Nov 2013 01:38:54 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
@@ -67,11 +67,11 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.18.0
+      - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: UTF-8
-      string: "{\"result\":{\"closed\":{\"ledger\":{\"accepted\":true,\"account_hash\":\"AA791D4479DDCE47711FF5CC2D6806FBCBBAAD220DD55FD259D9D1EAFC0849B7\",\"close_time\":438820120,\"close_time_human\":\"2013-Nov-26
-        22:28:40\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"684C56A7F52D8ACC15237776E022CF8C42C84EDD94FE57AF9F1F711B2475FE20\",\"ledger_hash\":\"684C56A7F52D8ACC15237776E022CF8C42C84EDD94FE57AF9F1F711B2475FE20\",\"ledger_index\":\"3558664\",\"parent_hash\":\"D716A6EDD7AA42275DF702A71C24FFCECAADD19CD61C8B50F1B7A16559246595\",\"seqNum\":\"3558664\",\"totalCoins\":\"99999998483917288\",\"total_coins\":\"99999998483917288\",\"transaction_hash\":\"639C05759334EA72F9095779F16307CF1D54F20A128CE1983930FCE55C769269\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3558665\",\"parent_hash\":\"684C56A7F52D8ACC15237776E022CF8C42C84EDD94FE57AF9F1F711B2475FE20\",\"seqNum\":\"3558665\"}},\"status\":\"success\"}}\n\n\r\n"
+      string: "{\"result\":{\"closed\":{\"ledger\":{\"accepted\":true,\"account_hash\":\"601FC740F5D54DF6214E5E3895753A25CBE7613FDA490D3BB198262E56646B4C\",\"close_time\":438831530,\"close_time_human\":\"2013-Nov-27
+        01:38:50\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"D300FED60E32459A43076F1C23D385FA3AE1708CD92D88C0834A6F934052AD61\",\"ledger_hash\":\"D300FED60E32459A43076F1C23D385FA3AE1708CD92D88C0834A6F934052AD61\",\"ledger_index\":\"3561258\",\"parent_hash\":\"F64A7BBBAF2CFB96E8E246D7B03ED96F14C7366A4D1DC400566B403123264A47\",\"seqNum\":\"3561258\",\"totalCoins\":\"99999998483816099\",\"total_coins\":\"99999998483816099\",\"transaction_hash\":\"628AF603B02386153FAE28CDCF866A5C774BA6DA08CB8903B7C772208E1DF888\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3561259\",\"parent_hash\":\"D300FED60E32459A43076F1C23D385FA3AE1708CD92D88C0834A6F934052AD61\",\"seqNum\":\"3561259\"}},\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Tue, 26 Nov 2013 22:28:43 GMT
+  recorded_at: Wed, 27 Nov 2013 01:38:54 GMT
 recorded_with: VCR 2.7.0

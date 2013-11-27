@@ -26,67 +26,62 @@ describe Ripple::Abstract do
   let(:abstract){ Ripple::Abstract.new }
 
   # High level methods
-  context '#send_currency' do
+  context '#submit_transaction' do
     it 'should be successful sending XRP' do
-      begin
-        resp = abstract.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
-        abstract.transaction_suceeded?(resp)
-      rescue Ripple::ServerUnavailable
-
-      end
+      transaction = Ripple::Model::Transaction.new
+      transaction.init_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
+      abstract.submit_transaction(transaction)
     end
 
     it 'should be successful sending USD' do
-      begin
-        resp = abstract.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.0001")
-      rescue Ripple::ServerUnavailable
-
-      end
+      transaction = Ripple::Model::Transaction.new
+      transaction.init_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
+      abstract.submit_transaction(transaction)
     end
 
 
     it 'should return first path' do
-      begin
-        destination_amount = Ripple::Model::Amount.new(currency: 'EUR', value: '0.0001', issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B')
-        params = {
-          destination_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-          destination_amount: destination_amount.to_json,
-          source_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-          source_currency: 'USD'
-        }
-        path = abstract.find_first_available_path(params)
-      end
+      destination_amount = Ripple::Model::Amount.new(
+        value: '1',
+        currency: 'XRP'
+        )
+      path = Ripple::Model::Path.new(
+        source_currency: 'USD',
+        destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
+        destination_amount: destination_amount
+        )
+      transaction = abstract.find_transaction_path(path)
     end
 
 
     it 'should throw NoPathAvailable' do
-      destination_amount = Ripple::Model::Amount.new(currency: 'EUR', value: '0.0001', issuer: 'r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj')
-      params = {
+      destination_amount = Ripple::Model::Amount.new(
+        value: '1',
+        currency: 'EUR',
+        issuer: 'r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj'
+        )
+      path = Ripple::Model::Path.new(
+        source_currency: 'USD',
         destination_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
-        destination_amount: destination_amount.to_json,
-        source_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-        source_currency: 'USD'
-      }
-      expect { abstract.find_first_available_path(params) }.to raise_error(Ripple::NoPathAvailable)
+        destination_amount: destination_amount
+        )
+      expect { transaction = abstract.find_transaction_path(path) }.to raise_error(Ripple::NoPathAvailable)
     end
 
 
-    it 'should be successful sending USD from EUR' do
-      destination_amount = Ripple::Model::Amount.new(value: '0.00001', currency: 'EUR', issuer: 'r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59')
-
-      params = {
-        destination_account: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-        destination_amount: destination_amount.to_json,
-        source_currency: 'USD'
-      }
-      path = abstract.find_first_available_path(params)
-
-      params = {
-        destination: "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
-        destination_amount: destination_amount.to_json,
-        path: path
-      }
-      tx_hash = abstract.send_other_currency(params)
+    it 'should be successful sending XRP from USD' do
+      destination_amount = Ripple::Model::Amount.new(
+        value: '1',
+        currency: 'XRP'
+        )
+      path = Ripple::Model::Path.new(
+        source_currency: 'USD',
+        destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
+        destination_amount: destination_amount
+        )
+      transaction = abstract.find_transaction_path(path)
+      tx_hash = abstract.submit_transaction(transaction)
+      puts tx_hash
     end
 
   end

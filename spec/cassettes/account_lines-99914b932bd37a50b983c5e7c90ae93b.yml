@@ -56,7 +56,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 26 Nov 2013 22:28:39 +0000
+      - Wed, 27 Nov 2013 01:38:52 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
@@ -66,10 +66,10 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.18.0
+      - ripple-json-rpc/Ripple-0.17.0-rc5
     body:
       encoding: UTF-8
-      string: "{\"result\":{\"account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"lines\":[{\"account\":\"rhxwHhfMhySyYB5Wrq7ohSNBqBfAYanAAx\",\"balance\":\"0.999\",\"currency\":\"BTC\",\"limit\":\"1\",\"limit_peer\":\"0\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rhxwHhfMhySyYB5Wrq7ohSNBqBfAYanAAx\",\"balance\":\"0\",\"currency\":\"USD\",\"limit\":\"1\",\"limit_peer\":\"0\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rHQFmb4ZaZLwqfFrNmJwnkizb7yfmkRS96\",\"balance\":\"-0.2387712304154104\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"20\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc\",\"balance\":\"0.529499\",\"currency\":\"USD\",\"limit\":\"20\",\"limit_peer\":\"20\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rKBt4cVu9UP8L66Nn4e6f9BLfaMcKRVYPa\",\"balance\":\"0\",\"currency\":\"BTC\",\"limit\":\"0\",\"limit_peer\":\"10\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc\",\"balance\":\"0\",\"currency\":\"BTC\",\"limit\":\"0\",\"limit_peer\":\"1\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc\",\"balance\":\"0\",\"currency\":\"EUR\",\"limit\":\"10\",\"limit_peer\":\"10\",\"quality_in\":0,\"quality_out\":0}],\"status\":\"success\"}}\n\n\r\n"
+      string: "{\"result\":{\"account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"lines\":[{\"account\":\"rhxwHhfMhySyYB5Wrq7ohSNBqBfAYanAAx\",\"balance\":\"0.999\",\"currency\":\"BTC\",\"limit\":\"1\",\"limit_peer\":\"0\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rhxwHhfMhySyYB5Wrq7ohSNBqBfAYanAAx\",\"balance\":\"0\",\"currency\":\"USD\",\"limit\":\"1\",\"limit_peer\":\"0\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rHQFmb4ZaZLwqfFrNmJwnkizb7yfmkRS96\",\"balance\":\"-0.2387852121059416\",\"currency\":\"USD\",\"limit\":\"0\",\"limit_peer\":\"20\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc\",\"balance\":\"0.529349\",\"currency\":\"USD\",\"limit\":\"20\",\"limit_peer\":\"20\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rKBt4cVu9UP8L66Nn4e6f9BLfaMcKRVYPa\",\"balance\":\"0\",\"currency\":\"BTC\",\"limit\":\"0\",\"limit_peer\":\"10\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc\",\"balance\":\"0\",\"currency\":\"BTC\",\"limit\":\"0\",\"limit_peer\":\"1\",\"quality_in\":0,\"quality_out\":0},{\"account\":\"rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc\",\"balance\":\"0\",\"currency\":\"EUR\",\"limit\":\"10\",\"limit_peer\":\"10\",\"quality_in\":0,\"quality_out\":0}],\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Tue, 26 Nov 2013 22:28:39 GMT
+  recorded_at: Wed, 27 Nov 2013 01:38:52 GMT
 recorded_with: VCR 2.7.0

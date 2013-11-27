@@ -25,11 +25,11 @@ Or install it yourself as:
 
     require 'ripple'
 
-    ripple = Ripple.client({
+    ripple = Ripple.client(
       endpoint: "http://s1.ripple.com:51234/",
       client_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
       client_secret: "ssm5HPoeEZYJWvkJvQW9ro6e6hW9m"
-    })
+    )
 
     # Send XRP
     tx_hash = ripple.send_currency("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP" "1")

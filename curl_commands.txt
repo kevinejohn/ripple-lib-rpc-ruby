@@ -6,3 +6,7 @@ curl -X POST -d '{"method":"ripple_path_find","params":[{"source_account":"r9cZA
 
 
 curl -X POST -d '{"method":"path_find","params":[{"source_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59","destination_account":"rhxwHhfMhySyYB5Wrq7ohSNBqBfAYanAAx","destination_amount":{"currency":"USD","value":"0.0001","issuer":"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"},"destination_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59"}]}' http://s1.ripple.com:51234/
+
+
+
+curl -X POST -d '{"method":"submit","params":[{"secret":"ssm5HPoeEZYJWvkJvQW9ro6e6hW9m","tx_json":{"TransactionType":"Payment","Account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","Destination":"rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc","Amount":"0.00001"}}]}' http://s1.ripple.com:51234/

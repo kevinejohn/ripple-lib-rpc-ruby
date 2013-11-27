@@ -12,9 +12,6 @@ module Ripple
 
     def raise_errors
       if resp.status == 'error'
-        # TODO: Is this the correct way?
-        # puts response_hash.inspect
-
         if resp.error == 'invalidParams'
           raise InvalidParameters
         elsif resp.error = 'malformedTransaction'
@@ -22,11 +19,6 @@ module Ripple
         else
           raise UnknownError
         end
-      else
-        # Error
-        # TODO: Make more specific
-        puts response_hash.inspect
-        raise StandardError
       end
     end
 

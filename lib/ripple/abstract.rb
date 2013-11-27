@@ -3,77 +3,22 @@ module Ripple
     ######################
     # High level methods
     ######################
-    def send_currency(destination, currency, amount)
-      if currency == 'XRP'
-        params = {
-          destination: destination,
-          amount: amount
-        }
-      else
-        # IOU
-        params = {
-          destination: destination,
-          amount: {
-             currency: currency,
-             value: amount,
-             issuer: destination
-          }
-        }
-      end
 
-      response = submit(params)
-
-      if response.resp.engine_result != 'tesSUCCESS'
-        # Failed
-        puts response.resp.inspect
-        raise SubmitFailed
-      end
-      # Return transaction hash
-      response.resp.tx_json['hash']
+    # Returns tx_hash if success
+    def submit_transaction(transaction)
+      transaction.valid?
+      transaction.response = submit(transaction.to_json)
+      transaction.response.raise_errors
+      transaction.tx_hash
     end
 
-    # Complex IOU send
-    def send_other_currency(opts = {})
-      path = opts[:path]
-      params = {
-        destination: opts[:destination],
-        amount: opts[:destination_amount],
-        SendMax: path.source_amount.to_json,
-        Paths: path.paths_computed
-      }
-
-      # puts "Sending other currency " + params.inspect
-      response = submit(params)
-
-      if response.resp.engine_result != 'tesSUCCESS'
-        # Failed
-        puts response.resp.inspect
-        raise SubmitFailed
-      end
-      # Return transaction hash
-      response.resp.tx_json['hash']
-    end
-
-    # Returns first available path
-    def find_first_available_path(opts = {})
-      params = {
-        source_account: opts[:source_account] || client_account,
-        destination_account: opts[:destination_account],
-        source_currencies: [
-          currency: opts[:source_currency]
-          ],
-        destination_amount: opts[:destination_amount]
-      }
-      #puts params.inspect
-      resp = ripple_path_find(params)
-      #puts resp.resp.inspect
-      if resp.resp.alternatives.count == 0
-        raise NoPathAvailable
-      else
-        # Create Path object
-        Ripple::Model::Path.new(resp.resp.alternatives[0])
-        #resp.resp.alternatives[0]
-      end
+    # Returns Transaction object if success
+    def find_transaction_path(path)
+      path.valid?
+      path.response = ripple_path_find(path.to_json)
+      #puts path.response.resp.inspect
+      path.response.raise_errors
+      path.transaction
     end
 
     # Returns true if tx_hash is completed.

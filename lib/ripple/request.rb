@@ -11,6 +11,7 @@ module Ripple
           unless options.empty? || options.nil?
             req.body.merge!(params: [options])
           end
+          # puts JSON(req.body)
         end
         # puts response.inspect
         Response.new(response.body)
