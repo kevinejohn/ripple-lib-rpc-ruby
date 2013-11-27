@@ -35,7 +35,11 @@ module Ripple
       end
 
       def print_path_info
-        puts "Sending #{self.destination_amount.value} #{self.destination_amount.currency} to #{self.destination_account} for #{self.source_amount.value} #{self.source_amount.currency}"
+        if self.path
+          puts "Sending #{self.destination_amount.value} #{self.destination_amount.currency} to #{self.destination_account} for #{self.source_amount.value} #{self.source_amount.currency}"
+        else
+          puts "Path not found"
+        end
       end
 
       def valid?
