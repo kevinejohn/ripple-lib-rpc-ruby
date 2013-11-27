@@ -37,11 +37,11 @@ describe Ripple::Abstract do
 
 
     it 'should return first path' do
-      destination_amount = Ripple::Model::Amount.new(
+      destination_amount = abstract.new_amount(
         value: '1',
         currency: 'XRP'
         )
-      path = Ripple::Model::Path.new(
+      path = abstract.new_path(
         source_currency: 'USD',
         destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
         destination_amount: destination_amount
@@ -51,12 +51,12 @@ describe Ripple::Abstract do
 
 
     it 'should throw NoPathAvailable' do
-      destination_amount = Ripple::Model::Amount.new(
+      destination_amount = abstract.new_amount(
         value: '1',
         currency: 'EUR',
         issuer: 'r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj'
         )
-      path = Ripple::Model::Path.new(
+      path = abstract.new_path(
         source_currency: 'USD',
         destination_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
         destination_amount: destination_amount
@@ -66,11 +66,11 @@ describe Ripple::Abstract do
 
 
     it 'should be successful sending XRP from USD' do
-      destination_amount = Ripple::Model::Amount.new(
+      destination_amount = abstract.new_amount(
         value: '1',
         currency: 'XRP'
         )
-      path = Ripple::Model::Path.new(
+      path = abstract.new_path(
         source_currency: 'USD',
         destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
         destination_amount: destination_amount

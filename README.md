@@ -54,7 +54,7 @@ Or install it yourself as:
     failed = false
     begin
         puts "Sending transaction"
-        tx_hash = ripple.send_basic_transaction("r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9", "USD", "0.00001")
+        tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
         success = true
     rescue Ripple::SubmitFailed => e
         puts "Transaction failed: " + e.message
@@ -87,12 +87,12 @@ Or install it yourself as:
     success = false
     begin
       puts "Finding Path"
-      destination_amount = Ripple::Model::Amount.new(
-        value: '0.00001',
-        currency: 'EUR',
-        issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
+      destination_amount = ripple.new_amount(
+        value: '1',
+        currency: 'XRP',
+        #issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
         )
-      path = Ripple::Model::Path.new(
+      path = ripple.new_path(
         source_currency: 'USD',
         destination_account: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
         destination_amount: destination_amount

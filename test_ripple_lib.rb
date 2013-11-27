@@ -4,16 +4,9 @@ require './lib/ripple'
 
 ripple = Ripple.client(
   endpoint: "http://s1.ripple.com:51234/",
-  client_account: "rPJ78bFzY54HNyuNvBs6Hch9Z3F2MvMjj6",
-  client_secret: "secret"
+  client_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
+  client_secret: "ssm5HPoeEZYJWvkJvQW9ro6e6hW9m"
 )
-
-
-# ripple = Ripple.client(
-#   endpoint: "http://s1.ripple.com:51234/",
-#   client_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
-#   client_secret: "secret"
-# )
 
 # Send XRP
 tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
@@ -38,7 +31,7 @@ success = false
 failed = false
 begin
     puts "Sending transaction"
-    tx_hash = ripple.send_basic_transaction("r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9", "USD", "0.00001")
+    tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
     success = true
 rescue Ripple::SubmitFailed => e
     puts "Transaction failed: " + e.message
@@ -71,12 +64,12 @@ end
 success = false
 begin
   puts "Finding Path"
-  destination_amount = Ripple::Model::Amount.new(
-    value: '0.00001',
-    currency: 'EUR',
-    issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
+  destination_amount = ripple.new_amount(
+    value: '1',
+    currency: 'XRP',
+    #issuer: 'r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9'
     )
-  path = Ripple::Model::Path.new(
+  path = ripple.new_path(
     source_currency: 'USD',
     destination_account: "r44SfjdwtQMpzyAML3vJkssHBiQspdMBw9",
     destination_amount: destination_amount

@@ -26,6 +26,18 @@ module Ripple
       submit_transaction(transaction)
     end
 
+    def new_path(params = {})
+      Ripple::Model::Path.new(params)
+    end
+
+    def new_transaction(params = {})
+      Ripple::Model::Transaction.new(params)
+    end
+
+    def new_amount(params = {})
+      Ripple::Model::Amount.new(params)
+    end
+
     # Returns true if tx_hash is completed.
     # Returns false if tx_hash is submitted but not complete
     # Raises Ripple::InvalidTxHash if tx_hash isnt found
