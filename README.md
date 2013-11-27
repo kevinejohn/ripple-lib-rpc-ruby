@@ -7,15 +7,11 @@ Ripple Client Ruby Gem
 
 Add this line to your application's Gemfile:
 
-    gem 'ripple_lib_rpc_ruby'
+    gem 'ripple_lib_rpc_ruby', :git => 'git@github.com:kevinejohn/ripple-lib-rpc-ruby.git'
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install ripple_lib_rpc_ruby
 
 ## Usage
 
