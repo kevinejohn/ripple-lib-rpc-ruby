@@ -5,7 +5,7 @@ http_interactions:
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
-      string: '{"method":"account_info","params":[{"account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj"}]}'
+      string: ! '{"method":"account_info","params":[{"account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj"}]}'
     headers:
       Accept:
       - application/json; charset=utf-8
@@ -13,28 +13,26 @@ http_interactions:
       - Ripple Ruby Gem 0.0.0
       Content-Type:
       - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 26 Nov 2013 21:39:38 +0000
+      - Tue, 03 Dec 2013 04:10:24 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
-      - '*'
+      - ! '*'
       Content-Length:
       - '410'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
-      - ripple-json-rpc/Ripple-0.18.0
+      - ripple-json-rpc/Ripple-0.19.1
     body:
-      encoding: UTF-8
-      string: "{\"result\":{\"account_data\":{\"Account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"Balance\":\"246992800\",\"Flags\":0,\"LedgerEntryType\":\"AccountRoot\",\"OwnerCount\":4,\"PreviousTxnID\":\"A91B2A1F591A281EB35D84B5DE2E6E2FDE27392968EB100FAAF319004F231AA5\",\"PreviousTxnLgrSeq\":3557979,\"Sequence\":498,\"index\":\"43A29F8B474DF86654B1BF9811BDA71AA8050124DD2567CC10F5D904838C15F7\"},\"ledger_current_index\":3557990,\"status\":\"success\"}}\n\n\r\n"
+      encoding: US-ASCII
+      string: ! "{\"result\":{\"account_data\":{\"Account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"Balance\":\"246991009\",\"Flags\":0,\"LedgerEntryType\":\"AccountRoot\",\"OwnerCount\":4,\"PreviousTxnID\":\"7450242B749A9953D6423DB4260D1490ACCD43AB1A5490651530476ED32830A2\",\"PreviousTxnLgrSeq\":3674945,\"Sequence\":673,\"index\":\"43A29F8B474DF86654B1BF9811BDA71AA8050124DD2567CC10F5D904838C15F7\"},\"ledger_current_index\":3674945,\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Tue, 26 Nov 2013 21:39:38 GMT
+  recorded_at: Tue, 03 Dec 2013 04:10:27 GMT
 recorded_with: VCR 2.7.0

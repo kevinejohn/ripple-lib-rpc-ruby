@@ -123,11 +123,13 @@ describe Ripple::Abstract do
 
     it 'should fail from invalid tx_tash' do
       success = false
-      begin
-        expect { abstract.transaction_suceeded?("94062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735") }.to raise_error(Ripple::InvalidTxHash)
-        success = true
-      rescue Ripple::ServerUnavailable
-      end while not success
+      expect {
+        begin
+           abstract.transaction_suceeded?("94062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
+          success = true
+        rescue Ripple::ServerUnavailable
+        end while not success
+      }.to raise_error(Ripple::InvalidTxHash)
     end
   end
 
@@ -137,6 +139,17 @@ describe Ripple::Abstract do
       success = false
       begin
         puts abstract.xrp_balance
+        success = true
+      rescue Ripple::ServerUnavailable
+      end while not success
+    end
+  end
+
+  context '#iou_lines' do
+    it 'should be successful' do
+      success = false
+      begin
+        abstract.iou_lines
         success = true
       rescue Ripple::ServerUnavailable
       end while not success

@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://s1.ripple.com:51234/
+    body:
+      encoding: UTF-8
+      string: ! '{"method":"tx","params":[{"transaction":"EAC1B3A55036882CA6CFE5C8F3D627046BEEDE38A5D5902FD5D7CC548883707C"}]}'
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Ripple Ruby Gem 0.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 03 Dec 2013 04:09:12 +0000
+      Connection:
+      - Keep-Alive
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Content-Length:
+      - '1499'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Server:
+      - ripple-json-rpc/Ripple-0.19.1
+    body:
+      encoding: US-ASCII
+      string: ! "{\"result\":{\"Account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"Amount\":\"1\",\"Destination\":\"rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc\",\"Fee\":\"10\",\"Flags\":0,\"Sequence\":286,\"SigningPubKey\":\"03AF2FB2EC38B072B50EC56360820D35C022D387BFE22D080D689D5DB5AF2C5095\",\"TransactionType\":\"Payment\",\"TxnSignature\":\"304402204B32387DD82926F3E48D51BBAD3332812A8ACFCC80806AC626A7A436275BB0F60220751162E700FB80520569CF36E8188F7CE1E81D4BE1996C513F05E0F9913DC7BC\",\"hash\":\"EAC1B3A55036882CA6CFE5C8F3D627046BEEDE38A5D5902FD5D7CC548883707C\",\"inLedger\":3315631,\"ledger_index\":3315631,\"meta\":{\"AffectedNodes\":[{\"ModifiedNode\":{\"FinalFields\":{\"Account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"Balance\":\"246995005\",\"Flags\":0,\"OwnerCount\":3,\"Sequence\":287},\"LedgerEntryType\":\"AccountRoot\",\"LedgerIndex\":\"43A29F8B474DF86654B1BF9811BDA71AA8050124DD2567CC10F5D904838C15F7\",\"PreviousFields\":{\"Balance\":\"246995016\",\"Sequence\":286},\"PreviousTxnID\":\"3B0CE174502021B7C02B8CB8E2EC03C7F51B436E2F1EBF75285E77D585914DF0\",\"PreviousTxnLgrSeq\":3315617}},{\"ModifiedNode\":{\"FinalFields\":{\"Account\":\"rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc\",\"Balance\":\"161999575\",\"Flags\":0,\"OwnerCount\":1,\"Sequence\":36},\"LedgerEntryType\":\"AccountRoot\",\"LedgerIndex\":\"C33591B9509A2907B7B0688215F67495DD7F34B2E5900E43BC5E164ACD945CBF\",\"PreviousFields\":{\"Balance\":\"161999574\"},\"PreviousTxnID\":\"8CBB79F21C55707EE789ADFC1094BF113C944B85B933E6040299D209871DC795\",\"PreviousTxnLgrSeq\":3315607}}],\"TransactionIndex\":1,\"TransactionResult\":\"tesSUCCESS\"},\"status\":\"success\",\"validated\":true}}\n\n\r\n"
+    http_version: 
+  recorded_at: Tue, 03 Dec 2013 04:09:15 GMT
+recorded_with: VCR 2.7.0

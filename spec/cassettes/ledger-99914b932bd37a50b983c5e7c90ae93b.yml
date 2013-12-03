@@ -2,42 +2,6 @@
 http_interactions:
 - request:
     method: post
-    uri: https://s1.ripple.com:51234/
-    body:
-      encoding: UTF-8
-      string: ! '{"method":"ledger","params":[{"full":false,"expand":false,"transactions":true,"accounts":true}]}'
-    headers:
-      Accept:
-      - application/json; charset=utf-8
-      User-Agent:
-      - Ripple Ruby Gem 0.0.0
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 15 Nov 2013 20:47:19 +0000
-      Connection:
-      - Keep-Alive
-      Access-Control-Allow-Origin:
-      - ! '*'
-      Content-Length:
-      - '854'
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - ripple-json-rpc/Ripple-0.17.0-rc5
-    body:
-      encoding: US-ASCII
-      string: ! "{\"result\":{\"closed\":{\"ledger\":{\"accepted\":true,\"account_hash\":\"EEB89DBBD161D051A696428B20FA0FFA89DF6743B9E3DF09DA9FF366154E8C45\",\"close_time\":437863620,\"close_time_human\":\"2013-Nov-15
-        20:47:00\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"5977876DBB1971707F499C2DE8CB98AF42E0B89C87ED8CA70BAA60EA31F696D6\",\"ledger_hash\":\"5977876DBB1971707F499C2DE8CB98AF42E0B89C87ED8CA70BAA60EA31F696D6\",\"ledger_index\":\"3351179\",\"parent_hash\":\"651BB7C227748A99F74257230B406C1FE8EBEC0D6C300778E0978E45426766C9\",\"seqNum\":\"3351179\",\"totalCoins\":\"99999998513508438\",\"total_coins\":\"99999998513508438\",\"transaction_hash\":\"3428F916D31BC3483E9A150666CA70E226C5633D99DA4C605D09C1C75E612D93\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3351180\",\"parent_hash\":\"5977876DBB1971707F499C2DE8CB98AF42E0B89C87ED8CA70BAA60EA31F696D6\",\"seqNum\":\"3351180\"}},\"status\":\"success\"}}\n\n\r\n"
-    http_version: 
-  recorded_at: Fri, 15 Nov 2013 20:47:19 GMT
-- request:
-    method: post
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
@@ -55,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 03 Dec 2013 03:07:58 +0000
+      - Tue, 03 Dec 2013 04:10:29 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
@@ -68,8 +32,8 @@ http_interactions:
       - ripple-json-rpc/Ripple-0.19.1
     body:
       encoding: US-ASCII
-      string: ! "{\"result\":{\"closed\":{\"ledger\":{\"accepted\":true,\"account_hash\":\"644FF6DA0CC04D80894348B67A0977EC52A03B4810D1284597D24A6181FA586F\",\"close_time\":439355270,\"close_time_human\":\"2013-Dec-03
-        03:07:50\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"282A7B800C43CCE2AA20C358EE8B4A664F56F85DC95B86F051CE3AD8AAC06C8A\",\"ledger_hash\":\"282A7B800C43CCE2AA20C358EE8B4A664F56F85DC95B86F051CE3AD8AAC06C8A\",\"ledger_index\":\"3674114\",\"parent_hash\":\"E2283BB4A54A4558899BB3EC0C83D77EBA7F7B15F57119F1271597529983C27E\",\"seqNum\":\"3674114\",\"totalCoins\":\"99999998460860200\",\"total_coins\":\"99999998460860200\",\"transaction_hash\":\"B965F48A89E5C6D285B3000394DFA03B87542DE455660D67EE0C9E35ECD1915B\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3674115\",\"parent_hash\":\"282A7B800C43CCE2AA20C358EE8B4A664F56F85DC95B86F051CE3AD8AAC06C8A\",\"seqNum\":\"3674115\"}},\"status\":\"success\"}}\n\n\r\n"
+      string: ! "{\"result\":{\"closed\":{\"ledger\":{\"accepted\":true,\"account_hash\":\"5C48B0F0E653F399311D3C783DF5F555CA197A8955E5784E8C361A357D6FE684\",\"close_time\":439359020,\"close_time_human\":\"2013-Dec-03
+        04:10:20\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"5A404467E0A5499AFD1A71E0C0A861B7AE4550A1F7594B6305A5EA2555BFB98E\",\"ledger_hash\":\"5A404467E0A5499AFD1A71E0C0A861B7AE4550A1F7594B6305A5EA2555BFB98E\",\"ledger_index\":\"3674945\",\"parent_hash\":\"F47E218BE7AED6B58DE73B6E02A2ED7027D8166CA19360ED73BEE8B6FF96FF96\",\"seqNum\":\"3674945\",\"totalCoins\":\"99999998460725376\",\"total_coins\":\"99999998460725376\",\"transaction_hash\":\"AA43A9E84A437F3CF53F18CFB392A909941DEF51AD7C92868DE57379F5C56120\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3674946\",\"parent_hash\":\"5A404467E0A5499AFD1A71E0C0A861B7AE4550A1F7594B6305A5EA2555BFB98E\",\"seqNum\":\"3674946\"}},\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Tue, 03 Dec 2013 03:08:01 GMT
+  recorded_at: Tue, 03 Dec 2013 04:10:33 GMT
 recorded_with: VCR 2.7.0

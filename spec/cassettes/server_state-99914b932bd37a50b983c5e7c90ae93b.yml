@@ -2,41 +2,6 @@
 http_interactions:
 - request:
     method: post
-    uri: https://s1.ripple.com:51234/
-    body:
-      encoding: UTF-8
-      string: ! '{"method":"server_state"}'
-    headers:
-      Accept:
-      - application/json; charset=utf-8
-      User-Agent:
-      - Ripple Ruby Gem 0.0.0
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 503
-      message: ''
-    headers:
-      Date:
-      - Fri, 15 Nov 2013 20:47:21 +0000
-      Connection:
-      - Keep-Alive
-      Access-Control-Allow-Origin:
-      - ! '*'
-      Content-Length:
-      - '32'
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - ripple-json-rpc/Ripple-0.17.0-rc5
-    body:
-      encoding: US-ASCII
-      string: ! "Unable to service at this time\r\n"
-    http_version: 
-  recorded_at: Fri, 15 Nov 2013 20:47:21 GMT
-- request:
-    method: post
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
@@ -54,20 +19,20 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 03 Dec 2013 03:08:24 +0000
+      - Tue, 03 Dec 2013 04:10:35 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
       - ! '*'
       Content-Length:
-      - '509'
+      - '510'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
       - ripple-json-rpc/Ripple-0.19.1
     body:
       encoding: US-ASCII
-      string: ! "{\"result\":{\"state\":{\"build_version\":\"0.19.1\",\"complete_ledgers\":\"32570-3674121\",\"last_close\":{\"converge_time\":2240,\"proposers\":1},\"load_base\":256,\"load_factor\":256,\"peers\":52,\"pubkey_node\":\"n9KNUUntNaDqvMVMKZLPHhGaWZDnx7soeUiHjeQE8ejR45DmHyfx\",\"server_state\":\"syncing\",\"validated_ledger\":{\"base_fee\":10,\"close_time\":439355300,\"hash\":\"FFCC02EA6A333E49074560B5B69DC7E33B13590E7458C2F9094AD102E8AA9820\",\"reserve_base\":50000000,\"reserve_inc\":12500000,\"seq\":3674121},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
+      string: ! "{\"result\":{\"state\":{\"build_version\":\"0.19.1\",\"complete_ledgers\":\"32570-3674946\",\"last_close\":{\"converge_time\":3061,\"proposers\":4},\"load_base\":256,\"load_factor\":1221,\"peers\":52,\"pubkey_node\":\"n9KmrBnGoyVf89WYdiAnvGnKFaVqjLdAYjKrBuvg2r8pMxGPp6MF\",\"server_state\":\"syncing\",\"validated_ledger\":{\"base_fee\":10,\"close_time\":439359030,\"hash\":\"539F76AEEFD73209534137ED3350AF71D1B452C50D610067679BF7FBE69BDE64\",\"reserve_base\":50000000,\"reserve_inc\":12500000,\"seq\":3674946},\"validation_quorum\":3},\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Tue, 03 Dec 2013 03:08:27 GMT
+  recorded_at: Tue, 03 Dec 2013 04:10:38 GMT
 recorded_with: VCR 2.7.0

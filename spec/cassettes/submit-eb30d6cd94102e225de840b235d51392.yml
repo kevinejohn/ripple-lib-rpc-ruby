@@ -2,41 +2,6 @@
 http_interactions:
 - request:
     method: post
-    uri: https://s1.ripple.com:51234/
-    body:
-      encoding: UTF-8
-      string: ! '{"method":"submit","params":[{"secret":"ssm5HPoeEZYJWvkJvQW9ro6e6hW9m","tx_json":{"TransactionType":"Payment","Account":"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj","Destination":"r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV","Amount":"200000000"}}]}'
-    headers:
-      Accept:
-      - application/json; charset=utf-8
-      User-Agent:
-      - Ripple Ruby Gem 0.0.0
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 503
-      message: ''
-    headers:
-      Date:
-      - Fri, 15 Nov 2013 20:47:23 +0000
-      Connection:
-      - Keep-Alive
-      Access-Control-Allow-Origin:
-      - ! '*'
-      Content-Length:
-      - '32'
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - ripple-json-rpc/Ripple-0.17.0-rc5
-    body:
-      encoding: US-ASCII
-      string: ! "Unable to service at this time\r\n"
-    http_version: 
-  recorded_at: Fri, 15 Nov 2013 20:47:23 GMT
-- request:
-    method: post
     uri: http://s1.ripple.com:51234/
     body:
       encoding: UTF-8
@@ -54,21 +19,21 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 03 Dec 2013 03:08:25 +0000
+      - Tue, 03 Dec 2013 04:10:37 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
       - ! '*'
       Content-Length:
-      - '1047'
+      - '1031'
       Content-Type:
       - application/json; charset=UTF-8
       Server:
       - ripple-json-rpc/Ripple-0.19.1
     body:
       encoding: US-ASCII
-      string: ! "{\"result\":{\"engine_result\":\"tecUNFUNDED_PAYMENT\",\"engine_result_code\":104,\"engine_result_message\":\"Insufficient
-        XRP balance to send.\",\"status\":\"success\",\"tx_blob\":\"1200002200000000240000028461400000000BEBC20068400000000000000A732103AF2FB2EC38B072B50EC56360820D35C022D387BFE22D080D689D5DB5AF2C5095744630440220153DECE48AF7960D6C249D05E30755A4060F220D8B00E88598BF39319C912D400220643B03B54D25B5A1F6AD8D56B9B1BB0AD281B411FDF44BF5DC78BC21CC1752598114EA1FCE78BEA993878FEAE450ADFC64A14331AB528314550FC62003E785DC231A1058A05E56E3F09CF4E6\",\"tx_json\":{\"Account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"Amount\":\"200000000\",\"Destination\":\"r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV\",\"Fee\":\"10\",\"Flags\":0,\"Sequence\":644,\"SigningPubKey\":\"03AF2FB2EC38B072B50EC56360820D35C022D387BFE22D080D689D5DB5AF2C5095\",\"TransactionType\":\"Payment\",\"TxnSignature\":\"30440220153DECE48AF7960D6C249D05E30755A4060F220D8B00E88598BF39319C912D400220643B03B54D25B5A1F6AD8D56B9B1BB0AD281B411FDF44BF5DC78BC21CC175259\",\"hash\":\"F166F2DBF4B09580D4E475B0FE17278EC71E344A621CDBBA1DAB2E713D343C6F\"}}}\n\n\r\n"
+      string: ! "{\"result\":{\"engine_result\":\"telINSUF_FEE_P\",\"engine_result_code\":-394,\"engine_result_message\":\"Fee
+        insufficient.\",\"status\":\"success\",\"tx_blob\":\"120000220000000024000002A161400000000BEBC20068400000000000000A732103AF2FB2EC38B072B50EC56360820D35C022D387BFE22D080D689D5DB5AF2C509574473045022100DF3A2E170F1FDFCCD07C63EE50DE5EFB87020C3CBF3068D3D51584F6F8CAE93402206BEEE5E1ECB5ED1CD59DE46B49D9F8CF99995EFF144AED450E575B923FEA43B88114EA1FCE78BEA993878FEAE450ADFC64A14331AB528314550FC62003E785DC231A1058A05E56E3F09CF4E6\",\"tx_json\":{\"Account\":\"r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj\",\"Amount\":\"200000000\",\"Destination\":\"r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV\",\"Fee\":\"10\",\"Flags\":0,\"Sequence\":673,\"SigningPubKey\":\"03AF2FB2EC38B072B50EC56360820D35C022D387BFE22D080D689D5DB5AF2C5095\",\"TransactionType\":\"Payment\",\"TxnSignature\":\"3045022100DF3A2E170F1FDFCCD07C63EE50DE5EFB87020C3CBF3068D3D51584F6F8CAE93402206BEEE5E1ECB5ED1CD59DE46B49D9F8CF99995EFF144AED450E575B923FEA43B8\",\"hash\":\"22DF67FE3B7BBA0D0DB1FD1D23460BB9152A7AA357206109E043F6B10B749FAE\"}}}\n\n\r\n"
     http_version: 
-  recorded_at: Tue, 03 Dec 2013 03:08:28 GMT
+  recorded_at: Tue, 03 Dec 2013 04:10:40 GMT
 recorded_with: VCR 2.7.0

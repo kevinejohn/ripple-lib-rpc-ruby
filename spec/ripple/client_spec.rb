@@ -13,14 +13,25 @@ describe Ripple::Client do
   end
 
   def make_request(command, params = {})
-    params_digest = Digest::MD5.hexdigest(JSON.dump(params))
-    VCR.use_cassette("#{command}-#{params_digest}") do
-      if params.empty? || params.nil?
-        client.send(command)
-      else
-        client.send(command, params)
+    resp = nil
+    server_unavailable = false
+    begin
+      params_digest = params.is_a?(Hash) ? Digest::MD5.hexdigest(JSON.dump(params)): Digest::MD5.hexdigest(params)
+      VCR.use_cassette("#{command}-#{params_digest}") do
+        if params.empty? || params.nil?
+          resp = client.send(command)
+        else
+          #puts params
+          resp = client.send(command, params)
+        end
       end
-    end
+      server_unavailable = true
+    rescue Ripple::ServerUnavailable
+      puts "Server Unavailable"
+      sleep 0.1
+    rescue Ripple::Timedout
+    end while not server_unavailable
+    resp
   end
 
   let(:client){ Ripple::Client.new }
@@ -188,7 +199,7 @@ describe Ripple::Client do
 
   context '#tx' do
     it "should be successful" do
-      resp = client.tx("EAC1B3A55036882CA6CFE5C8F3D627046BEEDE38A5D5902FD5D7CC548883707C")
+      resp = make_request(:tx, "EAC1B3A55036882CA6CFE5C8F3D627046BEEDE38A5D5902FD5D7CC548883707C")
       resp.should be_success
     end
   end

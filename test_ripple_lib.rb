@@ -16,6 +16,9 @@ ripple = Ripple.client(
 # # Send IOU
 # tx_hash = ripple.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "1")
 
+# XRP Balance
+balance = ripple.xrp_balance
+
 # # Verify tx_hash
 # begin
 #   if ripple.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")

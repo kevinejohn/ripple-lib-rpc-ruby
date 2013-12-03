@@ -20,11 +20,20 @@ module Ripple
       path.transaction
     end
 
+    # Returns xrp balance if success
     def xrp_balance
       obj = Ripple::Model::AccountInfo.new
       obj.response = account_info
       obj.response.raise_errors
       obj.balance
+    end
+
+    # Returns array of account lines if success
+    def iou_lines
+      obj = Ripple::Model::AccountLines.new
+      obj.response = account_lines
+      obj.response.raise_errors
+      obj.lines
     end
 
     def send_basic_transaction(destination, currency, amount)
