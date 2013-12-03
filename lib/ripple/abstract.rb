@@ -20,6 +20,13 @@ module Ripple
       path.transaction
     end
 
+    def xrp_balance
+      obj = Ripple::Model::AccountInfo.new
+      obj.response = account_info
+      obj.response.raise_errors
+      obj.balance
+    end
+
     def send_basic_transaction(destination, currency, amount)
       transaction = Ripple::Model::Transaction.init_basic_transaction(destination, currency, amount)
       submit_transaction(transaction)

@@ -55,7 +55,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 27 Nov 2013 22:14:33 +0000
+      - Tue, 03 Dec 2013 03:07:58 +0000
       Connection:
       - Keep-Alive
       Access-Control-Allow-Origin:
@@ -68,8 +68,8 @@ http_interactions:
       - ripple-json-rpc/Ripple-0.19.1
     body:
       encoding: US-ASCII
-      string: ! "{\"result\":{\"closed\":{\"ledger\":{\"accepted\":true,\"account_hash\":\"84273D13C9CAB80DE0D8F25AFD643A1EEA2A7E28ED4F4A16B600C506EF135981\",\"close_time\":438905660,\"close_time_human\":\"2013-Nov-27
-        22:14:20\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"566F71F5E4585CA290DE977300F09C7EF868AF8E58DEE09FF3C3977B28862A91\",\"ledger_hash\":\"566F71F5E4585CA290DE977300F09C7EF868AF8E58DEE09FF3C3977B28862A91\",\"ledger_index\":\"3578142\",\"parent_hash\":\"B5542745A8A93768A446DB08F5943CB605DD05D1A07D5FA60487E076BCE16CB2\",\"seqNum\":\"3578142\",\"totalCoins\":\"99999998483146974\",\"total_coins\":\"99999998483146974\",\"transaction_hash\":\"DD1C8150DAA43081892FEB86B263D218F4154730360FB2F1CD70CE9FC0C49136\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3578143\",\"parent_hash\":\"566F71F5E4585CA290DE977300F09C7EF868AF8E58DEE09FF3C3977B28862A91\",\"seqNum\":\"3578143\"}},\"status\":\"success\"}}\n\n\r\n"
+      string: ! "{\"result\":{\"closed\":{\"ledger\":{\"accepted\":true,\"account_hash\":\"644FF6DA0CC04D80894348B67A0977EC52A03B4810D1284597D24A6181FA586F\",\"close_time\":439355270,\"close_time_human\":\"2013-Dec-03
+        03:07:50\",\"close_time_resolution\":10,\"closed\":true,\"hash\":\"282A7B800C43CCE2AA20C358EE8B4A664F56F85DC95B86F051CE3AD8AAC06C8A\",\"ledger_hash\":\"282A7B800C43CCE2AA20C358EE8B4A664F56F85DC95B86F051CE3AD8AAC06C8A\",\"ledger_index\":\"3674114\",\"parent_hash\":\"E2283BB4A54A4558899BB3EC0C83D77EBA7F7B15F57119F1271597529983C27E\",\"seqNum\":\"3674114\",\"totalCoins\":\"99999998460860200\",\"total_coins\":\"99999998460860200\",\"transaction_hash\":\"B965F48A89E5C6D285B3000394DFA03B87542DE455660D67EE0C9E35ECD1915B\"}},\"open\":{\"ledger\":{\"closed\":false,\"ledger_index\":\"3674115\",\"parent_hash\":\"282A7B800C43CCE2AA20C358EE8B4A664F56F85DC95B86F051CE3AD8AAC06C8A\",\"seqNum\":\"3674115\"}},\"status\":\"success\"}}\n\n\r\n"
     http_version: 
-  recorded_at: Wed, 27 Nov 2013 22:14:33 GMT
+  recorded_at: Tue, 03 Dec 2013 03:08:01 GMT
 recorded_with: VCR 2.7.0

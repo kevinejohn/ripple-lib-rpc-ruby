@@ -16,6 +16,8 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'faraday_middleware'
   s.add_runtime_dependency 'hashie'
+  s.add_runtime_dependency 'faye-websocket'
+  s.add_runtime_dependency 'eventmachine'
 
   s.add_development_dependency 'awesome_print'
   s.add_development_dependency 'guard'

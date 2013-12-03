@@ -10,7 +10,8 @@ module Ripple
       :client_secret,
       :user_agent,
       :endpoint,
-      :adapter
+      :adapter,
+      :connection_type
     ].freeze
 
     # By default, don't set an account
@@ -23,6 +24,8 @@ module Ripple
     DEFAULT_USER_AGENT = "Ripple Ruby Gem #{Ripple::VERSION}".freeze
 
     DEFAULT_ENDPOINT = nil
+
+    DEFAULT_CONNECTION = 'RPC'
 
     # The adapter that will be used to connect if none is set
     #
@@ -56,6 +59,7 @@ module Ripple
       self.user_agent            = DEFAULT_USER_AGENT
       self.endpoint              = DEFAULT_ENDPOINT
       self.adapter               = DEFAULT_ADAPTER
+      self.connection_type       = DEFAULT_CONNECTION
     end
   end
 end

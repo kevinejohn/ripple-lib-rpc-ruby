@@ -28,11 +28,21 @@ describe Ripple::Abstract do
   # High level methods
   context '#submit_transaction' do
     it 'should be successful sending XRP' do
-      abstract.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
+      success = false
+      begin
+        abstract.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
+        success = true
+      rescue Ripple::ServerUnavailable
+      end while not success
     end
 
     it 'should be successful sending USD' do
-      abstract.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
+      success = false
+      begin
+        abstract.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
+        success = true
+      rescue Ripple::ServerUnavailable
+      end while not success
     end
 
 
@@ -46,7 +56,13 @@ describe Ripple::Abstract do
         destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
         destination_amount: destination_amount
         )
-      transaction = abstract.find_transaction_path(path)
+
+      success = false
+      begin
+        transaction = abstract.find_transaction_path(path)
+        success = true
+      rescue Ripple::ServerUnavailable
+      end while not success
     end
 
 
@@ -61,7 +77,13 @@ describe Ripple::Abstract do
         destination_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
         destination_amount: destination_amount
         )
-      expect { transaction = abstract.find_transaction_path(path) }.to raise_error(Ripple::NoPathAvailable)
+
+      success = false
+      begin
+        expect { transaction = abstract.find_transaction_path(path) }.to raise_error(Ripple::NoPathAvailable)
+        success = true
+      rescue Ripple::ServerUnavailable
+      end while not success
     end
 
 
@@ -75,21 +97,49 @@ describe Ripple::Abstract do
         destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
         destination_amount: destination_amount
         )
-      transaction = abstract.find_transaction_path(path)
-      tx_hash = abstract.submit_transaction(transaction)
-      puts tx_hash
+
+      success = false
+      begin
+        transaction = abstract.find_transaction_path(path)
+        tx_hash = abstract.submit_transaction(transaction)
+        puts tx_hash
+        success = true
+      rescue Ripple::ServerUnavailable
+      end while not success
     end
 
   end
 
   context '#transaction_suceeded' do
     it 'should be successful' do
-      resp = abstract.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
-      resp.should be_true
+      success = false
+      begin
+        resp = abstract.transaction_suceeded?("84062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
+        resp.should be_true
+        success = true
+      rescue Ripple::ServerUnavailable
+      end while not success
     end
 
     it 'should fail from invalid tx_tash' do
-      expect { abstract.transaction_suceeded?("94062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735") }.to raise_error(Ripple::InvalidTxHash)
+      success = false
+      begin
+        expect { abstract.transaction_suceeded?("94062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735") }.to raise_error(Ripple::InvalidTxHash)
+        success = true
+      rescue Ripple::ServerUnavailable
+      end while not success
+    end
+  end
+
+
+  context '#xrp_balance' do
+    it 'should be successful' do
+      success = false
+      begin
+        puts abstract.xrp_balance
+        success = true
+      rescue Ripple::ServerUnavailable
+      end while not success
     end
   end
 end
