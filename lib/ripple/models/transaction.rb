@@ -19,13 +19,17 @@ module Ripple
       end
 
       # Initialize a basic transaction
-      def self.init_basic_transaction(destination, currency, amount)
+      # Parameters:
+      #   destination
+      #   currency
+      #   amount
+      def self.init_basic_transaction(params={})
         obj = Transaction.new
-        obj.destination_account = destination
+        obj.destination_account = params[:destination]
         obj.destination_amount = Ripple::Model::Amount.new(
-          value: amount,
-          issuer: destination,
-          currency: currency
+          value: params[:amount],
+          issuer: params[:destination],
+          currency: params[:currency]
           )
         obj
       end
@@ -57,7 +61,7 @@ module Ripple
         self.response.resp.tx_json['hash']
       end
 
-      def to_json(options = {})
+      def to_json(options={})
         if self.path.nil?
           # Basic send
           {

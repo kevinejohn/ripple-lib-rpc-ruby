@@ -30,7 +30,12 @@ describe Ripple::Abstract do
     it 'should be successful sending XRP' do
       success = false
       begin
-        abstract.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "XRP", "1")
+        params = {
+          destination: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
+          currency: 'XRP',
+          amount: '1'
+        }
+        abstract.send_basic_transaction(params)
         success = true
       rescue Ripple::ServerUnavailable
       end while not success
@@ -39,7 +44,12 @@ describe Ripple::Abstract do
     it 'should be successful sending USD' do
       success = false
       begin
-        abstract.send_basic_transaction("rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc", "USD", "0.00001")
+        params = {
+          destination: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
+          currency: 'USD',
+          amount: '0.00001'
+        }
+        abstract.send_basic_transaction(params)
         success = true
       rescue Ripple::ServerUnavailable
       end while not success
@@ -47,14 +57,13 @@ describe Ripple::Abstract do
 
 
     it 'should return first path' do
-      destination_amount = abstract.new_amount(
-        value: '1',
-        currency: 'XRP'
-        )
       path = abstract.new_path(
         source_currency: 'USD',
         destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
-        destination_amount: destination_amount
+        destination_amount: abstract.new_amount(
+            value: '1',
+            currency: 'XRP'
+          )
         )
 
       success = false
@@ -67,17 +76,15 @@ describe Ripple::Abstract do
 
 
     it 'should throw NoPathAvailable' do
-      destination_amount = abstract.new_amount(
-        value: '1',
-        currency: 'EUR',
-        issuer: 'r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj'
-        )
       path = abstract.new_path(
         source_currency: 'USD',
         destination_account: "r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj",
-        destination_amount: destination_amount
+        destination_amount: abstract.new_amount(
+            value: '1',
+            currency: 'EUR',
+            issuer: 'r4LADqzmqQUMhgSyBLTtPMG4pAzrMDx7Yj'
+          )
         )
-
       success = false
       begin
         expect { transaction = abstract.find_transaction_path(path) }.to raise_error(Ripple::NoPathAvailable)
@@ -88,14 +95,13 @@ describe Ripple::Abstract do
 
 
     it 'should be successful sending XRP from USD' do
-      destination_amount = abstract.new_amount(
-        value: '1',
-        currency: 'XRP'
-        )
       path = abstract.new_path(
         source_currency: 'USD',
         destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
-        destination_amount: destination_amount
+        destination_amount: abstract.new_amount(
+            value: '1',
+            currency: 'XRP'
+          )
         )
 
       success = false

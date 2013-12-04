@@ -19,6 +19,10 @@ module Ripple
   class InvalidParameters < StandardError; end
 
 
+  # Faraday connection failed
+  class ConnectionFailed < StandardError; end
+
+
   # Submit errors
   class SubmitFailed < StandardError; end
 

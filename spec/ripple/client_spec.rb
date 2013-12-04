@@ -135,8 +135,8 @@ describe Ripple::Client do
            issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B'
         }
       }
-      resp = client.ripple_path_find(params)
-      # resp = make_request(:ripple_path_find, params)
+      # resp = client.ripple_path_find(params)
+      resp = make_request(:ripple_path_find, params)
       #puts JSON(resp.resp)
       resp.should be_success
     end

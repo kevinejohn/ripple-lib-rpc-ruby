@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://s1.ripple.com:51234/
+    body:
+      encoding: UTF-8
+      string: ! '{"method":"ripple_path_find","params":[{"source_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59","destination_account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59","destination_amount":{"currency":"EUR","value":"0.00001","issuer":"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"},"source_currencies":[{"currency":"USD"}]}]}'
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Ripple Ruby Gem 0.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 04 Dec 2013 01:47:04 +0000
+      Connection:
+      - Keep-Alive
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Content-Length:
+      - '1324'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Server:
+      - ripple-json-rpc/Ripple-0.19.1
+    body:
+      encoding: US-ASCII
+      string: ! "{\"result\":{\"alternatives\":[{\"paths_canonical\":[],\"paths_computed\":[[{\"account\":\"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B\",\"type\":1,\"type_hex\":\"0000000000000001\"},{\"currency\":\"EUR\",\"issuer\":\"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B\",\"type\":48,\"type_hex\":\"0000000000000030\"},{\"account\":\"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B\",\"type\":1,\"type_hex\":\"0000000000000001\"}],[{\"account\":\"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B\",\"type\":1,\"type_hex\":\"0000000000000001\"},{\"currency\":\"XRP\",\"type\":16,\"type_hex\":\"0000000000000010\"},{\"currency\":\"EUR\",\"issuer\":\"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B\",\"type\":48,\"type_hex\":\"0000000000000030\"},{\"account\":\"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B\",\"type\":1,\"type_hex\":\"0000000000000001\"}],[{\"account\":\"rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q\",\"type\":1,\"type_hex\":\"0000000000000001\"},{\"currency\":\"XRP\",\"type\":16,\"type_hex\":\"0000000000000010\"},{\"currency\":\"EUR\",\"issuer\":\"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B\",\"type\":48,\"type_hex\":\"0000000000000030\"},{\"account\":\"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B\",\"type\":1,\"type_hex\":\"0000000000000001\"}]],\"source_amount\":{\"currency\":\"USD\",\"issuer\":\"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59\",\"value\":\"0.000014056056\"}}],\"destination_account\":\"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59\",\"destination_currencies\":[\"MXN\",\"EUR\",\"BTC\",\"DYM\",\"CNY\",\"USD\",\"ILS\",\"XRP\"],\"ledger_current_index\":3690653,\"status\":\"success\"}}\n\n\r\n"
+    http_version: 
+  recorded_at: Wed, 04 Dec 2013 01:47:03 GMT
+recorded_with: VCR 2.7.0

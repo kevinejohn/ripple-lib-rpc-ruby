@@ -36,8 +36,8 @@ module Ripple
       obj.lines
     end
 
-    def send_basic_transaction(destination, currency, amount)
-      transaction = Ripple::Model::Transaction.init_basic_transaction(destination, currency, amount)
+    def send_basic_transaction(params)
+      transaction = Ripple::Model::Transaction.init_basic_transaction(params)
       submit_transaction(transaction)
     end
 

@@ -7,6 +7,7 @@ require File.expand_path('../ripple/models/transaction', __FILE__)
 require File.expand_path('../ripple/models/account_info', __FILE__)
 require File.expand_path('../ripple/models/account_lines', __FILE__)
 require File.expand_path('../ripple/client', __FILE__)
+require File.expand_path('../ripple/extensions/federation', __FILE__)
 require File.expand_path('../ripple/abstract', __FILE__)
 require File.expand_path('../ripple/request', __FILE__)
 require File.expand_path('../ripple/response', __FILE__)
@@ -20,6 +21,10 @@ module Ripple
   # @return [Ripple::Client]
   def self.client(options={})
     Ripple::Abstract.new(options)
+  end
+
+  def self.federation #(method, *args, &block)
+    Ripple::Federation.new #.send(method, *args, &block)
   end
 
   # Delegate to Ripple::Abstract
