@@ -14,11 +14,11 @@ describe Ripple::Federation do
 
   let(:federation){ Ripple::Federation.new }
 
-  # context '#bridge' do
-  #   it "should be successful" do
-  #     resp = federation.bridge("alipay.ripple.com")
-  #     puts resp.inspect
-  #     resp.should be_success
-  #   end
-  # end
+  context '#bridge' do
+    it "should be successful" do
+      resp = federation.bridge("alipay.ripple.com")
+      #puts resp.inspect
+      resp.should_not be_nil
+    end
+  end
 end

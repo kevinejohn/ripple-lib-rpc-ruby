@@ -166,7 +166,7 @@ module Ripple
       post(:submit, params)
     end
 
-    def transaction_entry(tx_hash, ledger_index)
+    def transaction_entry(opts={})
       params = {
         tx_hash: tx_hash,
         ledger_index: ledger_index
