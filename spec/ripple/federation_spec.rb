@@ -16,7 +16,7 @@ describe Ripple::Federation do
 
   context '#bridge' do
     it "should be successful" do
-      resp = federation.bridge("alipay.ripple.com")
+      resp = federation.service_declaration("alipay.ripple.com")
       #puts resp.inspect
       resp.should_not be_nil
     end
