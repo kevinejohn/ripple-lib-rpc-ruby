@@ -7,7 +7,7 @@ module Ripple
     # Returns tx_hash if success
     def submit_transaction(transaction)
       transaction.valid?
-      transaction.response = submit(transaction.to_json)
+      transaction.response = submit(transaction.to_hash)
       transaction.response.raise_errors
       transaction.tx_hash
     end
@@ -15,7 +15,7 @@ module Ripple
     # Returns Transaction object if success
     def find_transaction_path(path)
       path.valid?
-      path.response = ripple_path_find(path.to_json)
+      path.response = ripple_path_find(path.to_hash)
       path.response.raise_errors
       path.transaction
     end

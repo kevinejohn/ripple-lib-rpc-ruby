@@ -8,8 +8,6 @@ ripple = Ripple.client(
   client_secret: "ssm5HPoeEZYJWvkJvQW9ro6e6hW9m"
   )
 
-
-
 # Send XRP
 tx_hash = ripple.send_basic_transaction({destination: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",currency: "XRP",amount: "1"})
 

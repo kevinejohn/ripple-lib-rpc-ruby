@@ -40,18 +40,22 @@ module Ripple
         end
       end
 
-      def to_json(options = {})
+      def to_hash(options = {})
         base_json = {
           destination_account: self.destination_account,
           source_currencies: [
             currency: self.source_currency
             ],
-          destination_amount: self.destination_amount.to_json
+          destination_amount: self.destination_amount.to_hash
         }
         if self.source_account
           base_json[:source_account] = self.source_account
         end
         base_json
+      end
+
+      def to_json(options={})
+        to_hash(options).to_json
       end
     end
   end

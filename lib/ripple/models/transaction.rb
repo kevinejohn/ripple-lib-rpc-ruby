@@ -61,22 +61,26 @@ module Ripple
         self.response.resp.tx_json['hash']
       end
 
-      def to_json(options={})
+      def to_hash(options={})
         if self.path.nil?
           # Basic send
           {
             destination: self.destination_account,
-            amount: self.destination_amount.to_json
+            amount: self.destination_amount.to_hash
           }
         else
           # Complex send
           {
             destination: self.destination_account,
-            amount: self.destination_amount.to_json,
-            SendMax: self.path.source_amount.to_json,
+            amount: self.destination_amount.to_hash,
+            SendMax: self.path.source_amount.to_hash,
             Paths: self.path.paths_computed
           }
         end
+      end
+
+      def to_json(options={})
+        to_hash(options).to_json
       end
     end
   end

@@ -25,6 +25,10 @@ module Ripple
       end
 
       def to_json(options = {})
+        to_hash(options).to_json
+      end
+
+      def to_hash(options = {})
         if is_xrp?
           self.value
         else
