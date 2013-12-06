@@ -38,6 +38,7 @@ describe Ripple::Abstract do
         abstract.send_basic_transaction(params)
         success = true
       rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
       end while not success
     end
 
@@ -52,6 +53,7 @@ describe Ripple::Abstract do
         abstract.send_basic_transaction(params)
         success = true
       rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
       end while not success
     end
 
@@ -71,6 +73,7 @@ describe Ripple::Abstract do
         transaction = abstract.find_transaction_path(path)
         success = true
       rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
       end while not success
     end
 
@@ -86,11 +89,14 @@ describe Ripple::Abstract do
           )
         )
       success = false
-      begin
-        expect { transaction = abstract.find_transaction_path(path) }.to raise_error(Ripple::NoPathAvailable)
-        success = true
-      rescue Ripple::ServerUnavailable
-      end while not success
+      expect {
+        begin
+          transaction = abstract.find_transaction_path(path)
+          success = true
+        rescue Ripple::ServerUnavailable
+        rescue Ripple::Timedout
+        end while not success
+      }.to raise_error(Ripple::NoPathAvailable)
     end
 
 
@@ -111,6 +117,7 @@ describe Ripple::Abstract do
         puts tx_hash
         success = true
       rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
       end while not success
     end
 
@@ -134,6 +141,7 @@ describe Ripple::Abstract do
            abstract.transaction_suceeded?("94062717735DD0E6255F3A64750F543020D7DA05AA344012EFF1FEFB8213F735")
           success = true
         rescue Ripple::ServerUnavailable
+        rescue Ripple::Timedout
         end while not success
       }.to raise_error(Ripple::InvalidTxHash)
     end
@@ -147,6 +155,7 @@ describe Ripple::Abstract do
         puts abstract.xrp_balance
         success = true
       rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
       end while not success
     end
   end
@@ -158,7 +167,44 @@ describe Ripple::Abstract do
         abstract.iou_lines
         success = true
       rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
       end while not success
     end
   end
+
+  # context '#federate_transaction' do
+  #   it 'should be successful' do
+  #     params = {
+  #       url: 'https://alipay.ripple.com/alipaybridge',
+  #       domain: 'alipay.ripple.com',
+  #       destination: 'yangzhu165@gmail.com',
+  #       amount: '0.01',
+  #       currency: 'CNY',
+  #       fullname: 'Test'
+  #     }
+  #     response = abstract.federate_transaction(params)
+  #     response[:source_currency] = 'XRP'
+  #     path = abstract.new_path(response)
+
+  #     puts "PATH " + path.inspect
+
+  #     success = false
+  #     begin
+  #       transaction = abstract.find_transaction_path(path)
+  #     rescue Ripple::ServerUnavailable
+  #     rescue Ripple::Timedout
+  #     end while not success
+
+  #     puts "TRANSACTION: " + transaction.inspect
+
+  #     success = false
+  #     begin
+  #       tx_hash = abstract.submit_transaction(transaction)
+  #       puts tx_hash
+  #       success = true
+  #     rescue Ripple::ServerUnavailable
+  #     rescue Ripple::Timedout
+  #     end while not success
+  #   end
+  # end
 end

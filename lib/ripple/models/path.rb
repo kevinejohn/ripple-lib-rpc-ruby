@@ -11,11 +11,18 @@ module Ripple
       attr_accessor :destination_account
       attr_accessor :destination_amount
 
+      # Pass throughs for transaction
+      attr_accessor :destination_tag
+      attr_accessor :invoice_id
+
       def initialize(path_response)
         self.source_account = path_response[:source_account]
         self.source_currency = path_response[:source_currency]
         self.destination_account = path_response[:destination_account]
         self.destination_amount = path_response[:destination_amount]
+
+        self.destination_tag = path_response[:destination_tag]
+        self.invoice_id = path_response[:invoice_id]
       end
 
       def valid?
@@ -32,11 +39,19 @@ module Ripple
           self.source_amount = Ripple::Model::Amount.new(path_response.source_amount)
           self.paths_computed = path_response.paths_computed
 
-          Ripple::Model::Transaction.new(
+          transaction = Ripple::Model::Transaction.new(
               destination_account: self.destination_account,
               destination_amount: self.destination_amount,
               path: self
               )
+
+          if self.destination_tag
+            transaction.destination_tag = self.destination_tag
+          end
+          if self.invoice_id
+            transaction.invoice_id = self.invoice_id
+          end
+          transaction
         end
       end
 

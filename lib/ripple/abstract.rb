@@ -53,6 +53,11 @@ module Ripple
       Ripple::Model::Amount.new(params)
     end
 
+    def federate_transaction(params={})
+      federation = Ripple::Federation.new
+      federation.service_quote(params)
+    end
+
     # Returns true if tx_hash is completed.
     # Returns false if tx_hash is submitted but not complete
     # Raises Ripple::InvalidTxHash if tx_hash isnt found

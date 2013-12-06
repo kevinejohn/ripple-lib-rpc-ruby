@@ -6,8 +6,8 @@ module Ripple
       attr_accessor :value
 
       def initialize(amount_json)
-        # puts amount_json.inspect
-        if amount_json.key?('currency') or not amount_json[:currency].nil?
+        #puts "AMOUNT: " + amount_json.inspect
+        if not amount_json[:currency].nil?
           # IOU
           self.currency = amount_json[:currency]
           self.issuer = amount_json[:issuer]

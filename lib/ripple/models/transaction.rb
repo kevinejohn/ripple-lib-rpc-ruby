@@ -3,6 +3,8 @@ module Ripple
     class Transaction
       attr_accessor :destination_account
       attr_accessor :destination_amount
+      attr_accessor :destination_tag
+      attr_accessor :invoice_id
       attr_accessor :source_account
       attr_accessor :source_currency
       attr_accessor :send_max
@@ -12,10 +14,12 @@ module Ripple
       def initialize(transaction_json={})
         self.destination_account = transaction_json[:destination_account]
         self.destination_amount = transaction_json[:destination_amount]
+        self.destination_tag = transaction_json[:destination_tag]
         self.source_account = transaction_json[:source_account]
         self.source_currency = transaction_json[:source_currency]
         self.send_max = transaction_json[:send_max]
         self.path = transaction_json[:path]
+        self.invoice_id = transaction_json[:invoice_id]
       end
 
       # Initialize a basic transaction
@@ -62,21 +66,22 @@ module Ripple
       end
 
       def to_hash(options={})
-        if self.path.nil?
-          # Basic send
-          {
+        hash = {
             destination: self.destination_account,
             amount: self.destination_amount.to_hash
           }
-        else
-          # Complex send
-          {
-            destination: self.destination_account,
-            amount: self.destination_amount.to_hash,
-            SendMax: self.path.source_amount.to_hash,
-            Paths: self.path.paths_computed
-          }
+        if self.invoice_id
+          hash[:InvoiceID] = self.invoice_id
         end
+        if self.destination_tag
+          hash[:DestinationTag] = self.destination_tag
+        end
+        if self.path
+          # Complex send
+          hash[:SendMax] = self.path.source_amount.to_hash
+          hash[:Paths] = self.path.paths_computed
+        end
+        hash
       end
 
       def to_json(options={})

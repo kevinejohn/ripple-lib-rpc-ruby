@@ -34,6 +34,9 @@ module Ripple
   # ripple_find_path
   class NoPathAvailable < StandardError; end
 
+  # federation error
+  class FederationError < StandardError; end
+
 
   # transaction_suceeded? response on invalid transaction
   class InvalidTxHash < StandardError; end

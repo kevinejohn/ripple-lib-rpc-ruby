@@ -17,8 +17,55 @@ describe Ripple::Federation do
   context '#bridge' do
     it "should be successful" do
       resp = federation.service_declaration("alipay.ripple.com")
-      #puts resp.inspect
+      puts resp.inspect
       resp.should_not be_nil
     end
   end
+
+  context '#service_request' do
+    it "should be successful" do
+      params = {
+        url: 'https://alipay.ripple.com/alipaybridge',
+        domain: 'alipay.ripple.com',
+        destination: 'yangzhu165@gmail.com'
+      }
+      resp = federation.service_request(params)
+      #puts resp.inspect
+      #resp.should_not be_nil
+    end
+  end
+
+  context '#service_quote' do
+    it "should be successful" do
+      params = {
+        url: 'https://alipay.ripple.com/alipaybridge',
+        domain: 'alipay.ripple.com',
+        destination: 'yangzhu165@gmail.com',
+        amount: '0.01',
+        currency: 'CNY',
+        fullname: 'Test'
+      }
+      path = federation.service_quote(params)
+      puts path.to_json
+      #resp.should_not be_nil
+    end
+  end
+
+  # context '#entire_process' do
+  #   it "should be successful" do
+  #     #   domain
+  #     #   destination
+  #     #   amount
+  #     #   currency
+
+  #     params = {
+  #       domain: 'alipay.ripple.com',
+  #       destination: 'yangzhu165@gmail.com',
+  #       amount: '0.01',
+  #       currency: 'CNY',
+  #       fullname: 'Yuhao Huang'
+  #     }
+  #     federation.entire_process(params)
+  #   end
+  # end
 end

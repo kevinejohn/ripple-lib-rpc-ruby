@@ -142,24 +142,23 @@ module Ripple
       if opts.key?(:tx_blob)
         params.merge!(opts)
       else
+        params.merge!({tx_json: {
+          'TransactionType' => opts[:transaction_type] || 'Payment',
+          'Account' => client_account,
+          'Destination' => opts[:destination],
+          'Amount' => opts[:amount]
+        }})
+
         if opts.key?(:SendMax) and opts.key?(:Paths)
           # Complex IOU send
-          params.merge!({tx_json: {
-            'TransactionType' => opts[:transaction_type] || 'Payment',
-            'Account' => client_account,
-            'Destination' => opts[:destination],
-            'Amount' => opts[:amount],
-            'SendMax' => opts[:SendMax],
-            'Paths' => opts[:Paths]
-          }})
-        else
-          # Easy IOU Send
-          params.merge!({tx_json: {
-            'TransactionType' => opts[:transaction_type] || 'Payment',
-            'Account' => client_account,
-            'Destination' => opts[:destination],
-            'Amount' => opts[:amount]
-          }})
+          params[:tx_json]['SendMax'] = opts[:SendMax]
+          params[:tx_json]['Paths'] = opts[:Paths]
+        end
+        if opts.key?(:DestinationTag)
+          params[:tx_json]['DestinationTag'] = opts[:DestinationTag]
+        end
+        if opts.key?(:InvoiceID)
+          params[:tx_json]['InvoiceID'] = opts[:InvoiceID]
         end
       end
       # puts "Submit: " + params.inspect

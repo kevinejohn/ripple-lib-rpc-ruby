@@ -1,11 +1,11 @@
 module Ripple
   class Federation
-    def service_declaration(gateway)
+    def service_declaration(domain)
       # Check 3 canonical locations
       urls = [
-        "https://ripple.#{gateway}/ripple.txt",
-        "https://www.#{gateway}/ripple.txt",
-        "https://#{gateway}/ripple.txt"
+        "https://ripple.#{domain}/ripple.txt",
+        "https://www.#{domain}/ripple.txt",
+        "https://#{domain}/ripple.txt"
       ]
 
       response = nil
@@ -38,18 +38,88 @@ module Ripple
     #    url
     #    domain
     #    destination
-    #    user
     def service_request(params={})
-      url = "#{params[:url]}?type=federation&domain=#{params[:domain]}&destination=#{params[:destination]}&user=#{params[:user]}"
+      url = "#{params[:url]}?type=federation&destination=#{params[:destination]}&domain=#{params[:domain]}"
+      # url = "#{params[:url]}?type=federation&domain=#{params[:domain]}&destination=#{params[:destination]}&user=#{params[:user]}"
 
       begin
         response = Faraday.get url
-
       rescue Faraday::Error::ConnectionFailed
         raise ConnectionFailed
       rescue Faraday::Error::TimeoutError
         raise Timedout
       end
     end
+
+    # Parameters:
+    #    url
+    #    domain
+    #    destination
+    #    fullname
+    #    amount
+    #    currency
+    def service_quote(params={})
+      url = "#{params[:url]}?type=quote&amount=#{params[:amount]}%2F#{params[:currency]}&destination=#{params[:destination]}&domain=#{params[:domain]}&fullname=#{params[:fullname]}"
+
+      options = {
+        headers: {'Accept' => "application/json; charset=utf-8"}
+        # url: url
+      }
+
+      connection = Faraday::Connection.new(options) do |connection|
+        connection.use FaradayMiddleware::Mashify
+        connection.request :json
+        connection.response :json
+        connection.use FaradayMiddleware::RaiseHttpException
+        connection.adapter Faraday.default_adapter
+      end
+
+      begin
+        response = connection.get url
+      rescue Faraday::Error::ConnectionFailed
+        raise ConnectionFailed
+      rescue Faraday::Error::TimeoutError
+        raise Timedout
+      end
+
+      # Check for error
+      if response.body.result == 'error'
+        # Error
+        raise FederationError, response.body.error_message
+      end
+
+      quote = response.body.quote
+      #puts "FIRST: #{quote['send'].first.inspect}"
+      destination_amount = Ripple::Model::Amount.new({
+        value: quote['send'].first.value,
+        issuer: quote['send'].first.issuer,
+        currency: quote['send'].first.currency
+        })
+      #amount = JSON.parse(json)
+      #puts amount.inspect
+
+      {
+        destination_account: quote.address,
+        destination_amount: destination_amount,
+        destination_tag: quote.destination_tag,
+        invoice_id: quote.invoice_id
+      }
+    end
+
+    # # Parameters:
+    # #   domain
+    # #   destination
+    # #   amount
+    # #   currency
+    # def entire_process(params={})
+    #   url = service_declaration(params[:domain])
+    #   puts url
+    #   params[:url] = url
+    #   if params[:url]
+    #     service_request(params)
+    #     service_quote(params)
+
+    #   end
+    # end
   end
 end

@@ -15,6 +15,7 @@ module Ripple
         if resp.error == 'invalidParams'
           raise InvalidParameters
         elsif resp.error = 'malformedTransaction'
+          puts resp.inspect
           raise MalformedTransaction, resp.error_message
         else
           raise UnknownError
