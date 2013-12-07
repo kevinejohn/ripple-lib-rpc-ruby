@@ -27,7 +27,7 @@ describe Ripple::Federation do
       params = {
         url: 'https://alipay.ripple.com/alipaybridge',
         domain: 'alipay.ripple.com',
-        destination: 'yangzhu165@gmail.com'
+        destination: 'support@alipay.com'
       }
       resp = federation.service_request(params)
       #puts resp.inspect
@@ -40,7 +40,7 @@ describe Ripple::Federation do
       params = {
         url: 'https://alipay.ripple.com/alipaybridge',
         domain: 'alipay.ripple.com',
-        destination: 'yangzhu165@gmail.com',
+        destination: 'support@alipay.com',
         amount: '0.01',
         currency: 'CNY',
         fullname: 'Test'
@@ -60,10 +60,10 @@ describe Ripple::Federation do
 
   #     params = {
   #       domain: 'alipay.ripple.com',
-  #       destination: 'yangzhu165@gmail.com',
+  #       destination: 'support@alipay.com',
   #       amount: '0.01',
   #       currency: 'CNY',
-  #       fullname: 'Yuhao Huang'
+  #       fullname: 'Test'
   #     }
   #     federation.entire_process(params)
   #   end
