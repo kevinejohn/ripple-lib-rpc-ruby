@@ -58,19 +58,27 @@ module Ripple
       # url = "#{params[:url]}?type=federation&domain=#{params[:domain]}&destination=#{params[:destination]}&user=#{params[:user]}"
 
       begin
-        response = Faraday.get url
+        response = connection.get url
       rescue Faraday::Error::ConnectionFailed
         raise ConnectionFailed
       rescue Faraday::Error::TimeoutError
         raise Timedout
       end
+
+      # Check for error
+      if response.body.result == 'error'
+        # Error
+        raise FederationError, response.body.error_message
+      end
+
+      response.body.federation_json
     end
 
     # Parameters:
     #    url
     #    domain
     #    destination
-    #    fullname
+    #    extra_fields
     #    amount
     #    currency
     def service_quote(params={})
@@ -102,8 +110,6 @@ module Ripple
 
       quote = response.body.quote
       destination_amount = Ripple::Model::Amount.new(quote['send'].first)
-      #amount = JSON.parse(json)
-      #puts amount.inspect
 
       {
         destination_account: quote.address,
@@ -112,21 +118,5 @@ module Ripple
         invoice_id: quote.invoice_id
       }
     end
-
-    # # Parameters:
-    # #   domain
-    # #   destination
-    # #   amount
-    # #   currency
-    # def entire_process(params={})
-    #   url = service_declaration(params[:domain])
-    #   puts url
-    #   params[:url] = url
-    #   if params[:url]
-    #     service_request(params)
-    #     service_quote(params)
-
-    #   end
-    # end
   end
 end
