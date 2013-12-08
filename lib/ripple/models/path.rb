@@ -36,6 +36,7 @@ module Ripple
         else
           # Create Path object
           path_response = self.response.resp.alternatives[0]
+          #puts "Path response: " + path_response.to_json
           self.source_amount = Ripple::Model::Amount.new(path_response.source_amount)
           self.paths_computed = path_response.paths_computed
 

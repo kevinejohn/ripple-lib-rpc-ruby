@@ -7,7 +7,7 @@ module Ripple
 
       def initialize(amount_json)
         #puts "AMOUNT: " + amount_json.inspect
-        if not amount_json[:currency].nil?
+        if amount_json.is_a?(Hash)
           # IOU
           self.currency = amount_json[:currency]
           self.issuer = amount_json[:issuer]

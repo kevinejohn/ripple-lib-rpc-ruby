@@ -172,39 +172,52 @@ describe Ripple::Abstract do
     end
   end
 
-  # context '#federate_transaction' do
-  #   it 'should be successful' do
-  #     params = {
-  #       url: 'https://alipay.ripple.com/alipaybridge',
-  #       domain: 'alipay.ripple.com',
-  #       destination: 'yangzhu165@gmail.com',
-  #       amount: '0.01',
-  #       currency: 'CNY',
-  #       fullname: 'Test'
-  #     }
-  #     response = abstract.federate_transaction(params)
-  #     response[:source_currency] = 'XRP'
-  #     path = abstract.new_path(response)
+  context '#federate_transaction' do
+    it 'should be successful' do
+      params = {
+        url: 'https://alipay.ripple.com/alipaybridge',
+        domain: 'alipay.ripple.com',
+        destination: 'support@alipay.com',
+        amount: '0.01',
+        currency: 'CNY',
+        fullname: 'Full Name'
+      }
+      response = abstract.federate_transaction(params)
+      response[:source_currency] = 'XRP'
+      path = abstract.new_path(response)
 
-  #     puts "PATH " + path.inspect
+      #puts "PATH " + path.inspect
 
-  #     success = false
-  #     begin
-  #       transaction = abstract.find_transaction_path(path)
-  #     rescue Ripple::ServerUnavailable
-  #     rescue Ripple::Timedout
-  #     end while not success
+      success = false
+      begin
+        transaction = abstract.find_transaction_path(path)
+        success = true
+      rescue Ripple::ServerUnavailable
+        puts "Server unavailable"
+      rescue Ripple::Timedout
+        puts "Server Timed out"
+      end while not success
 
-  #     puts "TRANSACTION: " + transaction.inspect
+      # puts "TRANSACTION: " + transaction.to_json
 
-  #     success = false
-  #     begin
-  #       tx_hash = abstract.submit_transaction(transaction)
-  #       puts tx_hash
-  #       success = true
-  #     rescue Ripple::ServerUnavailable
-  #     rescue Ripple::Timedout
-  #     end while not success
-  #   end
-  # end
+      # Submit transaction
+      success = false
+      begin
+        tx_hash = abstract.submit_transaction(transaction)
+        puts tx_hash
+        success = true
+      rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
+      end while not success
+
+
+      # Verify transaction
+      success = false
+      begin
+        success = abstract.transaction_suceeded?(tx_hash)
+      rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
+      end while not success
+    end
+  end
 end

@@ -43,10 +43,10 @@ describe Ripple::Federation do
         destination: 'support@alipay.com',
         amount: '0.01',
         currency: 'CNY',
-        fullname: 'Test'
+        fullname: 'Full Name'
       }
-      path = federation.service_quote(params)
-      puts path.to_json
+      quote = federation.service_quote(params)
+      puts quote.to_json
       #resp.should_not be_nil
     end
   end
@@ -63,7 +63,7 @@ describe Ripple::Federation do
   #       destination: 'support@alipay.com',
   #       amount: '0.01',
   #       currency: 'CNY',
-  #       fullname: 'Test'
+  #       fullname: 'Full Name'
   #     }
   #     federation.entire_process(params)
   #   end

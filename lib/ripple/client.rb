@@ -125,6 +125,12 @@ module Ripple
           'Amount' => opts[:amount]
         }
       }
+      if opts.key?(:DestinationTag)
+        params[:tx_json]['DestinationTag'] = opts[:DestinationTag]
+      end
+      if opts.key?(:InvoiceID)
+        params[:tx_json]['InvoiceID'] = opts[:InvoiceID]
+      end
       post(:sign, params)
     end
 
