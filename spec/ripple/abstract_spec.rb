@@ -180,7 +180,7 @@ describe Ripple::Abstract do
         destination: 'support@alipay.com',
         amount: '0.01',
         currency: 'CNY',
-        fullname: 'Full Name'
+        extra_fields: {fullname: 'Full Name'}
       }
       response = abstract.federate_transaction(params)
       response[:source_currency] = 'XRP'

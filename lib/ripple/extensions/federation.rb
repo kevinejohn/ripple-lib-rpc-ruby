@@ -1,5 +1,20 @@
 module Ripple
   class Federation
+    def connection
+      options = {
+        headers: {'Accept' => "application/json; charset=utf-8"}
+      }
+
+      Faraday::Connection.new(options) do |connection|
+        connection.use FaradayMiddleware::Mashify
+        connection.request :json
+        connection.response :json
+        connection.use FaradayMiddleware::RaiseHttpException
+        connection.adapter Faraday.default_adapter
+      end
+    end
+
+
     def service_declaration(domain)
       # Check 3 canonical locations
       urls = [
@@ -59,19 +74,13 @@ module Ripple
     #    amount
     #    currency
     def service_quote(params={})
-      url = "#{params[:url]}?type=quote&amount=#{params[:amount]}%2F#{params[:currency]}&destination=#{params[:destination]}&domain=#{params[:domain]}&fullname=#{params[:fullname]}"
+      url = "#{params[:url]}?type=quote&amount=#{params[:amount]}%2F#{params[:currency]}&destination=#{params[:destination]}&domain=#{params[:domain]}}"
 
-      options = {
-        headers: {'Accept' => "application/json; charset=utf-8"}
-        # url: url
-      }
-
-      connection = Faraday::Connection.new(options) do |connection|
-        connection.use FaradayMiddleware::Mashify
-        connection.request :json
-        connection.response :json
-        connection.use FaradayMiddleware::RaiseHttpException
-        connection.adapter Faraday.default_adapter
+      # Add extra_fields to url
+      if params.key?(:extra_fields)
+        params[:extra_fields].each do |key, value|
+          url = "#{url}&#{key}=#{value}"
+        end
       end
 
       begin
@@ -87,14 +96,12 @@ module Ripple
         # Error
         raise FederationError, response.body.error_message
       end
+      if response.body.Result == "Error"
+        raise FederationError, response.body.Message
+      end
 
       quote = response.body.quote
-      #puts "FIRST: #{quote['send'].first.inspect}"
-      destination_amount = Ripple::Model::Amount.new({
-        value: quote['send'].first.value,
-        issuer: quote['send'].first.issuer,
-        currency: quote['send'].first.currency
-        })
+      destination_amount = Ripple::Model::Amount.new(quote['send'].first)
       #amount = JSON.parse(json)
       #puts amount.inspect
 
