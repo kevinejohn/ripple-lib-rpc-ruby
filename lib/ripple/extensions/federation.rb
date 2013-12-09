@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module Ripple
   class Federation
     def connection
@@ -87,9 +89,11 @@ module Ripple
       # Add extra_fields to url
       if params.key?(:extra_fields)
         params[:extra_fields].each do |key, value|
-          url = "#{url}&#{key}=#{value}"
+          url = "#{url}&#{key}=#{URI::encode(value)}"
         end
       end
+
+      # puts "URL: " + url
 
       begin
         response = connection.get url
