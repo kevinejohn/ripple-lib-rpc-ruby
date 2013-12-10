@@ -54,4 +54,23 @@ describe Ripple::Federation do
       expect { federation.service_quote(params) }.to raise_error(Ripple::FederationError)
     end
   end
+
+  context '#invoice_verify' do
+    it "should be successful" do
+      params = {
+        url: 'https://alipay.ripple.com/alipaybridge',
+        invoice_id: '2e23679a7fd97492003daf6e8fbfec940fd0f85829169c5124c9b4f61ae4fec4'
+      }
+      resp = federation.invoice_verify(params)
+      puts resp.to_json
+    end
+
+    it "should fail" do
+      params = {
+        url: 'https://alipay.ripple.com/alipaybridge',
+        invoice_id: '3e23679a7fd97492003daf6e8fbfec940fd0f85829169c5124c9b4f61ae4fec4'
+      }
+      expect { federation.invoice_verify(params) }.to raise_error(Ripple::FederationError)
+    end
+  end
 end

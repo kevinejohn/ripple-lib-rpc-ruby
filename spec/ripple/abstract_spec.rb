@@ -209,7 +209,9 @@ describe Ripple::Abstract do
         puts tx_hash
         success = true
       rescue Ripple::ServerUnavailable
+        puts "Server unavailable"
       rescue Ripple::Timedout
+        puts "Server Timed out"
       end while not success
 
 
@@ -218,8 +220,36 @@ describe Ripple::Abstract do
       begin
         success = abstract.transaction_suceeded?(tx_hash)
       rescue Ripple::ServerUnavailable
+        puts "Server unavailable"
       rescue Ripple::Timedout
+        puts "Server Timed out"
       end while not success
+
+
+      puts "Transaction verified"
+
+      puts "Transaction invoice_id: #{transaction.invoice_id}"
+
+
+      # # Verify federation transaction
+      # params = {
+      #   url: 'https://alipay.ripple.com/alipaybridge',
+      #   invoice_id: transaction.invoice_id
+      # }
+
+      # success = false
+      # begin
+      #   success = abstract.federate_invoice_id?(params)
+      # rescue Ripple::ServerUnavailable
+      #   puts "Server unavailable"
+      # rescue Ripple::Timedout
+      #   puts "Server Timed out"
+      # rescue Ripple::FederationError => e
+      #   puts "Transaction Failed: #{e.message}"
+      #   fail
+      # end while not success
+
+      puts "Transaction complete"
     end
   end
 end

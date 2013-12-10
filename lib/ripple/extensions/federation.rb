@@ -1,5 +1,3 @@
-require 'open-uri'
-
 module Ripple
   class Federation
     def connection
@@ -83,13 +81,14 @@ module Ripple
     #    extra_fields
     #    amount
     #    currency
+    # TODO: Change name to "bridge_transaction"
     def service_quote(params={})
       url = "#{params[:url]}?type=quote&amount=#{params[:amount]}%2F#{params[:currency]}&destination=#{params[:destination]}&domain=#{params[:domain]}}"
 
       # Add extra_fields to url
       if params.key?(:extra_fields)
         params[:extra_fields].each do |key, value|
-          url = "#{url}&#{key}=#{URI::encode(value)}"
+          url = "#{url}&#{key}=#{value}"
         end
       end
 
@@ -121,6 +120,39 @@ module Ripple
         destination_tag: quote.destination_tag,
         invoice_id: quote.invoice_id
       }
+    end
+
+
+
+    # Parameters:
+    #    invoice_id
+    #    url
+    def invoice_verify(params={})
+      url = "#{params[:url]}?type=invoice_id&iid=#{params[:invoice_id]}"
+
+      begin
+        response = connection.get url
+      rescue Faraday::Error::ConnectionFailed
+        raise ConnectionFailed
+      rescue Faraday::Error::TimeoutError
+        raise Timedout
+      end
+
+      # Check for error
+
+
+      if response.body.result == "Success"
+        # Success
+        #puts response.body.to_json
+        response.body.detail.success
+      elsif response.body.result == 'Error'
+        # Error
+        raise FederationError, response.body.detail
+      else
+        # Unkonwn error
+        puts response.inspect
+        raise FederationError, "Unknown Error"
+      end
     end
   end
 end

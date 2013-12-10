@@ -58,6 +58,11 @@ module Ripple
       federation.service_quote(params)
     end
 
+    def federate_invoice_id?(params={})
+      federation = Ripple::Federation.new
+      federation.invoice_verify(params)
+    end
+
     # Returns true if tx_hash is completed.
     # Returns false if tx_hash is submitted but not complete
     # Raises Ripple::InvalidTxHash if tx_hash isnt found
