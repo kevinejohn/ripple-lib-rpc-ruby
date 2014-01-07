@@ -107,21 +107,23 @@ And then execute:
       puts "Request timed out"
     end while not success
     # 2. Sign transaction
-    success = false
-    failed = false
-    begin
-      puts "Signing transaction"
-      #transaction.print_path_info
-      transaction = ripple.sign_transaction(transaction)
-      success = true
-    rescue Ripple::SubmitFailed => e
-      puts "Signing failed: " + e.message
-      failed = true
-    rescue Ripple::ServerUnavailable
-      puts "Server Unavailable"
-    rescue Ripple::Timedout
-      puts "Request timed out"
-    end while not success and not failed
+    if success
+      success = false
+      failed = false
+      begin
+        puts "Signing transaction"
+        #transaction.print_path_info
+        transaction = ripple.sign_transaction(transaction)
+        success = true
+      rescue Ripple::SubmitFailed => e
+        puts "Signing failed: " + e.message
+        failed = true
+      rescue Ripple::ServerUnavailable
+        puts "Server Unavailable"
+      rescue Ripple::Timedout
+        puts "Request timed out"
+      end while not success and not failed
+    end
     # 3. Submit transaction
     if success
       success = false
