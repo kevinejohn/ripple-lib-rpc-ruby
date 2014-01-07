@@ -92,7 +92,8 @@ module Ripple
         end
       end
 
-      # puts "URL: " + url
+
+      puts "URL: " + url
 
       begin
         response = connection.get url

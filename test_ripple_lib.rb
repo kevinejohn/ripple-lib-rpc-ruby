@@ -87,7 +87,23 @@ rescue Ripple::ServerUnavailable
 rescue Ripple::Timedout
   puts "Request timed out"
 end while not success
-# 2. Submit transaction
+# 2. Sign transaction
+success = false
+failed = false
+begin
+  puts "Signing transaction"
+  #transaction.print_path_info
+  transaction = ripple.sign_transaction(transaction)
+  success = true
+rescue Ripple::SubmitFailed => e
+  puts "Signing failed: " + e.message
+  failed = true
+rescue Ripple::ServerUnavailable
+  puts "Server Unavailable"
+rescue Ripple::Timedout
+  puts "Request timed out"
+end while not success and not failed
+# 3. Submit transaction
 success = false
 failed = false
 begin
@@ -103,7 +119,7 @@ rescue Ripple::ServerUnavailable
 rescue Ripple::Timedout
   puts "Request timed out"
 end while not success and not failed
-# 3. Verify transaction
+# 4. Verify transaction
 if success
   complete = false
   begin

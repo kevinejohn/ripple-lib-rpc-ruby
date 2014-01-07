@@ -27,6 +27,48 @@ describe Ripple::Abstract do
 
   let(:abstract){ Ripple::Abstract.new }
 
+
+  context '#sign_transaction' do
+    it 'should be successful signing transaction' do
+      success = false
+      begin
+        transaction = abstract.new_transaction(
+                destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
+                destination_amount: abstract.new_amount(
+                    value: '1',
+                    currency: 'XRP'
+                  )
+                )
+        transaction = abstract.sign_transaction(transaction)
+        #puts "tx_blob: " + transaction.tx_blob
+        success = true
+      rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
+      end while not success
+    end
+
+
+    it 'should be successful signing and submitting a transaction' do
+      success = false
+      begin
+        transaction = abstract.new_transaction(
+                destination_account: "rfGKu3tSxwMFZ5mQ6bUcxWrxahACxABqKc",
+                destination_amount: abstract.new_amount(
+                    value: '1',
+                    currency: 'XRP'
+                  )
+                )
+        transaction = abstract.sign_transaction(transaction)
+        tx_hash = abstract.submit_transaction(transaction)
+        puts "tx_hash: " + tx_hash
+        success = true
+      rescue Ripple::ServerUnavailable
+      rescue Ripple::Timedout
+      end while not success
+    end
+  end
+
+
   # High level methods
   context '#submit_transaction' do
     it 'should be successful sending XRP' do

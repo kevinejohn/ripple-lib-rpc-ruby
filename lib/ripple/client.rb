@@ -115,6 +115,13 @@ module Ripple
       post(:server_state)
     end
 
+    # Parameters for opts
+    # :tx_blob           // Optional. Replaces all other parameters. Raw transaction
+    # :transaction_type  // Optional. Default: 'Payment'
+    # :destination       // Destination account
+    # :amount            // Ammount to send
+    # :SendMax           // Optional. Complex IOU send
+    # :Paths             // Optional. Complex IOU send
     def sign(opts = {})
       params = {
         secret: client_secret,
@@ -125,6 +132,11 @@ module Ripple
           'Amount' => opts[:amount]
         }
       }
+      if opts.key?(:SendMax) and opts.key?(:Paths)
+          # Complex IOU send
+          params[:tx_json]['SendMax'] = opts[:SendMax]
+          params[:tx_json]['Paths'] = opts[:Paths]
+        end
       if opts.key?(:DestinationTag)
         params[:tx_json]['DestinationTag'] = opts[:DestinationTag]
       end

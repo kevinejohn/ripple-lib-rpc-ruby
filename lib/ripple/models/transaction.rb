@@ -55,6 +55,7 @@ module Ripple
         true
       end
 
+      #
       def tx_hash
         if self.response.resp.engine_result != 'tesSUCCESS'
           # Failed
@@ -65,21 +66,35 @@ module Ripple
         self.response.resp.tx_json['hash']
       end
 
+      def tx_blob
+        if self.response and self.response.resp.status == 'success' and self.response.resp.tx_blob
+          return self.response.resp.tx_blob
+        end
+        return nil
+      end
+
       def to_hash(options={})
-        hash = {
+        hash = nil
+        if not tx_blob.nil?
+          hash = {
+            tx_blob: tx_blob
+          }
+        else
+          hash = {
             destination: self.destination_account,
             amount: self.destination_amount.to_hash
           }
-        if self.invoice_id
-          hash[:InvoiceID] = self.invoice_id
-        end
-        if self.destination_tag
-          hash[:DestinationTag] = self.destination_tag
-        end
-        if self.path
-          # Complex send
-          hash[:SendMax] = self.path.source_amount.to_hash
-          hash[:Paths] = self.path.paths_computed
+          if self.invoice_id
+            hash[:InvoiceID] = self.invoice_id
+          end
+          if self.destination_tag
+            hash[:DestinationTag] = self.destination_tag
+          end
+          if self.path
+            # Complex send
+            hash[:SendMax] = self.path.source_amount.to_hash
+            hash[:Paths] = self.path.paths_computed
+          end
         end
         hash
       end

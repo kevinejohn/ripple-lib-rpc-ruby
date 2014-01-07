@@ -4,6 +4,14 @@ module Ripple
     # High level methods
     ######################
 
+    # Returns signed transaction if success
+    def sign_transaction(transaction)
+      transaction.valid?
+      transaction.response = sign(transaction.to_hash)
+      transaction.response.raise_errors
+      transaction
+    end
+
     # Returns tx_hash if success
     def submit_transaction(transaction)
       transaction.valid?
